@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>育碧情报速递 | 2026-04-06</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--text:#1a1a2e;--sub:#666;--mute:#999;--border:#f0f2f5;--red:#c0392b;--blue:#2980b9;--navy:#1a237e;--green:#2e7d32;--radius:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px;max-width:680px;margin:0 auto;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
+
+/* ── Header ── */
+.header{background:linear-gradient(135deg,#0a1628 0%,#142240 50%,#1e3a5f 100%);padding:28px 20px 22px;color:#fff;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,60,60,0.08) 0%,transparent 70%)}
+.header h1{font-size:20px;font-weight:700;letter-spacing:.5px;position:relative}
+.header .date{font-size:12px;color:rgba(255,255,255,0.45);margin-top:3px;position:relative}
+.header .badge{display:inline-block;background:rgba(255,60,60,0.25);border:1px solid rgba(255,60,60,0.4);padding:1px 8px;border-radius:10px;font-size:10px;color:#ff9999;margin-left:6px;vertical-align:middle}
+
+/* ── Stock Section ── */
+.stock-section{background:var(--card);margin:0 12px;border-radius:0 0 var(--radius) var(--radius);box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow:hidden;margin-bottom:14px}
+.stock-main{display:flex;align-items:baseline;gap:10px;padding:14px 16px 6px;flex-wrap:wrap}
+.stock-price{font-size:28px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+.stock-change{font-size:14px;font-weight:600;padding:3px 8px;border-radius:5px}
+.stock-change.down{background:#e8f5e9;color:var(--green)}
+.stock-change.up{background:#ffebee;color:#c62828}
+.stock-ticker{font-size:12px;color:var(--mute);font-weight:500}
+.stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:2px 16px 14px}
+.stock-item{text-align:center;padding:6px 2px;position:relative}
+.stock-item:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--border)}
+.stock-item .label{font-size:10px;color:var(--mute);font-weight:500;letter-spacing:.3px}
+.stock-item .value{font-size:13px;font-weight:600;color:var(--text);margin-top:1px}
+
+/* ── Container ── */
+.container{padding:0 12px 12px}
+
+/* ── Section Titles ── */
+.sec-title{font-size:13px;font-weight:600;padding:7px 10px;margin:14px 0 8px;border-left:3px solid;border-radius:3px;letter-spacing:.3px}
+.sec-title.news{color:var(--red);background:#fef2f0;border-left-color:var(--red)}
+.sec-title.social{color:var(--blue);background:#eef6fc;border-left-color:var(--blue)}
+.sec-title.steam{color:var(--navy);background:#e8eaf6;border-left-color:#3949ab}
+
+/* ── Cards ── */
+.card{background:var(--card);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04);border-left:3px solid var(--red)}
+.card.social{border-left-color:var(--blue)}
+.card .hd{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
+.card .num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;min-width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.card.social .num{background:var(--blue)}
+.card .ttl{font-size:14px;font-weight:700;color:var(--text);line-height:1.4}
+.card .bd{font-size:12.5px;color:var(--sub);line-height:1.6;margin-top:2px}
+.card .src{font-size:10px;color:var(--mute);margin-top:5px}
+.card .src a{color:var(--blue);text-decoration:none}
+.tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;margin-right:2px;font-weight:600;vertical-align:middle}
+.tag.launch{background:#e8f5e9;color:var(--green)}
+.tag.update{background:#e3f2fd;color:#1565c0}
+.tag.biz{background:#fff3e0;color:#e65100}
+.tag.promo{background:#f3e5f5;color:#7b1fa2}
+.tag.ip{background:#fce4ec;color:#c62828}
+
+/* ── Steam List (mobile-first, no horizontal scroll!) ── */
+.steam-list{display:flex;flex-direction:column;gap:4px}
+.steam-row{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;background:var(--card);padding:8px 12px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+.steam-row.top3{background:linear-gradient(135deg,#fff9f0 0%,#fff 100%);border-left:3px solid #e67e22}
+.steam-rank{font-size:12px;font-weight:700;color:var(--mute);text-align:center}
+.steam-row.top3 .steam-rank{color:#e67e22}
+.steam-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steam-name .cn{font-size:11px;font-weight:400;color:var(--mute);margin-left:4px}
+.steam-data{text-align:right;white-space:nowrap}
+.steam-count{font-size:14px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.steam-chg{font-size:10px;margin-top:1px}
+.steam-chg .up{color:#e53935}
+.steam-chg .dn{color:#43a047}
+.steam-chg .fl{color:#ccc}
+.steam-note{font-size:9px;color:var(--mute);text-align:right}
+
+/* ── Desktop: show as table ── */
+@media(min-width:640px){
+  .steam-list{gap:2px}
+  .steam-row{grid-template-columns:28px 1fr 100px 90px;border-radius:6px;padding:6px 14px}
+  .steam-name{font-size:13px}
+}
+
+/* ── Summary Note ── */
+.note{font-size:11.5px;color:var(--sub);padding:10px 12px;background:var(--card);border-radius:var(--radius);margin-top:6px;box-shadow:0 1px 3px rgba(0,0,0,0.03);line-height:1.6}
+
+/* ── Legend ── */
+.legend{display:flex;gap:12px;justify-content:center;font-size:10px;color:var(--mute);padding:4px 0 2px}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:16px 12px;font-size:10px;color:#c0c8d0}
+
+/* ── Responsive fine-tune ── */
+@media(max-width:400px){
+  .header{padding:22px 16px 18px}
+  .header h1{font-size:18px}
+  .stock-price{font-size:24px}
+  .stock-grid{grid-template-columns:repeat(2,1fr);row-gap:4px}
+  .stock-item:nth-child(2)::after{display:none}
+  .card{padding:12px 14px}
+  .card .ttl{font-size:13px}
+  .card .bd{font-size:12px}
+  .steam-row{padding:7px 10px}
+  .steam-name{font-size:12px}
+  .steam-count{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>育碧情报速递<span class="badge">Ubisoft Daily</span></h1>
+<div class="date">2026-04-06 Monday</div>
+</div>
+
+<!-- ── 资本市场 ── -->
+<div class="stock-section">
+<div class="stock-main">
+<span class="stock-price">&euro;3.840</span>
+<span class="stock-change down">-1.08%</span>
+<span class="stock-ticker">UBI.PA &middot; Euronext Paris</span>
+</div>
+<div class="stock-grid">
+<div class="stock-item"><div class="label">市值</div><div class="value">&euro;5.17亿</div></div>
+<div class="stock-item"><div class="label">企业价值</div><div class="value">&euro;19.4亿</div></div>
+<div class="stock-item"><div class="label">52周区间</div><div class="value">3.70&ndash;11.70</div></div>
+<div class="stock-item"><div class="label">年初至今</div><div class="value" style="color:#2e7d32">-41.6%</div></div>
+</div>
+</div>
+
+<div class="container">
+
+<!-- ── 今日要闻 ── -->
+<div class="sec-title news">今日要闻</div>
+
+<div class="card">
+<div class="hd"><span class="num">1</span><span class="ttl">AC Shadows 明日发布 PSSR 重大更新</span></div>
+<div class="bd"><span class="tag update">版本</span><span class="tag ip">刺客信条</span> Title Update 1.1.9 将于4月7日上线，带来 PS5 Pro PSSR 增强视觉和光追。发售首周 300 万玩家，Metacritic 81 分，多家媒体满分。PC Gamer："十年来在潜行游戏中获得的最大乐趣之一。"</div>
+<div class="src"><a href="https://screenrant.com/assassins-creed-shadows-ps5-pro-update-april-2026/" target="_blank">Screen Rant</a> &middot; <a href="https://khelnow.com/gaming/assassins-creed-shadows-pssr-update-202604" target="_blank">KhelNow</a> &middot; 04-03</div>
+</div>
+
+<div class="card">
+<div class="hd"><span class="num">2</span><span class="ttl">Xbox 免费6款 AC 今日截止</span></div>
+<div class="bd"><span class="tag promo">促销</span> 4/2&ndash;4/6，大革命/枭雄/起源/奥德赛/英灵殿/幻景免费畅玩，无需 Game Pass。进度可保留，同期全线折扣。活动期间 Steam 端 AC Odyssey 环比 +8.9%，引流效果显著。</div>
+<div class="src"><a href="https://news.xbox.com/en-us/2026/04/02/free-play-days-find-your-perfect-assassins-creed-game/" target="_blank">Xbox Wire</a> &middot; 04-02</div>
+</div>
+
+<div class="card">
+<div class="hd"><span class="num">3</span><span class="ttl">全境封锁：曙光上线一周</span></div>
+<div class="bd"><span class="tag launch">上线</span> 3/31 全球上线 iOS/Android，免费 RPG 射击。媒体评价："年度最流畅的手机射击"。含 PvE/PvP/暗区。Steam 端 Division 2 在线 9.7K，Rise Up 新赛季带动回流。</div>
+<div class="src"><a href="https://mobilesyrup.com/2026/03/31/ubisoft-the-division-resurgence-mobile-launch/" target="_blank">Mobile Syrup</a> &middot; <a href="https://www.ubisoft.com/en-us/game/the-division/resurgence" target="_blank">Ubisoft</a> &middot; 03-31</div>
+</div>
+
+<div class="card">
+<div class="hd"><span class="num">4</span><span class="ttl">Anno 纪年日 4/9 直播 &middot; The Crew 被诉</span></div>
+<div class="bd"><span class="tag biz">活动</span> Anno 系列 28 周年直播 4/9 举行，Anno 1800 在线 3,497。<span class="tag biz">商业</span> 法国消费者团体因 The Crew 停运正式起诉育碧，GaaS 模式行业性风险持续发酵。</div>
+<div class="src"><a href="https://news.ubisoft.com/en-gb/" target="_blank">Ubisoft News</a> &middot; 04-02</div>
+</div>
+
+<!-- ── 社区热议 ── -->
+<div class="sec-title social">社区热议</div>
+
+<div class="card social">
+<div class="hd"><span class="num">1</span><span class="ttl">AC Shadows PSSR 补丁万众期待</span></div>
+<div class="bd">r/assassinscreed 和 r/PS5 讨论活跃。PS5 Pro 玩家期待光追增强，多名用户表示会因此补丁回归。首发 300 万玩家为后续更新提供坚实社区基础。</div>
+</div>
+
+<div class="card social">
+<div class="hd"><span class="num">2</span><span class="ttl">Resurgence 手游：画质赞 vs 体力系统争议</span></div>
+<div class="bd">r/thedivision 画质和枪感获好评（"AAA 级手游"），但体力系统限制游玩、抽卡机制引发 P2W 争议。核心粉丝希望变现和体验间找到平衡。</div>
+</div>
+
+<div class="card social">
+<div class="hd"><span class="num">3</span><span class="ttl">Xbox 免费 AC：奥德赛最受推荐</span></div>
+<div class="bd">活动最后一天，"只能装 2-3 款选哪些"成热门话题。奥德赛和起源获推荐最多，枭雄被称"被低估的佳作"。六款总容量超 400GB 引发存储焦虑。</div>
+</div>
+
+<!-- ── Steam 在线 ── -->
+<div class="sec-title steam">Steam 实时在线</div>
+<div class="legend">采集 2026-04-06 18:29 CST &middot; 21 款游戏 &middot; 总在线 81,075</div>
+
+<div class="steam-list">
+<div class="steam-row top3"><span class="steam-rank">1</span><div class="steam-name">Rainbow Six Siege<span class="cn">彩虹六号</span></div><div class="steam-data"><div class="steam-count">41,499</div><div class="steam-chg"><span class="dn">-27.1%</span></div><div class="steam-note">周一回落 昨56.9K</div></div></div>
+<div class="steam-row top3"><span class="steam-rank">2</span><div class="steam-name">The Division 2<span class="cn">全境封锁</span></div><div class="steam-data"><div class="steam-count">9,739</div><div class="steam-chg"><span class="up">Rise Up</span></div><div class="steam-note">新赛季+手游联动</div></div></div>
+<div class="steam-row top3"><span class="steam-rank">3</span><div class="steam-name">Brawlhalla<span class="cn">格斗哈拉</span></div><div class="steam-data"><div class="steam-count">5,396</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">4</span><div class="steam-name">Anno 1800<span class="cn">纪元</span></div><div class="steam-data"><div class="steam-count">3,497</div><div class="steam-chg"><span class="fl">&ndash;</span></div><div class="steam-note">纪年日预热</div></div></div>
+<div class="steam-row"><span class="steam-rank">5</span><div class="steam-name">AC Valhalla<span class="cn">英灵殿</span></div><div class="steam-data"><div class="steam-count">3,247</div><div class="steam-chg"><span class="fl">&ndash;</span></div><div class="steam-note">Xbox免费引流</div></div></div>
+<div class="steam-row"><span class="steam-rank">6</span><div class="steam-name">AC Shadows<span class="cn">暗影</span></div><div class="steam-data"><div class="steam-count">3,081</div><div class="steam-chg"><span class="fl">&ndash;</span></div><div class="steam-note">明日PSSR更新</div></div></div>
+<div class="steam-row"><span class="steam-rank">7</span><div class="steam-name">The Crew Motorfest<span class="cn">飙酷车神</span></div><div class="steam-data"><div class="steam-count">2,662</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">8</span><div class="steam-name">For Honor<span class="cn">荣耀战魂</span></div><div class="steam-data"><div class="steam-count">2,535</div><div class="steam-chg"><span class="up">+1,843%</span></div><div class="steam-note">昨130 愚人节余温</div></div></div>
+<div class="steam-row"><span class="steam-rank">9</span><div class="steam-name">Ghost Recon BP<span class="cn">幽灵行动</span></div><div class="steam-data"><div class="steam-count">1,600</div><div class="steam-chg"><span class="dn">-22.9%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">10</span><div class="steam-name">Avatar: Pandora<span class="cn">阿凡达</span></div><div class="steam-data"><div class="steam-count">1,592</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">11</span><div class="steam-name">Trackmania<span class="cn">赛道狂飙</span></div><div class="steam-data"><div class="steam-count">1,526</div><div class="steam-chg"><span class="dn">-39.3%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">12</span><div class="steam-name">Far Cry 6<span class="cn">孤岛惊魂</span></div><div class="steam-data"><div class="steam-count">1,365</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">13</span><div class="steam-name">Star Wars Outlaws<span class="cn">星球大战</span></div><div class="steam-data"><div class="steam-count">572</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">14</span><div class="steam-name">Riders Republic<span class="cn">极限国度</span></div><div class="steam-data"><div class="steam-count">325</div><div class="steam-chg"><span class="dn">-35.1%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">15</span><div class="steam-name">AC Mirage<span class="cn">幻景</span></div><div class="steam-data"><div class="steam-count">293</div><div class="steam-chg"><span class="dn">-31.5%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">16</span><div class="steam-name">South Park TFBW<span class="cn">南方公园</span></div><div class="steam-data"><div class="steam-count">233</div><div class="steam-chg"><span class="dn">-53.3%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">17</span><div class="steam-name">Skull and Bones<span class="cn">碧海黑帆</span></div><div class="steam-data"><div class="steam-count">230</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">18</span><div class="steam-name">Watch Dogs: Legion<span class="cn">看门狗</span></div><div class="steam-data"><div class="steam-count">180</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">19</span><div class="steam-name">Prince of Persia<span class="cn">波斯王子</span></div><div class="steam-data"><div class="steam-count">107</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">20</span><div class="steam-name">UNO</div><div class="steam-data"><div class="steam-count">74</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">21</span><div class="steam-name">Rocksmith+<span class="cn">摇滚史密斯</span></div><div class="steam-data"><div class="steam-count">22</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
+</div>
+
+<div class="note">
+周一工作日回落：R6S 41.5K（较周日 56.9K 降 27%，正常周期）。Division 2 维持 9.7K 高位（Rise Up 新赛季 + Resurgence 手游联动）。For Honor 2,535（较昨日 130 大幅回升，愚人节活动延续）。AC Valhalla 3,247 + Shadows 3,081 双双高位（Xbox 免费最后一天）。
+</div>
+
+</div>
+
+<div class="footer">育碧情报速递 &middot; Claw for Tian &middot; 2026-04-06 &middot; 股价沿用 4/2 收盘</div>
+</body>
+</html>

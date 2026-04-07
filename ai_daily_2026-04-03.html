@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 情报速递 | 2026-04-03</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f5f5f5; color: #333; line-height: 1.7; padding: 16px; max-width: 720px; margin: 0 auto; }
+.header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: #fff; padding: 28px 24px; border-radius: 12px; margin-bottom: 16px; }
+.header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.header .date { font-size: 13px; color: #8892b0; }
+.summary { background: #fff; border-left: 4px solid #e74c3c; padding: 18px 20px; border-radius: 8px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.summary h2 { font-size: 15px; color: #e74c3c; margin-bottom: 10px; font-weight: 700; }
+.summary ol { padding-left: 18px; margin-bottom: 0; }
+.summary ol li { font-size: 14px; color: #444; margin-bottom: 6px; }
+.summary ol li strong { color: #1a1a2e; }
+.summary .verdict { font-size: 13px; color: #555; font-style: italic; margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; line-height: 1.6; }
+.section { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.section-title { font-size: 13px; font-weight: 700; color: #1a1a2e; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e74c3c; }
+.item { margin-bottom: 20px; }
+.item:last-child { margin-bottom: 0; }
+.item h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+.item h3 a { color: #1a1a2e; text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.2s; }
+.item h3 a:hover { color: #e74c3c; border-bottom-color: #e74c3c; }
+.item .source { font-size: 12px; color: #999; margin-bottom: 6px; }
+.item p { font-size: 14px; color: #555; margin-bottom: 4px; }
+.item .impact { font-size: 13px; color: #e74c3c; font-weight: 500; margin-top: 6px; }
+.footer { text-align: center; font-size: 12px; color: #999; padding: 20px 0 8px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>AI 情报速递</h1>
+  <div class="date">2026-04-03 | 游戏行业 + 工作提效</div>
+</div>
+
+<div class="summary">
+  <h2>今日 4 个变化</h2>
+  <ol>
+    <li><strong>Google Gemma 4 开源发布</strong> — Apache 2.0 协议，31B 模型性能击败大 20 倍闭源模型</li>
+    <li><strong>AI 编程三巨头同日亮剑</strong> — Cursor 3 + Claude Code + Codex CLI，IDE 变成 Agent 终端</li>
+    <li><strong>Moonlake 因果世界模型</strong> — 用游戏引擎训练 AI Agent，斯坦福团队获英伟达投资</li>
+    <li><strong>高盛 AI 采用报告</strong> — 每人日省 1 小时，但 80% 企业仍未部署</li>
+  </ol>
+  <div class="verdict">总判断：开源模型正式进入"够用即最好"时代，而 AI 编程赛道一夜之间从"辅助补全"跃迁到"Agent 自主开发"——这对游戏工作室的研发流程将产生直接冲击。</div>
+</div>
+
+<div class="section">
+  <div class="section-title">A. Top Signals</div>
+
+  <div class="item">
+    <h3><a href="https://deepmind.google/models/gemma/gemma-4/" target="_blank">Google Gemma 4：开源模型的 Apache 2.0 时刻</a></h3>
+    <div class="source">Google DeepMind | 04-02</div>
+    <p>Google 发布 Gemma 4 系列四款规格（含 31B 旗舰和 E2B/E4B 移动端版本），首次采用 Apache 2.0 无限制商用协议。31B 模型在推理和 Agent 任务上击败体量大 20 倍的闭源模型。英伟达同步宣布合作，加速 Gemma 4 在 RTX 系统上的本地 Agent 应用部署。</p>
+    <div class="impact">影响：中小游戏工作室和独立开发者将以近零成本获得旗舰级推理能力，本地化部署门槛大幅降低。</div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://cursor.com/blog/cursor-3" target="_blank">AI 编程进入 Agent 时代：Cursor 3 / Claude Code / Codex CLI 三连发</a></h3>
+    <div class="source">Cursor / Anthropic / OpenAI | 04-02/03</div>
+    <p>Cursor 3 从传统 IDE 重构为 AI Agent 统一工作区，支持多仓库协作和本地/云端 Agent 无缝切换；Anthropic 发布 <a href="https://aitoolly.com/zh/ai-news/2026-04-03" style="color:#e74c3c">Claude Code</a> CLI 工具深度理解本地代码库；OpenAI 推出 Codex CLI 轻量终端助手。Cursor 官方数据显示 Agent 使用量已超越 Tab 补全。</p>
+    <div class="impact">影响：开发范式正从"你写代码，AI 辅助"向"AI 写代码，你来审查"转变。游戏团队的工具链选型需要重新评估。</div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://www.latent.space/p/moonlake" target="_blank">Moonlake：用游戏引擎训练 AI 的因果世界模型</a></h3>
+    <div class="source">Latent Space / AIToolly | 04-03</div>
+    <p>斯坦福 Chris Manning 团队的 Moonlake 公布多模态因果世界模型新进展，核心方法是用游戏引擎引导 Agent 构建长周期、多人交互式 3D 环境。此前其 Reverie 引擎已能从单句 prompt 自动生成可玩的赛博朋克 3D 游戏场景，已获英伟达等巨头投资。</p>
+    <div class="impact">影响：AI + 游戏行业最前沿的交叉方向。如果世界模型成熟，游戏关卡设计和原型验证的效率将有数量级提升。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">B. Product & Tech</div>
+
+  <div class="item">
+    <h3><a href="https://aitoolly.com/zh/ai-news/2026-04-03" target="_blank">阿里发布闭源 Qwen3.6-Plus，开源策略转向</a></h3>
+    <div class="source">阿里云 | 04-03</div>
+    <p>阿里推出三款闭源 Qwen 模型（含编程优化的 Qwen3.6-Plus），仅通过云平台提供。反映头部厂商在开源红利见顶后开始收紧最强模型的商业化路径。</p>
+    <div class="impact">影响：国内大模型竞争格局微妙变化——开源 vs 闭源策略分化加速。</div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://aitoolly.com/zh/ai-news/2026-04-03" target="_blank">Google Vids 集成 Veo 3.1，免费 AI 视频生成</a></h3>
+    <div class="source">Google | 04-03</div>
+    <p>Google Vids 更新集成 Lyria 3 和 Veo 3.1 模型，支持免费高质量 AI 视频生成，用户可通过 prompt 直接指挥视频中的 AI 数字人角色。</p>
+    <div class="impact">影响：对游戏宣传片和市场素材制作有直接参考价值，制作门槛进一步降低。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">C. Watchlist</div>
+
+  <div class="item">
+    <h3><a href="https://fortune.com/2026/04/01/ai-worker-productivity-adoption-goldman-sachs-saves-60-minutes-per-day/" target="_blank">高盛 AI 采用追踪报告：日省 1 小时但 80% 企业未部署</a></h3>
+    <div class="source">Fortune / Goldman Sachs | 04-01</div>
+    <p>高盛 2026 年 3 月报告显示，美国仅 19% 企业采用 AI，但已采用者平均日省 40-60 分钟，产品周期从 24-36 月压缩至 6 月。75% 用户表示能完成此前无法完成的任务。预计未来 6 月采用率升至 22.3%。</p>
+    <div class="impact">关注理由：先行者优势窗口仍然打开，游戏行业的 AI 部署率数据值得对标参考。</div>
+  </div>
+
+  <div class="item">
+    <h3><a href="https://aitoolly.com/zh/ai-news/2026-04-03" target="_blank">LangChain 评测：开源模型 Agent 任务比肩闭源旗舰</a></h3>
+    <div class="source">LangChain | 04-03</div>
+    <p>GLM-5、MiniMax M2.7 等开源模型在核心 Agent 任务评测中达到顶尖闭源模型水平，且成本和延迟更优。配合 Gemma 4 的 Apache 2.0 开源，开源阵营实力大增。</p>
+    <div class="impact">关注理由：选型参考——游戏 AI NPC、自动化工具链可优先考虑开源方案。</div>
+  </div>
+</div>
+
+<div class="footer">
+  信息截至北京时间 2026-04-03 20:00 | 严格只包含过去 24 小时首次公开信息<br>
+  AI 情报速递 · 游戏行业 + 工作提效
+</div>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 情报速递 | 2026-04-04</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.7;font-size:15px}
+.header{background:linear-gradient(135deg,#0a1628 0%,#1a2744 50%,#2d3f5e 100%);padding:36px 24px 28px;color:#fff;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60%;right:-15%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,180,255,0.12) 0%,transparent 70%)}
+.header h1{font-size:22px;font-weight:700;letter-spacing:1px;position:relative}
+.header .date{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;position:relative}
+.header .badge{display:inline-block;background:rgba(0,120,255,0.3);border:1px solid rgba(0,120,255,0.5);padding:2px 10px;border-radius:12px;font-size:11px;color:#7ec8ff;margin-left:8px}
+.container{max-width:720px;margin:0 auto;padding:16px}
+.section{margin-bottom:20px}
+.section-title{font-size:14px;font-weight:700;color:#0078ff;text-transform:uppercase;letter-spacing:1.5px;padding:12px 0 8px;border-bottom:2px solid #0078ff;margin-bottom:12px}
+.section-title.product{color:#e17055;border-bottom-color:#e17055}
+.section-title.watch{color:#636e72;border-bottom-color:#636e72}
+.card{background:#fff;border-radius:10px;padding:18px 20px;margin-bottom:12px;box-shadow:0 1px 8px rgba(0,0,0,0.04);border-left:4px solid #0078ff;transition:transform 0.15s}
+.card:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+.card.product{border-left-color:#e17055}
+.card.watch{border-left-color:#636e72}
+.card .num{display:inline-block;background:#0078ff;color:#fff;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:8px;flex-shrink:0}
+.card.product .num{background:#e17055}
+.card.watch .num{background:#636e72}
+.card .title{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center}
+.card .body{font-size:14px;color:#444;line-height:1.7}
+.card .source{font-size:12px;color:#999;margin-top:8px}
+.card .source a{color:#0078ff;text-decoration:none}
+.card .source a:hover{text-decoration:underline}
+.tag{display:inline-block;background:#f0f6ff;color:#0078ff;font-size:11px;padding:2px 8px;border-radius:4px;margin-right:4px;font-weight:600}
+.tag.game{background:#fff3e6;color:#e17055}
+.tag.security{background:#ffe6e6;color:#d63031}
+.tag.china{background:#ffe6f0;color:#e84393}
+.footer{text-align:center;padding:24px;font-size:11px;color:#b0b8c1}
+@media(max-width:768px){.header{padding:24px 16px 20px}.header h1{font-size:18px}.container{padding:10px}.card{padding:14px 16px}.card .title{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>AI 情报速递<span class="badge">Daily Brief</span></h1>
+<div class="date">2026-04-04 Saturday</div>
+</div>
+<div class="container">
+
+<div class="section">
+<div class="section-title">Top Signals</div>
+
+<div class="card">
+<div class="title"><span class="num">1</span>OpenAI 高管层 IPO 前夕震荡</div>
+<div class="body">
+COO Brad Lightcap 转任"特别项目"，AGI 部门负责人 Fidji Simo 因健康原因休假，CMO Kate Rouch 因癌症治疗离职。三位核心高管同时变动，正值 OpenAI 冲刺史上最大规模 IPO。与此同时，ChatGPT Business 正式上线（$25/人/月），Codex App 已超越 VS Code 扩展成为 OpenAI 使用率最高的界面，新企业用户可获高达 $500 积分。投资者密切关注：在 IPO 关键冲刺期，如此规模的领导层变动公司能否承受。
+</div>
+<div class="source">来源：<a href="https://techcrunch.com/2026/04/03/openai-executive-shuffle-new-roles-coo-brad-lightcap-fidji-simo-kate-rouch/" target="_blank">TechCrunch</a> · <a href="https://www.theverge.com/ai-artificial-intelligence/906965/openais-agi-boss-is-taking-a-leave-of-absence" target="_blank">The Verge</a> · 04-03</div>
+</div>
+
+<div class="card">
+<div class="title"><span class="num">2</span>AI Agent 4 小时自主攻破 FreeBSD 内核</div>
+<div class="body">
+<span class="tag security">安全</span>安全研究团队 Calif.io 披露：Claude 4.6 在 4 小时内自主发现并利用 FreeBSD 内核漏洞 CVE-2026-4747（RPCSEC_GSS 栈溢出），劫持内核线程，通过网络数据包编写 shellcode，生成完整远程 root shell——全程无需人类辅助。这是已知首个由 AI 独立完成"发现+利用"全链路的远程内核漏洞攻击。FreeBSD 支撑着 Netflix、PlayStation、WhatsApp 等关键基础设施，此前这类工作需要顶级安全专家数周完成。AI 网络攻防能力的质变拐点已到来。
+</div>
+<div class="source">来源：<a href="https://blog.calif.io/p/mad-bugs-claude-wrote-a-full-freebsd" target="_blank">Calif.io</a> · <a href="https://winbuzzer.com/2026/04/01/claude-ai-freebsd-remote-kernel-exploit-root-shell-xcxwbn/" target="_blank">WinBuzzer</a> · 04-01</div>
+</div>
+
+<div class="card">
+<div class="title"><span class="num">3</span>DeepSeek V4 将运行在华为 Ascend 950PR</div>
+<div class="body">
+<span class="tag china">中国 AI</span>据 The Information 报道，DeepSeek 与华为及寒武纪合作重写 V4 底层代码适配国产芯片，发布前排除美国芯片厂商的早期访问权。阿里巴巴、字节跳动、腾讯已向华为下单数十万颗 Ascend 950PR 芯片。受此消息刺激，寒武纪股价涨 2.67%。V4 预计数周内发布，此前 V3/R1 的发布曾引发全球科技股剧震，重新定义了国产 AI 的天花板。中国 AI 半导体自主化进入实质落地阶段。
+</div>
+<div class="source">来源：<a href="https://blockonomi.com/deepseek-v4-to-power-huawei-chips-as-chinas-tech-titans-order-massive-quantities/" target="_blank">Blockonomi</a> · <a href="https://technews.tw/2026/04/04/deepseek-v4-huawei/" target="_blank">TechNews</a> · 04-03</div>
+</div>
+
+</div>
+
+<div class="section">
+<div class="section-title product">Product & Tech</div>
+
+<div class="card product">
+<div class="title"><span class="num">4</span>Anthropic 封杀 OpenClaw 共享 Claude 订阅</div>
+<div class="body">
+4 月 4 日起，Claude Pro/Max 订阅不再覆盖 OpenClaw 等第三方工具，用户需单独按量付费（API 价格）。Anthropic 称这些工具对系统容量造成"过度压力"。受影响用户可获 $200 补偿积分。OpenClaw 此前凭借共享订阅模式快速崛起，此举实质上切断了其最大增长引擎，第三方 AI 工具的商业模式面临重塑。
+</div>
+<div class="source">来源：<a href="https://www.theverge.com/ai-artificial-intelligence/907074/anthropic-openclaw-claude-subscription-ban" target="_blank">The Verge</a> · <a href="https://news.ycombinator.com/item?id=47633396" target="_blank">Hacker News</a> · 04-03</div>
+</div>
+
+<div class="card product">
+<div class="title"><span class="num">5</span>Anthropic 4 亿美元收购生物科技 AI Coefficient Bio</div>
+<div class="body">
+全股票交易，Anthropic 迄今最大收购案。Coefficient Bio 处于隐身模式，专注 AI 在生物技术领域的应用。此举标志着 Anthropic 将 Claude 的能力从纯软件领域扩展到物理科学——药物发现、蛋白质工程等方向。AI 巨头们正从"做更好的聊天机器人"转向"用 AI 解决真实世界的科学问题"。
+</div>
+<div class="source">来源：<a href="https://techcrunch.com/2026/04/03/anthropic-buys-biotech-startup-coefficient-bio-in-400m-deal-reports/" target="_blank">TechCrunch</a> · 04-03</div>
+</div>
+
+<div class="card product">
+<div class="title"><span class="num">6</span>上海"数龙"全球 AI+游戏创新大赛启动</div>
+<div class="body">
+<span class="tag game">游戏 AI</span>世纪华通主办，设 AI 游戏、AI 应用、AI 智能体三条赛道。上海/杭州/澳门设线下站点。获胜者 7 月 31 日 ChinaJoy 揭晓，获孵化器+投资对接+技术资源全套支持。首届冠军海翼互娱已获世纪华通战略投资，另一团队 Gamercury 获上海天使俱乐部联合资助。赛事定位为技术开发者、企业、投资方和用户之间的桥梁，加速 AI 从实验室走向游戏产业。
+</div>
+<div class="source">来源：<a href="https://www.citynewsservice.cn/articles/china-biz-buzz/tech/shanghai-holds-second-digiloong-global-ai-innovation-competition-zmz8vvwm" target="_blank">City News Service</a> · 04-02</div>
+</div>
+
+</div>
+
+<div class="section">
+<div class="section-title watch">Watchlist</div>
+
+<div class="card watch">
+<div class="title"><span class="num">7</span>LangChain Agent 自愈部署管线</div>
+<div class="body">
+LangChain 为 GTM Agent 推出自愈（self-heal）部署管线：部署后自动检测回归，定位最近变更是否为根因，并自动修复。这是面向 AI Agent 生产化的关键基础设施——Agent 从"能跑"到"能稳定跑在生产环境"，需要这类自动化可靠性保障。
+</div>
+<div class="source">来源：<a href="https://blog.langchain.com/production-agents-self-heal/" target="_blank">LangChain Blog</a> · 04-03</div>
+</div>
+
+<div class="card watch">
+<div class="title"><span class="num">8</span>微软 100 亿美元四年投资日本 AI</div>
+<div class="body">
+微软宣布四年 100 亿美元日本 AI 投资计划，聚焦数据中心和 AI 基础设施建设。这是微软亚洲 AI 推进战略的重要支柱，也是全球 AI 算力竞赛从美中两极扩展到亚太多极的标志性事件。
+</div>
+<div class="source">来源：<a href="https://www.theneuron.ai/explainer-articles/-around-the-horn-digest-everything-that-happened-in-ai-this-weekend-saturday-sunday-april-4-5-2026/" target="_blank">The Neuron</a> · 04-04</div>
+</div>
+
+</div>
+
+</div>
+<div class="footer">AI 情报速递 · Claw for Tian · 2026-04-04 · 侧重 AI+游戏 & 工作提效</div>
+</body>
+</html>

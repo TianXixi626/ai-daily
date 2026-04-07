@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>育碧发行工作台 | K9 Publishing Workbench</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+:root{--bg:#f8f9fb;--card:#fff;--text:#1a1a2e;--sub:#5a6172;--mute:#9aa0ad;--border:#e8ecf1;--blue:#2563eb;--navy:#0f172a;--red:#dc2626;--green:#16a34a;--orange:#ea580c;--purple:#7c3aed;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:240px;background:#0f172a;color:#fff;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s}
+.sidebar-header{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.sidebar-header h1{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.sidebar-header h1 .icon{width:28px;height:28px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.sidebar-header .sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px}
+.nav{flex:1;padding:12px 8px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;margin-bottom:2px;user-select:none}
+.nav-item:hover{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.9)}
+.nav-item.active{background:rgba(59,130,246,0.15);color:#60a5fa}
+.nav-item .emoji{font-size:16px;width:20px;text-align:center}
+.nav-item .badge{margin-left:auto;background:rgba(59,130,246,0.2);color:#93c5fd;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:600}
+.sidebar-footer{padding:12px 20px;border-top:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.25)}
+.main{flex:1;margin-left:240px}
+.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:50}
+.topbar h2{font-size:16px;font-weight:700;color:var(--navy)}
+.topbar .search{margin-left:auto;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:13px;width:260px;outline:none}
+.topbar .search:focus{border-color:var(--blue)}
+.content{padding:24px 28px}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.stat-card .label{font-size:11px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.stat-card .value{font-size:24px;font-weight:700;margin-top:3px;color:var(--navy)}
+.stat-card .value.blue{color:var(--blue)}.stat-card .value.green{color:var(--green)}.stat-card .value.red{color:var(--red)}.stat-card .value.orange{color:var(--orange)}.stat-card .value.purple{color:var(--purple)}
+.stat-card .delta{font-size:11px;margin-top:2px;color:var(--mute)}
+.tw{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:20px}
+.tw-h{display:flex;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap}
+.tw-h h3{font-size:14px;font-weight:700;white-space:nowrap}
+.tw-h .cnt{font-size:12px;color:var(--mute)}
+.flts{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.fb{padding:4px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;cursor:pointer;background:#fff;color:var(--sub);font-weight:500;transition:all .15s}
+.fb:hover,.fb.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:#f8f9fb}
+th{padding:10px 14px;text-align:left;font-weight:600;color:var(--sub);font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+td{padding:10px 14px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+tr:hover td{background:#fafbfc}
+.gn{font-weight:600;color:var(--navy)}.gs{font-size:11px;color:var(--mute)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
+.tag-pc{background:#eff6ff;color:#2563eb}.tag-ps{background:#eef2ff;color:#4338ca}.tag-xbox{background:#ecfdf5;color:#059669}.tag-switch{background:#fef2f2;color:#dc2626}.tag-mobile{background:#fdf4ff;color:#7c3aed}
+.tag-live{background:#dcfce7;color:#16a34a}.tag-up{background:#fff7ed;color:#ea580c}.tag-legacy{background:#f1f5f9;color:#64748b}.tag-new{background:#fef2f2;color:#dc2626}
+.nu{color:var(--red);font-weight:600}.nd{color:var(--green);font-weight:600}.nf{color:var(--mute)}
+.section{display:none}.section.active{display:block}
+.sec-t{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.chart-g{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.ch-c{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-height:200px}
+.ch-c h4{font-size:13px;font-weight:600;color:var(--sub);margin-bottom:12px}
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--border)}
+.tl-i{position:relative;margin-bottom:16px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow)}
+.tl-i::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;border:2px solid var(--blue);background:#fff}
+.tl-d{font-size:11px;color:var(--mute);font-weight:600}.tl-t{font-size:13px;font-weight:600;margin-top:2px}.tl-desc{font-size:12px;color:var(--sub);margin-top:2px}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.nc .meta{font-size:11px;color:var(--mute);margin-bottom:4px}.nc .body{font-size:13px;line-height:1.7}
+.warn-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;gap:8px;font-size:12px}
+.rights-tbl td{font-size:12px;padding:8px 12px;line-height:1.5}
+.rights-tbl td:first-child{color:var(--green);font-weight:500}
+.rights-tbl td:last-child{color:var(--red);font-weight:500}
+.grp-hdr{background:#f1f5f9;font-weight:700;color:var(--navy)}
+.grp-hdr td{padding:8px 14px;font-size:13px;border-bottom:2px solid var(--border)}
+.cmp-link{color:var(--blue);text-decoration:none;font-weight:500;font-size:12px}
+.cmp-link:hover{text-decoration:underline}
+.quote-box{background:#f8fafc;border-left:3px solid var(--blue);padding:10px 14px;margin:8px 0;font-size:12px;color:var(--sub);line-height:1.6;border-radius:0 6px 6px 0;font-style:italic}
+.tab-row{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:16px}
+.tab-btn{padding:8px 16px;font-size:13px;font-weight:600;color:var(--mute);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.menu-btn{display:none;background:none;border:none;font-size:20px;cursor:pointer;padding:4px;color:var(--navy)}
+@media(max-width:1024px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.menu-btn{display:block}.chart-g{grid-template-columns:1fr}}
+@media(max-width:640px){.content{padding:16px}.topbar{padding:12px 16px}.topbar .search{width:160px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1><span class="icon">🎮</span>发行工作台</h1>
+    <div class="sub">K9 · Ubisoft Publishing</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-item active" data-s="overview"><span class="emoji">📊</span>产品总览<span class="badge">120</span></div>
+    <div class="nav-item" data-s="steam"><span class="emoji">🎯</span>Steam 监控<span class="badge">30</span></div>
+    <div class="nav-item" data-s="coop"><span class="emoji">🤝</span>育碧合作</div>
+    <div class="nav-item" data-s="pricing"><span class="emoji">💰</span>价格追踪</div>
+    <div class="nav-item" data-s="history"><span class="emoji">📈</span>历史销售</div>
+    <div class="nav-item" data-s="events"><span class="emoji">📅</span>大事记</div>
+    <div class="nav-item" data-s="market"><span class="emoji">📰</span>市场情报</div>
+    <div class="nav-item" data-s="notes"><span class="emoji">📝</span>工作备忘</div>
+  </nav>
+  <div class="sidebar-footer">更新于 2026-04-08 · V2.2</div>
+</aside>
+
+<div class="main">
+<div class="topbar">
+  <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+  <h2 id="pt">产品总览</h2>
+  <input type="text" class="search" placeholder="搜索产品、合同号..." id="gs" oninput="doSearch()">
+</div>
+<div class="content">
+
+<!-- ===== 1. 产品总览 ===== -->
+<div class="section active" id="sec-overview">
+<div class="stat-row">
+  <div class="stat-card"><div class="label">在架产品</div><div class="value blue">120</div><div class="delta">PC + Console + Mobile</div></div>
+  <div class="stat-card"><div class="label">🇨🇳 中国区 YTD</div><div class="value green">—</div><div class="delta">待接入数据源</div></div>
+  <div class="stat-card"><div class="label">🇨🇳 Net Revenue</div><div class="value green">—</div><div class="delta">USD · 待接入</div></div>
+  <div class="stat-card"><div class="label">🌏 亚洲区 YTD</div><div class="value orange">—</div><div class="delta">待接入数据源</div></div>
+  <div class="stat-card"><div class="label">🌏 Net Revenue</div><div class="value orange">—</div><div class="delta">USD · 待接入</div></div>
+  <div class="stat-card"><div class="label">Steam 峰值</div><div class="value red">56,890</div><div class="delta">R6S · 04-05</div></div>
+</div>
+<div class="warn-box"><span style="font-size:16px">⚠️</span><div><b>数据源待接入：</b>中国区/亚洲区销售数据（销量 + Net Revenue）当前为占位结构，等育碧数据门户上线后可通过 API / Excel 导入。</div></div>
+<div class="tw">
+  <div class="tw-h"><h3>📋 产品目录</h3><span class="cnt" id="pc">120 款</span>
+    <div class="flts">
+      <span class="fb active" data-f="all">全部</span><span class="fb" data-f="live">运营中</span><span class="fb" data-f="upcoming">即将发售</span><span class="fb" data-f="legacy">经典</span>
+      <span class="fb" data-f="f-ac">刺客信条</span><span class="fb" data-f="f-fc">孤岛惊魂</span><span class="fb" data-f="f-tc">汤姆克兰西</span>
+    </div>
+  </div>
+  <div style="overflow-x:auto"><table><thead><tr>
+    <th>产品名称</th><th>系列</th><th>平台</th><th>状态</th><th>年份</th>
+    <th style="border-left:2px solid #dbeafe">🇨🇳 销量</th><th>🇨🇳 Rev</th>
+    <th style="border-left:2px solid #fef3c7">🌏 销量</th><th>🌏 Rev</th>
+    <th style="border-left:2px solid var(--border)">Steam</th><th>评价</th>
+  </tr></thead><tbody id="ptb"></tbody></table></div>
+</div>
+</div>
+
+<!-- ===== 2. Steam 监控 ===== -->
+<div class="section" id="sec-steam">
+<div class="stat-row">
+  <div class="stat-card"><div class="label">总在线</div><div class="value blue">82,528</div><div class="delta">育碧全平台 Steam</div></div>
+  <div class="stat-card"><div class="label">#1</div><div class="value green">R6 Siege</div><div class="delta">56,890 · +2.5%</div></div>
+  <div class="stat-card"><div class="label">Top 3 占比</div><div class="value orange">78.9%</div></div>
+  <div class="stat-card"><div class="label">监控</div><div class="value">30</div><div class="delta">含退市</div></div>
+  <div class="stat-card"><div class="label">窗口</div><div class="value purple">14天</div><div class="delta">04-03 至 04-05</div></div>
+</div>
+<div class="chart-g">
+  <div class="ch-c"><h4>📈 在线趋势（Top 5）</h4><canvas id="ct1" height="200"></canvas></div>
+  <div class="ch-c"><h4>🥧 在线占比</h4><canvas id="ct2" height="200"></canvas></div>
+</div>
+<div class="tw"><div class="tw-h"><h3>🎯 Steam Top 20</h3><span class="cnt">最近: 2026-04-05</span></div>
+<div style="overflow-x:auto"><table><thead><tr><th>#</th><th>游戏</th><th>在线</th><th>日环比</th><th>周同比</th><th>趋势</th></tr></thead><tbody id="stb"></tbody></table></div></div>
+</div>
+
+<!-- ===== 3. 育碧合作 ===== -->
+<div class="section" id="sec-coop">
+<div class="sec-t">🤝 育碧合作 · 权责总览</div>
+
+<div class="tw" style="margin-bottom:16px">
+<div class="tw-h"><h3>合作概览</h3></div>
+<table><tbody>
+<tr><td style="width:120px;font-weight:600;color:var(--blue)">合作性质</td><td>腾讯作为市场咨询与营销支持服务方，与 Ubisoft 共同开展亚洲市场推广；Ubisoft 保留所有发行及运营控制权</td></tr>
+<tr><td style="font-weight:600;color:var(--blue)">地域范围</td><td>亚洲区域（含中国大陆、港澳台、日韩、印度、东南亚、俄罗斯等约40个国家/地区）</td></tr>
+<tr><td style="font-weight:600;color:var(--blue)">适用产品</td><td>所有在亚洲数字 PC 平台发行的 Ubisoft PC 数字版游戏（既有库存、AC/R6/FC 系列、AB 云游戏及未来新品）</td></tr>
+<tr><td style="font-weight:600;color:var(--blue)">适用平台</td><td>Ubisoft Store、Steam、Epic Games Store，以及协议期内 Ubisoft 与本地平台签约的其他渠道（仅限 PC 数字版）</td></tr>
+<tr><td style="font-weight:600;color:var(--blue)">中国大陆模式</td><td>跨境数字发行模式：无需版号/ISBN/游戏审批，Ubisoft 无需在境内设立发行实体，玩家通过境外平台直接购买</td></tr>
+</tbody></table>
+</div>
+
+<div class="tab-row">
+  <div class="tab-btn active" data-ct="rights">权限对照</div>
+  <div class="tab-btn" data-ct="ubi-duty">Ubisoft 承诺</div>
+  <div class="tab-btn" data-ct="tc-duty">腾讯义务</div>
+  <div class="tab-btn" data-ct="redline">红线</div>
+  <div class="tab-btn" data-ct="products">产品范围</div>
+</div>
+
+<div id="ct-rights" class="ct-panel">
+<div class="tw"><div class="tw-h"><h3>全平台权限对照</h3></div>
+<table class="rights-tbl"><thead><tr><th style="color:var(--green)">✅ 腾讯可以做的</th><th style="color:var(--red)">❌ 腾讯不能做的</th></tr></thead><tbody>
+<tr><td>查看中国大陆营销流量数据及双方约定信息</td><td>直接访问 Ubisoft 内部系统、数据库或工具</td></tr>
+<tr><td>获取各平台实时数据门户（收入、销量、退款、预购）</td><td>访问 Ubisoft 任何 Store 后台或运营管理账号</td></tr>
+<tr><td>共同主导中国大陆第三方平台商务谈判</td><td>独立签署与第三方平台的任何协议</td></tr>
+<tr><td>对各平台商品配置、Storefront 推广定位提出建议</td><td>单方面决定各平台最终定价或促销参数</td></tr>
+<tr><td>就定价、折扣、促销活动（含全平台）提出战略建议</td><td>要求 Ubisoft 必须采纳促销或定价建议</td></tr>
+<tr><td>合理申请区域锁定的平台 CD Key（用于本地渠道）</td><td>独立生成或管理 CD Key / 数字授权码</td></tr>
+<tr><td>使用 Ubisoft 商标及营销素材（仅限协议内活动）</td><td>注册与产品相关的商标、域名或版权</td></tr>
+<tr><td>提供 O2 / FengXun 工具访问权给 Ubisoft（免费期内）</td><td>向 Ubisoft 索取超出商定范围的内部报告</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="ct-ubi-duty" class="ct-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>Ubisoft 运营承诺</h3></div>
+<table><tbody>
+<tr><td style="width:140px;font-weight:600">营销可视性</td><td>提前最多12个月向腾讯披露产品重大营销里程碑（非约束性，仅供规划参考）</td></tr>
+<tr><td style="font-weight:600">网络加速 ⚡</td><td>在 AC Black Flag Resynced 上线前，须完成 EdgeOne 或同等方案集成，改善中国大陆客户端、服务器和商店的网络连接质量。配置至少3名全职员工专责在线服务质量。</td></tr>
+<tr><td style="font-weight:600">数据共享</td><td>提供实时数据门户：分渠道收入、销量、退款、预购数据，每日更新，事务数据24小时内可查。Wishlist 追踪每周更新（最多10款产品）。</td></tr>
+<tr><td style="font-weight:600">CD Key 供应</td><td>按腾讯合理申请提供区域锁定的平台激活码，用于本地渠道合作；须遵循平台政策，数量由腾讯合理确定。</td></tr>
+</tbody></table></div>
+<div class="quote-box">§ 5.3(a) "Ubisoft shall provide Tencent with real-time access to a data portal..." — 数据门户不授予腾讯直接访问 Ubisoft 内部系统的权限。</div>
+</div>
+
+<div id="ct-tc-duty" class="ct-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>腾讯运营义务</h3></div>
+<table><tbody>
+<tr><td style="width:160px;font-weight:600">市场策略支持</td><td>就亚洲区域 SKU 数量及内容、营销方向、渠道策略、促销方向提供战略建议，重点覆盖中国大陆市场</td></tr>
+<tr><td style="font-weight:600">商务谈判</td><td>参与并共同主导与中国大陆第三方平台的商务谈判；其他亚洲区域参与讨论（执行权归 Ubisoft）</td></tr>
+<tr><td style="font-weight:600">商品配置建议</td><td>对各平台商品配置、Storefront 页面及推广定位提出建议（Ubisoft 保留后台管理权限）</td></tr>
+<tr><td style="font-weight:600">工具开放 🔧</td><td>须向 Ubisoft 提供 O2（监测工具）和 FengXun/蜂巡（社区情绪分析工具）的限制性访问权限（免费期内）。免费期结束后需另行协商付费方案。</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="ct-redline" class="ct-panel" style="display:none">
+<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;font-weight:600;color:var(--red)">⚠️ 以下为最高优先级红线，任何违反均可能导致协议终止及法律追责</div>
+<div class="tw"><div class="tw-h"><h3>知识产权红线</h3></div>
+<table><tbody>
+<tr><td style="font-size:12px">腾讯<b>不因本协议</b>取得任何产品 IP、Ubisoft 商标或营销素材的知识产权</td></tr>
+<tr><td style="font-size:12px">腾讯<b>不可禁止、阻碍或干预</b> Ubisoft 对任何游戏产品的开发、授权、发行或利用</td></tr>
+<tr><td style="font-size:12px">腾讯<b>不可就本协议主张</b>获取产品相关知识产权的任何权利</td></tr>
+</tbody></table></div>
+<div class="quote-box">§ 9.4 "IN NO EVENT SHALL TENCENT HAVE ANY RIGHT TO (i) RESTRICT, IMPEDE OR INTERFERE..."</div>
+<div class="tw" style="margin-top:16px"><div class="tw-h"><h3>平台发行红线</h3></div>
+<table><tbody>
+<tr><td style="font-size:12px"><b>后台管理权：</b>Ubisoft 保留对所有 Storefront 的后台管理权、运营权及 CD Key 生成管理权，腾讯无权独立操作</td></tr>
+<tr><td style="font-size:12px"><b>定价决策权：</b>Ubisoft 保留对定价、促销活动的最终决策权；腾讯仅有建议权</td></tr>
+<tr><td style="font-size:12px"><b>第三方协议：</b>腾讯不得独立签署任何与第三方平台的协议，执行权归 Ubisoft</td></tr>
+<tr><td style="font-size:12px"><b>产品下架：</b>Ubisoft 可在全球同步下架/IP到期/监管合规/安全原因下下架产品，合规下架不构成违约</td></tr>
+</tbody></table></div>
+</div>
+
+<div id="ct-products" class="ct-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>产品范围参考</h3></div>
+<table><thead><tr><th>产品类别</th><th>代表游戏</th><th>备注</th></tr></thead><tbody>
+<tr><td class="gn">Back Catalog（Ubisoft Ent）</td><td style="font-size:12px">Anno 系列、For Honor、Ghost Recon 系列、Watch Dogs、The Division、Prince of Persia 系列等</td><td style="font-size:12px">含 Skull & Bones、Star Wars Outlaws</td></tr>
+<tr><td class="gn">Nova Back Catalog</td><td style="font-size:12px">AC 全系列（含 Shadows）、Rainbow Six 系列、Far Cry 系列</td><td style="font-size:12px">AC Shadows 已纳入</td></tr>
+<tr><td class="gn">AB Cloud Games</td><td style="font-size:12px">Diablo 1/2R、CoD MW2/MW3、Warcraft 1&2 Remastered、Crash、Spyro</td><td style="font-size:12px">仅限云端流媒体版本</td></tr>
+<tr><td class="gn">New Products</td><td style="font-size:12px">Beyond Good & Evil 2、Splinter Cell North、HoMM Return to Erathia / Olden Era、Steadfast</td><td style="font-size:12px">暂定，可随时调整</td></tr>
+<tr><td class="gn">Nova New Products</td><td style="font-size:12px">AC Valhalla Legacy、AC Black Flag Resynced、AC Hexe、AC Invictus、AC Stardust、R6 Slide</td><td style="font-size:12px">含多款 AC/R6/FC 续作</td></tr>
+</tbody></table></div>
+<div class="warn-box"><span>📄</span>本文件为运营脱敏版，已移除所有财务金额及分成比例信息。如需完整版本（含财务条款）请联系法务/商务负责人。</div>
+</div>
+</div>
+
+<!-- ===== 4. 价格追踪 ===== -->
+<div class="section" id="sec-pricing">
+<div class="sec-t">💰 价格追踪 · 按系列分组</div>
+<div class="warn-box"><span>💡</span>价格为 Steam 中国区参考价，实际折扣以平台为准。点击表头可排序。</div>
+<div class="tw"><div class="tw-h"><h3>全产品价格一览</h3><span class="cnt" id="prc-cnt"></span></div>
+<div style="overflow-x:auto"><table><thead><tr><th>系列</th><th>产品</th><th>中国区 (¥)</th><th>美区 ($)</th><th>当前折扣</th><th>史低</th><th>更新</th></tr></thead><tbody id="prc-tb"></tbody></table></div>
+</div>
+</div>
+
+<!-- ===== 5. 历史销售 ===== -->
+<div class="section" id="sec-history">
+<div class="sec-t">📈 历史销售数据 · 2020-2025</div>
+<div class="warn-box"><span>⚠️</span><b>数据源待接入：</b>历史销售数据为示例结构，等育碧数据门户上线后可通过年度报告/Excel 导入真实数据。支持中国区/亚洲区/全球三个维度。</div>
+
+<div class="tab-row">
+  <div class="tab-btn active" data-ht="china">🇨🇳 中国区</div>
+  <div class="tab-btn" data-ht="asia">🌏 亚洲区</div>
+  <div class="tab-btn" data-ht="global">🌍 全球</div>
+</div>
+
+<div id="ht-china" class="ht-panel">
+<div class="tw"><div class="tw-h"><h3>中国区年度销售（2020-2025）</h3><span class="cnt">按 franchise 分组 · 单位: 万套 / 万美元</span></div>
+<div style="overflow-x:auto"><table><thead><tr><th>系列 / 产品</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>累计</th></tr></thead><tbody id="hist-cn"></tbody></table></div></div>
+</div>
+
+<div id="ht-asia" class="ht-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>亚洲区年度销售（2020-2025）</h3><span class="cnt">按 franchise 分组 · 单位: 万套 / 万美元</span></div>
+<div style="overflow-x:auto"><table><thead><tr><th>系列 / 产品</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>累计</th></tr></thead><tbody id="hist-asia"></tbody></table></div></div>
+</div>
+
+<div id="ht-global" class="ht-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>全球年度销售（2020-2025）</h3><span class="cnt">按 franchise 分组 · 单位: 万套 / 万美元</span></div>
+<div style="overflow-x:auto"><table><thead><tr><th>系列 / 产品</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>累计</th></tr></thead><tbody id="hist-gl"></tbody></table></div></div>
+</div>
+</div>
+
+<!-- ===== 6. 大事记 ===== -->
+<div class="section" id="sec-events">
+<div class="sec-t">📅 大事记 · 2026 Q2</div>
+<div class="chart-g" style="grid-template-columns:1fr"><div class="ch-c" style="min-height:auto"><div class="timeline" id="evt-tl"></div></div></div>
+</div>
+
+<!-- ===== 7. 市场情报 ===== -->
+<div class="section" id="sec-market">
+<div class="sec-t">📰 市场情报</div>
+<div class="stat-row" style="grid-template-columns:repeat(4,1fr)">
+  <div class="stat-card"><div class="label">UBI.PA</div><div class="value red">€3.84</div><div class="delta">-1.08% · 04-02收盘</div></div>
+  <div class="stat-card"><div class="label">市值</div><div class="value">€5.17亿</div></div>
+  <div class="stat-card"><div class="label">52周高</div><div class="value green">€15.42</div></div>
+  <div class="stat-card"><div class="label">52周低</div><div class="value orange">€3.42</div></div>
+</div>
+<div class="chart-g">
+  <div class="ch-c"><h4>📰 近期新闻</h4><div id="nws"></div></div>
+  <div class="ch-c"><h4>🗣 社区热议</h4><div id="soc"></div></div>
+</div>
+</div>
+
+<!-- ===== 8. 工作备忘 ===== -->
+<div class="section" id="sec-notes">
+<div class="sec-t">📝 工作备忘</div>
+<div id="nts"></div>
+</div>
+
+</div></div></div>
+
+<script>
+// ===== DATA =====
+const P=[
+{n:"AC Shadows",c:"刺客信条：影",s:"刺客信条",pl:["PC","PS5","Xbox"],st:"live",y:2025,sm:0,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Mirage",c:"刺客信条：幻景",s:"刺客信条",pl:["PC","PS5","Xbox","PS4"],st:"live",y:2023,sm:428,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Valhalla",c:"英灵殿",s:"刺客信条",pl:["PC","PS5","Xbox","PS4"],st:"live",y:2020,sm:3960,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Odyssey",c:"奥德赛",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"live",y:2018,sm:5352,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Origins",c:"起源",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"live",y:2017,sm:900,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Syndicate",c:"枭雄",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"legacy",y:2015,sm:1072,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Unity",c:"大革命",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:935,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC IV Black Flag",c:"黑旗",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"legacy",y:2013,sm:27,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC III Remastered",c:"刺客信条3重制",s:"刺客信条",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2019,sm:19,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC II",c:"刺客信条2",s:"刺客信条",pl:["PC"],st:"legacy",y:2009,sm:32,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Brotherhood",c:"兄弟会",s:"刺客信条",pl:["PC"],st:"legacy",y:2010,sm:1,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"Assassin's Creed",c:"刺客信条1",s:"刺客信条",pl:["PC"],st:"legacy",y:2007,sm:148,rv:"褒贬不一",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Nexus VR",c:"VR版",s:"刺客信条",pl:["VR"],st:"live",y:2023,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Hexe",c:"女巫",s:"刺客信条",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Jade (手游)",c:"翡翠",s:"刺客信条",pl:["Mobile"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"AC Infinity",c:"无限",s:"刺客信条",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry 6",c:"孤岛惊魂6",s:"孤岛惊魂",pl:["PC","PS5","Xbox"],st:"live",y:2021,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry 5",c:"孤岛惊魂5",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"live",y:2018,sm:2983,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry 4",c:"孤岛惊魂4",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:1401,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry 3",c:"孤岛惊魂3",s:"孤岛惊魂",pl:["PC"],st:"legacy",y:2012,sm:983,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry New Dawn",c:"新曙光",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"legacy",y:2019,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry Primal",c:"原始杀戮",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"legacy",y:2016,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry 2",c:"孤岛惊魂2",s:"孤岛惊魂",pl:["PC"],st:"legacy",y:2008,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Far Cry Blood Dragon",c:"血龙",s:"孤岛惊魂",pl:["PC"],st:"legacy",y:2013,sm:0,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
+{n:"Rainbow Six Siege",c:"彩虹六号：围攻",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"live",y:2015,sm:56890,rv:"特别好评",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"R6 Extraction",c:"异种",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"live",y:2022,sm:0,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"The Division 2",c:"全境封锁2",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"live",y:2019,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"The Division",c:"全境封锁",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"live",y:2016,sm:1304,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Ghost Recon Breakpoint",c:"断点",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"live",y:2019,sm:2074,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Ghost Recon Wildlands",c:"荒野",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"legacy",y:2017,sm:92,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Splinter Cell Blacklist",c:"黑名单",s:"汤姆克兰西",pl:["PC"],st:"legacy",y:2013,sm:12,rv:"特别好评",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"XDefiant",c:"XDefiant",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Division Resurgence",c:"全境封锁：曙光",s:"汤姆克兰西",pl:["Mobile"],st:"live",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Splinter Cell Remake",c:"细胞分裂重制",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Ghost Recon (New)",c:"幽灵行动新作",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
+{n:"Star Wars Outlaws",c:"亡命之徒",s:"星球大战",pl:["PC","PS5","Xbox"],st:"live",y:2024,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Prince of Persia TLC",c:"失落的王冠",s:"波斯王子",pl:["PC","PS5","Xbox","Switch"],st:"live",y:2024,sm:20,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Skull and Bones",c:"碧海黑帆",s:"独立IP",pl:["PC","PS5","Xbox"],st:"live",y:2024,sm:0,rv:"差评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"For Honor",c:"荣耀战魂",s:"独立IP",pl:["PC","PS4","Xbox"],st:"live",y:2017,sm:130,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Riders Republic",c:"极限国度",s:"独立IP",pl:["PC","PS5","Xbox"],st:"live",y:2021,sm:501,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Trackmania",c:"赛道狂飙",s:"赛道狂飙",pl:["PC"],st:"live",y:2020,sm:2516,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"The Crew 2",c:"飙酷车神2",s:"飙酷车神",pl:["PC","PS4","Xbox"],st:"live",y:2018,sm:1826,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Crew Motorfest",c:"动力节",s:"飙酷车神",pl:["PC","PS5","Xbox"],st:"live",y:2023,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Watch Dogs 2",c:"看门狗2",s:"看门狗",pl:["PC","PS4","Xbox"],st:"legacy",y:2016,sm:1139,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Watch Dogs Legion",c:"看门狗：军团",s:"看门狗",pl:["PC","PS5","Xbox"],st:"legacy",y:2020,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Watch Dogs",c:"看门狗1",s:"看门狗",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:2,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Immortals Fenyx Rising",c:"渡神纪",s:"独立IP",pl:["PC","PS5","Xbox","Switch"],st:"legacy",y:2020,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"South Park TFBW",c:"南方公园完整破碎",s:"南方公园",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2017,sm:499,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"South Park SoT",c:"真理之杖",s:"南方公园",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:344,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Anno 1800",c:"纪元1800",s:"纪元",pl:["PC"],st:"live",y:2019,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Brawlhalla",c:"格斗哈拉",s:"独立IP",pl:["PC","PS5","Xbox","Switch","Mobile"],st:"live",y:2017,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Steep",c:"极限巅峰",s:"独立IP",pl:["PC","PS4","Xbox"],st:"legacy",y:2016,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Rayman Legends",c:"雷曼传奇",s:"雷曼",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2013,sm:0,rv:"好评如潮",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Valiant Hearts",c:"勇敢的心",s:"独立IP",pl:["PC","PS4","Xbox","Switch","Mobile"],st:"legacy",y:2014,sm:0,rv:"好评如潮",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Child of Light",c:"光之子",s:"独立IP",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2014,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Just Dance 2026",c:"舞力全开2026",s:"舞力全开",pl:["PS5","Xbox","Switch"],st:"live",y:2025,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Just Dance 2025",c:"舞力全开2025",s:"舞力全开",pl:["PS5","Xbox","Switch"],st:"live",y:2024,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Mario+Rabbids Sparks",c:"星耀之愿",s:"疯兔",pl:["Switch"],st:"live",y:2022,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Rocksmith+",c:"摇滚史密斯+",s:"独立IP",pl:["PC","PS4","Xbox"],st:"live",y:2022,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Avatar Pandora",c:"潘多拉边境",s:"阿凡达",pl:["PC","PS5","Xbox"],st:"live",y:2023,sm:0,rv:"多半好评",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"UNO",c:"UNO",s:"桌游",pl:["PC","PS4","Xbox"],st:"live",y:2016,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"Anomaly Metal",c:"异变金属",s:"独立IP",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"BG&E 2",c:"超越善恶2",s:"独立IP",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+{n:"PoP Sands Remake",c:"时之沙重制",s:"波斯王子",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
+];
+
+// Pricing data by franchise
+const PRC=[
+{f:"刺客信条",items:[
+  {n:"AC Shadows",cn:298,us:69.99,d:"-",low:"¥249(-16%)",u:"04-01"},
+  {n:"AC Mirage",cn:248,us:49.99,d:"-50%",low:"¥99(-60%)",u:"04-02"},
+  {n:"AC Valhalla Complete",cn:398,us:99.99,d:"-70%",low:"¥79(-80%)",u:"03-28"},
+  {n:"AC Odyssey Ultimate",cn:398,us:119.99,d:"-75%",low:"¥59(-85%)",u:"03-25"},
+  {n:"AC Origins Deluxe",cn:198,us:49.99,d:"-80%",low:"¥29(-85%)",u:"03-20"},
+  {n:"AC Syndicate",cn:148,us:29.99,d:"-75%",low:"¥19(-87%)",u:"03-20"},
+  {n:"AC Unity",cn:118,us:29.99,d:"-80%",low:"¥15(-87%)",u:"03-15"},
+  {n:"AC IV Black Flag",cn:98,us:19.99,d:"-75%",low:"¥15(-85%)",u:"03-10"},
+]},
+{f:"孤岛惊魂",items:[
+  {n:"Far Cry 6",cn:298,us:59.99,d:"-70%",low:"¥59(-80%)",u:"04-01"},
+  {n:"Far Cry 5 Gold",cn:198,us:59.99,d:"-80%",low:"¥29(-85%)",u:"04-01"},
+  {n:"Far Cry 4",cn:118,us:29.99,d:"-75%",low:"¥19(-84%)",u:"03-28"},
+  {n:"Far Cry 3",cn:68,us:19.99,d:"-80%",low:"¥9(-87%)",u:"03-25"},
+  {n:"Far Cry New Dawn",cn:198,us:39.99,d:"-75%",low:"¥29(-85%)",u:"03-20"},
+  {n:"Far Cry Primal",cn:148,us:49.99,d:"-80%",low:"¥19(-87%)",u:"03-15"},
+]},
+{f:"汤姆克兰西",items:[
+  {n:"R6 Siege Deluxe",cn:88,us:19.99,d:"-60%",low:"¥29(-67%)",u:"04-05"},
+  {n:"R6 Extraction",cn:198,us:39.99,d:"-70%",low:"¥39(-80%)",u:"03-30"},
+  {n:"Ghost Recon Breakpoint",cn:298,us:59.99,d:"-80%",low:"¥39(-87%)",u:"04-01"},
+  {n:"Ghost Recon Wildlands",cn:198,us:49.99,d:"-75%",low:"¥29(-85%)",u:"03-25"},
+  {n:"The Division 2",cn:198,us:49.99,d:"-80%",low:"¥25(-87%)",u:"03-28"},
+  {n:"Splinter Cell Blacklist",cn:98,us:29.99,d:"-75%",low:"¥15(-85%)",u:"03-10"},
+]},
+{f:"其他",items:[
+  {n:"Star Wars Outlaws",cn:298,us:69.99,d:"-20%",low:"¥199(-33%)",u:"03-28"},
+  {n:"Prince of Persia TLC",cn:198,us:49.99,d:"-40%",low:"¥99(-50%)",u:"03-30"},
+  {n:"Skull and Bones",cn:298,us:69.99,d:"-60%",low:"¥99(-67%)",u:"04-03"},
+  {n:"For Honor Complete",cn:148,us:29.99,d:"-75%",low:"¥19(-87%)",u:"03-20"},
+  {n:"Riders Republic",cn:248,us:59.99,d:"-75%",low:"¥39(-84%)",u:"03-25"},
+  {n:"Trackmania Club",cn:198,us:29.99,d:"-",low:"¥198(0%)",u:"04-01"},
+  {n:"The Crew 2",cn:198,us:49.99,d:"-80%",low:"¥25(-87%)",u:"03-20"},
+  {n:"Watch Dogs 2",cn:148,us:49.99,d:"-80%",low:"¥19(-87%)",u:"03-15"},
+  {n:"Watch Dogs Legion",cn:298,us:59.99,d:"-80%",low:"¥39(-87%)",u:"03-20"},
+  {n:"South Park TFBW",cn:198,us:59.99,d:"-75%",low:"¥29(-85%)",u:"03-10"},
+  {n:"Anno 1800",cn:198,us:59.99,d:"-70%",low:"¥39(-80%)",u:"03-25"},
+  {n:"Immortals Fenyx Rising",cn:298,us:59.99,d:"-80%",low:"¥39(-87%)",u:"03-15"},
+  {n:"Avatar Pandora",cn:348,us:69.99,d:"-30%",low:"¥209(-40%)",u:"04-01"},
+]}];
+
+// History data (placeholder structure)
+const HIST=[
+{f:"刺客信条",items:[
+  {n:"AC Valhalla",d:[null,null,null,null,null,null]},
+  {n:"AC Odyssey",d:[null,null,null,null,null,null]},
+  {n:"AC Origins",d:[null,null,null,null,null,null]},
+  {n:"AC Mirage",d:[null,null,null,null,null,null]},
+  {n:"AC Shadows",d:[null,null,null,null,null,null]},
+]},
+{f:"孤岛惊魂",items:[
+  {n:"Far Cry 6",d:[null,null,null,null,null,null]},
+  {n:"Far Cry 5",d:[null,null,null,null,null,null]},
+  {n:"Far Cry New Dawn",d:[null,null,null,null,null,null]},
+]},
+{f:"汤姆克兰西",items:[
+  {n:"Rainbow Six Siege",d:[null,null,null,null,null,null]},
+  {n:"The Division 2",d:[null,null,null,null,null,null]},
+  {n:"Ghost Recon Breakpoint",d:[null,null,null,null,null,null]},
+  {n:"R6 Extraction",d:[null,null,null,null,null,null]},
+]},
+{f:"其他重点",items:[
+  {n:"Star Wars Outlaws",d:[null,null,null,null,null,null]},
+  {n:"Skull and Bones",d:[null,null,null,null,null,null]},
+  {n:"Prince of Persia TLC",d:[null,null,null,null,null,null]},
+  {n:"For Honor",d:[null,null,null,null,null,null]},
+  {n:"Riders Republic",d:[null,null,null,null,null,null]},
+  {n:"Trackmania",d:[null,null,null,null,null,null]},
+]}];
+
+const STEAM=[
+{r:1,n:"Rainbow Six Siege",c:"围攻",v:56890,d:2.5,w:2.5,sp:[63279,55510,56890]},
+{r:2,n:"AC Odyssey",c:"奥德赛",v:5352,d:8.9,w:8.9,sp:[4859,4914,5352]},
+{r:3,n:"Far Cry 5",c:"孤岛惊魂5",v:2983,d:11.4,w:11.4,sp:[2735,2678,2983]},
+{r:4,n:"Trackmania",c:"赛道狂飙",v:2516,d:4.8,w:4.8,sp:[2272,2401,2516]},
+{r:5,n:"Ghost Recon Breakpoint",c:"断点",v:2074,d:16.0,w:16.0,sp:[1764,1788,2074]},
+{r:6,n:"The Crew 2",c:"飙酷车神2",v:1826,d:-2.1,w:0,sp:[0,1865,1826]},
+{r:7,n:"Far Cry 4",c:"孤岛惊魂4",v:1401,d:10.0,w:0,sp:[0,1274,1401]},
+{r:8,n:"The Division",c:"全境封锁",v:1304,d:6.2,w:6.2,sp:[1260,1228,1304]},
+{r:9,n:"Watch Dogs 2",c:"看门狗2",v:1139,d:5.4,w:0,sp:[0,1081,1139]},
+{r:10,n:"AC Syndicate",c:"枭雄",v:1072,d:-0.6,w:3.6,sp:[1035,1078,1072]},
+{r:11,n:"Far Cry 3",c:"孤岛惊魂3",v:983,d:7.9,w:0,sp:[0,911,983]},
+{r:12,n:"AC Unity",c:"大革命",v:935,d:1.9,w:6.7,sp:[876,918,935]},
+{r:13,n:"AC Origins",c:"起源",v:892,d:3.7,w:3.7,sp:[900,860,892]},
+{r:14,n:"Riders Republic",c:"极限国度",v:501,d:15.7,w:10.8,sp:[452,433,501]},
+{r:15,n:"South Park TFBW",c:"南方公园",v:499,d:2.9,w:-2.0,sp:[509,485,499]},
+{r:16,n:"AC Mirage",c:"幻景",v:428,d:11.7,w:0,sp:[428,383,428]},
+{r:17,n:"Assassin's Creed",c:"刺客信条1",v:148,d:17.5,w:22.3,sp:[121,126,148]},
+{r:18,n:"For Honor",c:"荣耀战魂",v:130,d:-17.2,w:-20.7,sp:[164,157,130]},
+{r:19,n:"Ghost Recon Wildlands",c:"荒野",v:92,d:4.5,w:5.7,sp:[87,88,92]},
+{r:20,n:"AC II",c:"刺客信条2",v:32,d:0,w:0,sp:[0,0,32]},
+];
+
+const EVENTS=[
+{d:"2026-04-05",t:"异变金属 EA 上线",desc:"Steam 抢先体验版发布",tp:"launch"},
+{d:"2026-04-06",t:"Xbox 免费 AC 截止",desc:"6款刺客信条限免最后一天",tp:"promo"},
+{d:"2026-04-07",t:"全境封锁 Resurgence 全球上线",desc:"手游全球发布，K9 联运跟进",tp:"launch"},
+{d:"2026-04-20",t:"XDefiant 凤凰计划回归",desc:"付费回归测试",tp:"update"},
+{d:"2026-04-30",t:"英雄无敌上古纪元 PC Game Pass",desc:"登陆 PC Game Pass",tp:"launch"},
+{d:"2026-05-15",t:"AC Shadows 第二赛季",desc:"新赛季内容更新",tp:"update"},
+{d:"2026-06-01",t:"E3 / Summer Game Fest",desc:"关注育碧新品公布",tp:"event"},
+{d:"2026-06-15",t:"XDefiant 公测",desc:"正式免费公测",tp:"launch"},
+{d:"2026-Q3",t:"细胞分裂重制版",desc:"预期下半年发售",tp:"launch"},
+];
+
+const NEWS=[
+{t:"Xbox 限免 6 款 AC 引爆安装量",s:"IGN",d:"04-06"},
+{t:"全境封锁 Resurgence 全球首日100万下载",s:"Ubisoft",d:"04-07"},
+{t:"育碧 Q3 财报：净预定下降 20%",s:"Reuters",d:"04-02"},
+{t:"XDefiant 凤凰计划4月20日回归",s:"Ubisoft",d:"04-03"},
+{t:"英雄无敌上古纪元登陆 Game Pass",s:"Xbox Wire",d:"04-04"},
+];
+const SOC=[
+{t:"R6S Y11 新干员 Fenrir 技能演示引争议",s:"Reddit",d:"04-06"},
+{t:"R6S 合金装备联动回顾，峰值63K",s:"Reddit",d:"04-04"},
+{t:"Skull and Bones 是否真的死了？",s:"Reddit",d:"04-05"},
+{t:"XDefiant 回归收费引两极化反应",s:"Twitter",d:"04-03"},
+{t:"AC Shadows PC 优化补丁帧率+30%",s:"Reddit",d:"04-05"},
+];
+const NOTES=[
+{d:"2026-04-07",a:"Tian",t:"全境封锁手游跟进",b:"Division Resurgence 已全球上线，需要跟进联运数据。",tg:["待跟进","合同"]},
+{d:"2026-04-06",a:"Tian",t:"Xbox 限免数据",b:"6 款 AC 限免对 Steam 同时在线有明显拉动（Odyssey +8.9%）",tg:["数据","AC"]},
+{d:"2026-04-04",a:"Tian",t:"XDefiant 商务准备",b:"XDefiant 4/20 凤凰回归，6月公测。联运合同需在公测前签署。",tg:["待签署","重点"]},
+];
+
+// ===== RENDER =====
+function fS(v){if(v==null) return '<span style="color:var(--mute);font-size:11px">待接入</span>';if(v>=10000) return (v/10000).toFixed(1)+'万';if(v>=1000) return (v/1000).toFixed(1)+'K';return v.toLocaleString();}
+function fR(v){if(v==null) return '<span style="color:var(--mute);font-size:11px">待接入</span>';if(v>=1e6) return '$'+(v/1e6).toFixed(2)+'M';if(v>=1000) return '$'+(v/1000).toFixed(0)+'K';return '$'+v.toLocaleString();}
+function fH(v){if(v==null) return '<span style="color:#cbd5e1;font-size:11px">—</span>';return v.toLocaleString();}
+function spark(d){const v=d.filter(x=>x>0);if(v.length<2) return '';const mx=Math.max(...v),mn=Math.min(...v),w=60,h=18;const pts=v.map((x,i)=>`${(i/(v.length-1))*w},${h-((x-mn)/(mx-mn||1))*h}`).join(' ');return `<svg width="${w}" height="${h}" style="vertical-align:middle"><polyline points="${pts}" fill="none" stroke="#3b82f6" stroke-width="1.5"/></svg>`;}
+
+let curFilter='all';
+function renderP(){
+  let d=P.slice();
+  if(curFilter==='live') d=d.filter(p=>p.st==='live');
+  else if(curFilter==='upcoming') d=d.filter(p=>p.st==='upcoming');
+  else if(curFilter==='legacy') d=d.filter(p=>p.st==='legacy');
+  else if(curFilter.startsWith('f-')) d=d.filter(p=>p.f==={['f-ac']:'ac',['f-fc']:'fc',['f-tc']:'tc'}[curFilter]);
+  const q=document.getElementById('gs').value.toLowerCase();
+  if(q) d=d.filter(p=>p.n.toLowerCase().includes(q)||p.c.includes(q)||p.s.includes(q));
+  document.getElementById('pc').textContent=d.length+' 款';
+  document.getElementById('ptb').innerHTML=d.map(p=>{
+    const plT=p.pl.map(x=>{const c=x==='PC'?'tag-pc':x.includes('PS')?'tag-ps':x.includes('Xbox')?'tag-xbox':x==='Switch'?'tag-switch':'tag-mobile';return `<span class="tag ${c}">${x}</span>`;}).join(' ');
+    const sC=p.st==='live'?'tag-live':p.st==='upcoming'?'tag-up':'tag-legacy';
+    const sT=p.st==='live'?'运营中':p.st==='upcoming'?'即将发售':'经典';
+    const sm=p.sm>0?p.sm.toLocaleString():'—';
+    return `<tr><td><div class="gn">${p.n}</div><div class="gs">${p.c}</div></td><td>${p.s}</td><td>${plT}</td><td><span class="tag ${sC}">${sT}</span></td><td>${p.y}</td><td style="text-align:right;border-left:2px solid #dbeafe;font-weight:600">${fS(p.cn)}</td><td style="text-align:right;font-weight:600">${fR(p.cr)}</td><td style="text-align:right;border-left:2px solid #fef3c7;font-weight:600">${fS(p.as)}</td><td style="text-align:right;font-weight:600">${fR(p.ar)}</td><td style="text-align:right;border-left:2px solid var(--border);font-weight:600;font-variant-numeric:tabular-nums">${sm}</td><td style="font-size:12px;color:var(--sub)">${p.rv}</td></tr>`;
+  }).join('');
+}
+function renderSteam(){
+  document.getElementById('stb').innerHTML=STEAM.map(s=>{
+    const dc=s.d>0?'nu':s.d<0?'nd':'nf',wc=s.w>0?'nu':s.w<0?'nd':'nf';
+    const dt=s.d>0?`+${s.d}%`:s.d<0?`${s.d}%`:'—',wt=s.w>0?`+${s.w}%`:s.w<0?`${s.w}%`:'—';
+    return `<tr${s.r<=3?' style="background:#fffbf5"':''}><td style="font-weight:700;color:${s.r<=3?'#e67e22':'var(--mute)'}">${s.r}</td><td><span class="gn">${s.n}</span> <span class="gs">${s.c}</span></td><td style="font-weight:700;font-variant-numeric:tabular-nums">${s.v.toLocaleString()}</td><td class="${dc}">${dt}</td><td class="${wc}">${wt}</td><td>${spark(s.sp)}</td></tr>`;
+  }).join('');
+}
+function renderPricing(){
+  let ct=0,html='';
+  PRC.forEach(g=>{
+    html+=`<tr class="grp-hdr"><td colspan="7">${g.f} (${g.items.length})</td></tr>`;
+    g.items.forEach(p=>{ct++;html+=`<tr><td style="font-size:12px;color:var(--mute)">${g.f}</td><td class="gn">${p.n}</td><td style="font-weight:600">¥${p.cn}</td><td>$${p.us}</td><td style="font-weight:600;color:${p.d!=='-'?'var(--red)':'var(--mute)'}">${p.d}</td><td style="font-size:12px;color:var(--green)">${p.low}</td><td style="font-size:12px;color:var(--mute)">${p.u}</td></tr>`;});
+  });
+  document.getElementById('prc-tb').innerHTML=html;
+  document.getElementById('prc-cnt').textContent=ct+' 款产品';
+}
+function renderHistory(target,suffix){
+  const tb=document.getElementById('hist-'+suffix);
+  let html='';
+  HIST.forEach(g=>{
+    html+=`<tr class="grp-hdr"><td colspan="8">${g.f} (${g.items.length})</td></tr>`;
+    g.items.forEach(p=>{
+      const total=p.d.reduce((a,v)=>a+(v||0),0);
+      html+=`<tr><td class="gn" style="padding-left:24px">${p.n}</td>${p.d.map(v=>`<td style="text-align:right;font-variant-numeric:tabular-nums">${fH(v)}</td>`).join('')}<td style="text-align:right;font-weight:700;font-variant-numeric:tabular-nums">${total?total.toLocaleString():fH(null)}</td></tr>`;
+    });
+  });
+  tb.innerHTML=html;
+}
+function renderEvents(){document.getElementById('evt-tl').innerHTML=EVENTS.map(e=>{const tc=e.tp==='launch'?'tag-live':e.tp==='update'?'tag-up':e.tp==='promo'?'tag-new':'tag-live';const tt=e.tp==='launch'?'发售':e.tp==='update'?'更新':e.tp==='promo'?'促销':'活动';return `<div class="tl-i"><div class="tl-d">${e.d} · <span class="tag ${tc}">${tt}</span></div><div class="tl-t">${e.t}</div><div class="tl-desc">${e.desc}</div></div>`;}).join('');}
+function renderMarket(){document.getElementById('nws').innerHTML=NEWS.map((n,i)=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--red);font-weight:600">${i+1}.</span> ${n.t}<div style="font-size:11px;color:var(--mute)">${n.s} · ${n.d}</div></div>`).join('');document.getElementById('soc').innerHTML=SOC.map((s,i)=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--blue);font-weight:600">${i+1}.</span> ${s.t}<div style="font-size:11px;color:var(--mute)">${s.s} · ${s.d}</div></div>`).join('');}
+function renderNotes(){document.getElementById('nts').innerHTML=NOTES.map(n=>`<div class="nc"><div class="meta">${n.d} · ${n.a}</div><div style="font-weight:600;margin-bottom:4px">${n.t}</div><div class="body">${n.b}</div><div style="margin-top:8px;display:flex;gap:4px">${n.tg.map(t=>`<span class="tag tag-pc">${t}</span>`).join('')}</div></div>`).join('');}
+
+// Nav
+const titles={overview:'产品总览',steam:'Steam 监控',coop:'育碧合作',pricing:'价格追踪',history:'历史销售',events:'大事记',market:'市场情报',notes:'工作备忘'};
+document.querySelectorAll('.nav-item').forEach(i=>{i.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));i.classList.add('active');const s=i.dataset.s;document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s).classList.add('active');document.getElementById('pt').textContent=titles[s]||s;if(window.innerWidth<=1024) document.getElementById('sidebar').classList.remove('open');});});
+// Filters
+document.querySelectorAll('.fb').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=b.dataset.f;renderP();});});
+// Coop tabs
+document.querySelectorAll('.tab-btn[data-ct]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn[data-ct]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.ct-panel').forEach(p=>p.style.display='none');document.getElementById('ct-'+b.dataset.ct).style.display='block';});});
+// History tabs
+document.querySelectorAll('.tab-btn[data-ht]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn[data-ht]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.ht-panel').forEach(p=>p.style.display='none');document.getElementById('ht-'+b.dataset.ht).style.display='block';});});
+function doSearch(){renderP();}
+
+// Init
+renderP();renderSteam();renderPricing();
+renderHistory('cn','cn');renderHistory('asia','asia');renderHistory('gl','gl');
+renderEvents();renderMarket();renderNotes();
+</script>
+</body>
+</html>
