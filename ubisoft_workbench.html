@@ -93,11 +93,12 @@ tr:hover td{background:#fafbfc}
     <div class="nav-item" data-s="coop"><span class="emoji">🤝</span>育碧合作</div>
     <div class="nav-item" data-s="pricing"><span class="emoji">💰</span>价格追踪</div>
     <div class="nav-item" data-s="history"><span class="emoji">📈</span>历史销售</div>
-    <div class="nav-item" data-s="events"><span class="emoji">📅</span>大事记</div>
-    <div class="nav-item" data-s="market"><span class="emoji">📰</span>市场情报</div>
-    <div class="nav-item" data-s="notes"><span class="emoji">📝</span>工作备忘</div>
+    <div class="nav-item" data-s="sentiment"><span class="emoji">💬</span>社区舆情</div>
+    <div class="nav-item" data-s="marketing"><span class="emoji">📊</span>市场效果追踪</div>
+    <div class="nav-item" data-s="l10n"><span class="emoji">🌐</span>本地化</div>
+    <div class="nav-item" data-s="todos"><span class="emoji">✅</span>待办事项</div>
   </nav>
-  <div class="sidebar-footer">更新于 2026-04-08 · V2.2</div>
+  <div class="sidebar-footer">更新于 2026-04-08 · V2.3</div>
 </aside>
 
 <div class="main">
@@ -277,31 +278,98 @@ tr:hover td{background:#fafbfc}
 </div>
 </div>
 
-<!-- ===== 6. 大事记 ===== -->
-<div class="section" id="sec-events">
-<div class="sec-t">📅 大事记 · 2026 Q2</div>
-<div class="chart-g" style="grid-template-columns:1fr"><div class="ch-c" style="min-height:auto"><div class="timeline" id="evt-tl"></div></div></div>
+<!-- ===== 6. 社区舆情 ===== -->
+<div class="section" id="sec-sentiment">
+<div class="sec-t">💬 社区舆情 · 中国区社媒监控</div>
+<div class="warn-box"><span>💡</span><b>数据源规划：</b>当前为示例数据。后续接入腾讯舆情系统（蜂巡/FengXun）实现自动抓取，覆盖微博、B站、NGA、贴吧、小红书等主要社区。</div>
+<div class="stat-row">
+  <div class="stat-card"><div class="label">监控平台</div><div class="value blue">6</div><div class="delta">微博/B站/NGA/贴吧/小红书/抖音</div></div>
+  <div class="stat-card"><div class="label">近7日讨论量</div><div class="value green">—</div><div class="delta">待接入舆情系统</div></div>
+  <div class="stat-card"><div class="label">正面情绪占比</div><div class="value green">—</div><div class="delta">待接入</div></div>
+  <div class="stat-card"><div class="label">负面预警</div><div class="value red">—</div><div class="delta">待接入</div></div>
+</div>
+<div class="tab-row">
+  <div class="tab-btn active" data-st="hot">🔥 热点话题</div>
+  <div class="tab-btn" data-st="product">🎮 产品口碑</div>
+  <div class="tab-btn" data-st="alert">⚠️ 舆情预警</div>
+</div>
+<div id="st-hot" class="st-panel">
+<div class="tw"><div class="tw-h"><h3>近期热点讨论</h3><span class="cnt">最近更新: 2026-04-07</span></div>
+<table><thead><tr><th>平台</th><th>话题</th><th>热度</th><th>情绪</th><th>相关产品</th><th>时间</th></tr></thead>
+<tbody id="sent-hot"></tbody></table></div>
+</div>
+<div id="st-product" class="st-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>产品口碑追踪</h3><span class="cnt">按产品汇总社区反馈</span></div>
+<table><thead><tr><th>产品</th><th>讨论量</th><th>好评率</th><th>关键词</th><th>趋势</th></tr></thead>
+<tbody id="sent-prod"></tbody></table></div>
+</div>
+<div id="st-alert" class="st-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>舆情预警</h3><span class="cnt">负面或异常舆情</span></div>
+<table><thead><tr><th>等级</th><th>事件</th><th>平台</th><th>影响产品</th><th>状态</th><th>发现时间</th></tr></thead>
+<tbody id="sent-alert"></tbody></table></div>
+</div>
 </div>
 
-<!-- ===== 7. 市场情报 ===== -->
-<div class="section" id="sec-market">
-<div class="sec-t">📰 市场情报</div>
-<div class="stat-row" style="grid-template-columns:repeat(4,1fr)">
-  <div class="stat-card"><div class="label">UBI.PA</div><div class="value red">€3.84</div><div class="delta">-1.08% · 04-02收盘</div></div>
+<!-- ===== 7. 市场效果追踪 ===== -->
+<div class="section" id="sec-marketing">
+<div class="sec-t">📊 市场效果追踪</div>
+<div class="warn-box"><span>💡</span><b>数据源规划：</b>后续接入 Steamworks Market Traffic 数据（Impressions / Visits / Wishlists / Sales），追踪市场营销及投放效果。</div>
+<div class="stat-row">
+  <div class="stat-card"><div class="label">UBI.PA 股价</div><div class="value red">€3.84</div><div class="delta">-1.08% · 04-02收盘</div></div>
   <div class="stat-card"><div class="label">市值</div><div class="value">€5.17亿</div></div>
-  <div class="stat-card"><div class="label">52周高</div><div class="value green">€15.42</div></div>
-  <div class="stat-card"><div class="label">52周低</div><div class="value orange">€3.42</div></div>
+  <div class="stat-card"><div class="label">Steam 曝光</div><div class="value blue">—</div><div class="delta">Impressions · 待接入</div></div>
+  <div class="stat-card"><div class="label">Steam 访问</div><div class="value green">—</div><div class="delta">Visits · 待接入</div></div>
+  <div class="stat-card"><div class="label">愿望单</div><div class="value orange">—</div><div class="delta">Wishlists · 待接入</div></div>
 </div>
-<div class="chart-g">
-  <div class="ch-c"><h4>📰 近期新闻</h4><div id="nws"></div></div>
-  <div class="ch-c"><h4>🗣 社区热议</h4><div id="soc"></div></div>
+<div class="tab-row">
+  <div class="tab-btn active" data-mt="traffic">📈 Market Traffic</div>
+  <div class="tab-btn" data-mt="campaign">🎯 营销活动</div>
+  <div class="tab-btn" data-mt="news">📰 行业新闻</div>
+</div>
+<div id="mt-traffic" class="mt-panel">
+<div class="tw"><div class="tw-h"><h3>Steamworks Market Traffic</h3><span class="cnt">待接入 Steamworks 后台数据</span></div>
+<table><thead><tr><th>产品</th><th>Impressions</th><th>Page Visits</th><th>Wishlists</th><th>Wishlist 转化</th><th>日销量</th><th>周期</th></tr></thead>
+<tbody id="mkt-traffic"></tbody></table></div>
+</div>
+<div id="mt-campaign" class="mt-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>营销活动效果</h3><span class="cnt">追踪各活动 ROI</span></div>
+<table><thead><tr><th>活动名称</th><th>产品</th><th>渠道</th><th>时间</th><th>预算</th><th>曝光</th><th>转化</th><th>ROI</th></tr></thead>
+<tbody id="mkt-camp"></tbody></table></div>
+</div>
+<div id="mt-news" class="mt-panel" style="display:none">
+<div class="tw"><div class="tw-h"><h3>行业新闻</h3></div>
+<div id="mkt-news"></div></div>
 </div>
 </div>
 
-<!-- ===== 8. 工作备忘 ===== -->
-<div class="section" id="sec-notes">
-<div class="sec-t">📝 工作备忘</div>
-<div id="nts"></div>
+<!-- ===== 8. 本地化 ===== -->
+<div class="section" id="sec-l10n">
+<div class="sec-t">🌐 本地化管理</div>
+<div class="warn-box"><span>💡</span><b>后续规划：</b>接入本地化工具（Crowdin/Memsource/腾讯翻译君等），追踪各产品简中本地化进度、翻译质量评分、社区本地化反馈。</div>
+<div class="stat-row">
+  <div class="stat-card"><div class="label">需本地化产品</div><div class="value blue">—</div><div class="delta">含文字+配音</div></div>
+  <div class="stat-card"><div class="label">翻译完成率</div><div class="value green">—</div><div class="delta">整体进度 · 待接入</div></div>
+  <div class="stat-card"><div class="label">配音进行中</div><div class="value orange">—</div><div class="delta">待接入</div></div>
+  <div class="stat-card"><div class="label">QA 待审</div><div class="value purple">—</div><div class="delta">待接入</div></div>
+</div>
+<div class="tw"><div class="tw-h"><h3>本地化状态追踪</h3><span class="cnt">按产品追踪简体中文本地化进度</span></div>
+<table><thead><tr><th>产品</th><th>文字翻译</th><th>配音</th><th>QA 状态</th><th>社区反馈</th><th>备注</th></tr></thead>
+<tbody id="l10n-tb"></tbody></table></div>
+</div>
+
+<!-- ===== 9. 待办事项 ===== -->
+<div class="section" id="sec-todos">
+<div class="sec-t">✅ 待办事项</div>
+<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+  <span class="fb active" data-tf="all">全部</span>
+  <span class="fb" data-tf="todo">待处理</span>
+  <span class="fb" data-tf="doing">进行中</span>
+  <span class="fb" data-tf="done">已完成</span>
+  <span class="fb" data-tf="blocked">阻塞</span>
+</div>
+<div class="tw"><div class="tw-h"><h3>任务看板</h3><span class="cnt" id="todo-cnt"></span></div>
+<table><thead><tr><th style="width:60px">状态</th><th style="width:60px">优先级</th><th>标题</th><th>产品</th><th>负责人</th><th>截止</th><th>标签</th></tr></thead>
+<tbody id="todo-tb"></tbody></table></div>
 </div>
 
 </div></div></div>
@@ -471,36 +539,73 @@ const STEAM=[
 {r:20,n:"AC II",c:"刺客信条2",v:32,d:0,w:0,sp:[0,0,32]},
 ];
 
-const EVENTS=[
-{d:"2026-04-05",t:"异变金属 EA 上线",desc:"Steam 抢先体验版发布",tp:"launch"},
-{d:"2026-04-06",t:"Xbox 免费 AC 截止",desc:"6款刺客信条限免最后一天",tp:"promo"},
-{d:"2026-04-07",t:"全境封锁 Resurgence 全球上线",desc:"手游全球发布，K9 联运跟进",tp:"launch"},
-{d:"2026-04-20",t:"XDefiant 凤凰计划回归",desc:"付费回归测试",tp:"update"},
-{d:"2026-04-30",t:"英雄无敌上古纪元 PC Game Pass",desc:"登陆 PC Game Pass",tp:"launch"},
-{d:"2026-05-15",t:"AC Shadows 第二赛季",desc:"新赛季内容更新",tp:"update"},
-{d:"2026-06-01",t:"E3 / Summer Game Fest",desc:"关注育碧新品公布",tp:"event"},
-{d:"2026-06-15",t:"XDefiant 公测",desc:"正式免费公测",tp:"launch"},
-{d:"2026-Q3",t:"细胞分裂重制版",desc:"预期下半年发售",tp:"launch"},
+// Sentiment data (社区舆情)
+const SENT_HOT=[
+{pl:"微博",topic:"#刺客信条影# 简中翻译质量被吐槽",heat:"12.3万",mood:"😐 中性",prod:"AC Shadows",time:"04-07"},
+{pl:"B站",topic:"全境封锁曙光手游首日体验评测合集",heat:"8.7万",mood:"😊 正面",prod:"Division Resurgence",time:"04-07"},
+{pl:"NGA",topic:"R6S Y11赛季新干员技能讨论",heat:"5.2万",mood:"😊 正面",prod:"R6 Siege",time:"04-06"},
+{pl:"贴吧",topic:"Xbox 限免6款AC引新玩家涌入",heat:"3.8万",mood:"😊 正面",prod:"AC 系列",time:"04-06"},
+{pl:"小红书",topic:"波斯王子失落的王冠被安利为年度最佳",heat:"2.1万",mood:"😊 正面",prod:"PoP TLC",time:"04-05"},
+{pl:"抖音",topic:"碧海黑帆差评如潮 玩家呼吁退款",heat:"6.5万",mood:"😡 负面",prod:"Skull and Bones",time:"04-04"},
+];
+const SENT_PROD=[
+{n:"AC Shadows",vol:"—",rate:"—",kw:"优化/帧率/简中翻译",trend:"↗"},
+{n:"R6 Siege",vol:"—",rate:"—",kw:"新干员/赛季/联动",trend:"→"},
+{n:"Division Resurgence",vol:"—",rate:"—",kw:"手游/首日/下载",trend:"↗"},
+{n:"Skull and Bones",vol:"—",rate:"—",kw:"差评/退款/无内容",trend:"↘"},
+{n:"Far Cry 5",vol:"—",rate:"—",kw:"打折/回忆/经典",trend:"→"},
+];
+const SENT_ALERT=[
+{lv:"🔴 高",evt:"碧海黑帆差评扩散，多平台要求退款",pl:"微博/B站/NGA",prod:"Skull and Bones",st:"监控中",time:"04-04"},
+{lv:"🟡 中",evt:"AC Shadows 简中翻译质量争议",pl:"微博/NGA",prod:"AC Shadows",st:"已通报Ubi",time:"04-07"},
+{lv:"🟢 低",evt:"XDefiant 付费回归引不满",pl:"NGA",prod:"XDefiant",st:"持续关注",time:"04-03"},
 ];
 
-const NEWS=[
+// Marketing data (市场效果追踪)
+const MKT_TRAFFIC=[
+{n:"AC Shadows",imp:"—",vis:"—",wl:"—",conv:"—",sales:"—",period:"待接入"},
+{n:"Star Wars Outlaws",imp:"—",vis:"—",wl:"—",conv:"—",sales:"—",period:"待接入"},
+{n:"R6 Siege",imp:"—",vis:"—",wl:"—",conv:"—",sales:"—",period:"待接入"},
+{n:"Prince of Persia TLC",imp:"—",vis:"—",wl:"—",conv:"—",sales:"—",period:"待接入"},
+{n:"Far Cry 5",imp:"—",vis:"—",wl:"—",conv:"—",sales:"—",period:"待接入"},
+{n:"AC Odyssey",imp:"—",vis:"—",wl:"—",conv:"—",sales:"—",period:"待接入"},
+];
+const MKT_CAMP=[
+{name:"Xbox 6款AC限免",prod:"AC 系列",ch:"Xbox Store",time:"04-02~04-06",budget:"—",exp:"—",conv:"—",roi:"—"},
+{name:"Spring Sale 2026",prod:"全线",ch:"Steam",time:"03-15~03-28",budget:"—",exp:"—",conv:"—",roi:"—"},
+{name:"全境封锁曙光上线推广",prod:"Div Resurgence",ch:"全渠道",time:"04-07~",budget:"—",exp:"—",conv:"—",roi:"—"},
+];
+const MKT_NEWS=[
 {t:"Xbox 限免 6 款 AC 引爆安装量",s:"IGN",d:"04-06"},
 {t:"全境封锁 Resurgence 全球首日100万下载",s:"Ubisoft",d:"04-07"},
 {t:"育碧 Q3 财报：净预定下降 20%",s:"Reuters",d:"04-02"},
 {t:"XDefiant 凤凰计划4月20日回归",s:"Ubisoft",d:"04-03"},
 {t:"英雄无敌上古纪元登陆 Game Pass",s:"Xbox Wire",d:"04-04"},
 ];
-const SOC=[
-{t:"R6S Y11 新干员 Fenrir 技能演示引争议",s:"Reddit",d:"04-06"},
-{t:"R6S 合金装备联动回顾，峰值63K",s:"Reddit",d:"04-04"},
-{t:"Skull and Bones 是否真的死了？",s:"Reddit",d:"04-05"},
-{t:"XDefiant 回归收费引两极化反应",s:"Twitter",d:"04-03"},
-{t:"AC Shadows PC 优化补丁帧率+30%",s:"Reddit",d:"04-05"},
+
+// L10N data (本地化)
+const L10N=[
+{n:"AC Shadows",txt:"✅ 已完成",voice:"✅ 简中配音",qa:"通过",fb:"翻译质量有争议（NGA/微博）",note:"合同要求简中文字强制，配音双方协商"},
+{n:"AC Mirage",txt:"✅ 已完成",voice:"✅ 简中配音",qa:"通过",fb:"好评",note:""},
+{n:"Star Wars Outlaws",txt:"✅ 已完成",voice:"❌ 无简中配音",qa:"通过",fb:"一般",note:"IP方限制配音语种"},
+{n:"XDefiant",txt:"🔄 进行中",voice:"待定",qa:"待审",fb:"—",note:"公测前需完成"},
+{n:"AC Hexe",txt:"🔄 进行中",voice:"待定",qa:"未开始",fb:"—",note:"2026发售，跟进中"},
+{n:"Division Resurgence",txt:"✅ 已完成",voice:"❌ 无配音",qa:"通过",fb:"—",note:"手游文字本地化"},
+{n:"Splinter Cell Remake",txt:"未开始",voice:"未开始",qa:"未开始",fb:"—",note:"待开发进度确认"},
 ];
-const NOTES=[
-{d:"2026-04-07",a:"Tian",t:"全境封锁手游跟进",b:"Division Resurgence 已全球上线，需要跟进联运数据。",tg:["待跟进","合同"]},
-{d:"2026-04-06",a:"Tian",t:"Xbox 限免数据",b:"6 款 AC 限免对 Steam 同时在线有明显拉动（Odyssey +8.9%）",tg:["数据","AC"]},
-{d:"2026-04-04",a:"Tian",t:"XDefiant 商务准备",b:"XDefiant 4/20 凤凰回归，6月公测。联运合同需在公测前签署。",tg:["待签署","重点"]},
+
+// Todos data (待办事项)
+const TODOS=[
+{st:"doing",pr:"🔴 P0",title:"XDefiant 联运合同签署",prod:"XDefiant",owner:"Tian",due:"2026-04-18",tags:["合同","紧急"]},
+{st:"doing",pr:"🔴 P0",title:"Division Resurgence 联运数据跟进",prod:"Div Resurgence",owner:"Tian",due:"2026-04-15",tags:["数据","联运"]},
+{st:"todo",pr:"🟡 P1",title:"AC Shadows 简中翻译争议反馈给 Ubi",prod:"AC Shadows",owner:"Tian",due:"2026-04-10",tags:["本地化","舆情"]},
+{st:"todo",pr:"🟡 P1",title:"Steamworks Market Traffic 接入方案",prod:"全线",owner:"Tian",due:"2026-04-30",tags:["数据","工具"]},
+{st:"todo",pr:"🟡 P1",title:"接入腾讯舆情系统（蜂巡）",prod:"全线",owner:"Tian",due:"2026-05-15",tags:["工具","舆情"]},
+{st:"todo",pr:"🟢 P2",title:"历史销售数据录入（2020-2025）",prod:"全线",owner:"Tian",due:"2026-04-30",tags:["数据"]},
+{st:"todo",pr:"🟢 P2",title:"Xbox 限免期间完整数据收集",prod:"AC 系列",owner:"Tian",due:"2026-04-12",tags:["数据"]},
+{st:"done",pr:"🟢 P2",title:"育碧发行工作台 V2 上线",prod:"—",owner:"Tian",due:"2026-04-08",tags:["工具"]},
+{st:"done",pr:"🟡 P1",title:"COS 部署工作台",prod:"—",owner:"Tian",due:"2026-04-08",tags:["部署"]},
+{st:"blocked",pr:"🟡 P1",title:"iData 自动化抓取恢复",prod:"—",owner:"Tian",due:"2026-04-15",tags:["工具","内网"]},
 ];
 
 // ===== RENDER =====
@@ -555,12 +660,39 @@ function renderHistory(target,suffix){
   });
   tb.innerHTML=html;
 }
-function renderEvents(){document.getElementById('evt-tl').innerHTML=EVENTS.map(e=>{const tc=e.tp==='launch'?'tag-live':e.tp==='update'?'tag-up':e.tp==='promo'?'tag-new':'tag-live';const tt=e.tp==='launch'?'发售':e.tp==='update'?'更新':e.tp==='promo'?'促销':'活动';return `<div class="tl-i"><div class="tl-d">${e.d} · <span class="tag ${tc}">${tt}</span></div><div class="tl-t">${e.t}</div><div class="tl-desc">${e.desc}</div></div>`;}).join('');}
-function renderMarket(){document.getElementById('nws').innerHTML=NEWS.map((n,i)=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--red);font-weight:600">${i+1}.</span> ${n.t}<div style="font-size:11px;color:var(--mute)">${n.s} · ${n.d}</div></div>`).join('');document.getElementById('soc').innerHTML=SOC.map((s,i)=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--blue);font-weight:600">${i+1}.</span> ${s.t}<div style="font-size:11px;color:var(--mute)">${s.s} · ${s.d}</div></div>`).join('');}
-function renderNotes(){document.getElementById('nts').innerHTML=NOTES.map(n=>`<div class="nc"><div class="meta">${n.d} · ${n.a}</div><div style="font-weight:600;margin-bottom:4px">${n.t}</div><div class="body">${n.b}</div><div style="margin-top:8px;display:flex;gap:4px">${n.tg.map(t=>`<span class="tag tag-pc">${t}</span>`).join('')}</div></div>`).join('');}
+function renderSentiment(){
+  document.getElementById('sent-hot').innerHTML=SENT_HOT.map(s=>`<tr><td><span class="tag tag-pc">${s.pl}</span></td><td style="font-weight:600">${s.topic}</td><td style="font-weight:600;color:var(--orange)">${s.heat}</td><td>${s.mood}</td><td style="font-size:12px">${s.prod}</td><td style="font-size:12px;color:var(--mute)">${s.time}</td></tr>`).join('');
+  document.getElementById('sent-prod').innerHTML=SENT_PROD.map(s=>`<tr><td class="gn">${s.n}</td><td>${s.vol}</td><td>${s.rate}</td><td style="font-size:12px">${s.kw}</td><td style="font-size:16px">${s.trend}</td></tr>`).join('');
+  document.getElementById('sent-alert').innerHTML=SENT_ALERT.map(s=>{const stC=s.st==='监控中'?'tag-up':s.st.includes('通报')?'tag-live':'tag-legacy';return `<tr><td style="font-weight:600">${s.lv}</td><td style="font-weight:600">${s.evt}</td><td style="font-size:12px">${s.pl}</td><td style="font-size:12px">${s.prod}</td><td><span class="tag ${stC}">${s.st}</span></td><td style="font-size:12px;color:var(--mute)">${s.time}</td></tr>`;}).join('');
+}
+function renderMarketing(){
+  document.getElementById('mkt-traffic').innerHTML=MKT_TRAFFIC.map(m=>`<tr><td class="gn">${m.n}</td><td>${m.imp}</td><td>${m.vis}</td><td>${m.wl}</td><td>${m.conv}</td><td>${m.sales}</td><td style="font-size:12px;color:var(--mute)">${m.period}</td></tr>`).join('');
+  document.getElementById('mkt-camp').innerHTML=MKT_CAMP.map(m=>`<tr><td class="gn">${m.name}</td><td style="font-size:12px">${m.prod}</td><td style="font-size:12px">${m.ch}</td><td style="font-size:12px">${m.time}</td><td>${m.budget}</td><td>${m.exp}</td><td>${m.conv}</td><td style="font-weight:600">${m.roi}</td></tr>`).join('');
+  document.getElementById('mkt-news').innerHTML=MKT_NEWS.map((n,i)=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="color:var(--red);font-weight:600">${i+1}.</span> ${n.t}<div style="font-size:11px;color:var(--mute)">${n.s} · ${n.d}</div></div>`).join('');
+}
+function renderL10n(){
+  document.getElementById('l10n-tb').innerHTML=L10N.map(l=>`<tr><td class="gn">${l.n}</td><td>${l.txt}</td><td>${l.voice}</td><td>${l.qa}</td><td style="font-size:12px">${l.fb}</td><td style="font-size:12px;color:var(--mute)">${l.note}</td></tr>`).join('');
+}
+let todoFilter='all';
+function renderTodos(){
+  let d=TODOS;
+  if(todoFilter!=='all') d=d.filter(t=>t.st===todoFilter);
+  document.getElementById('todo-cnt').textContent=d.length+' 项';
+  document.getElementById('todo-tb').innerHTML=d.map(t=>{
+    const stMap={todo:['待处理','tag-up'],doing:['进行中','tag-pc'],done:['已完成','tag-live'],blocked:['阻塞','tag-new']};
+    const [stText,stCls]=stMap[t.st]||['—','tag-legacy'];
+    return `<tr><td><span class="tag ${stCls}">${stText}</span></td><td style="font-size:12px;font-weight:600">${t.pr}</td><td style="font-weight:600">${t.title}</td><td style="font-size:12px">${t.prod}</td><td style="font-size:12px">${t.owner}</td><td style="font-size:12px;color:var(--mute)">${t.due}</td><td>${t.tags.map(g=>`<span class="tag tag-pc">${g}</span>`).join(' ')}</td></tr>`;
+  }).join('');
+}
+// Sentiment tabs
+document.querySelectorAll('.tab-btn[data-st]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn[data-st]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.st-panel').forEach(p=>p.style.display='none');document.getElementById('st-'+b.dataset.st).style.display='block';});});
+// Marketing tabs
+document.querySelectorAll('.tab-btn[data-mt]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn[data-mt]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.mt-panel').forEach(p=>p.style.display='none');document.getElementById('mt-'+b.dataset.mt).style.display='block';});});
+// Todo filters
+document.querySelectorAll('[data-tf]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('[data-tf]').forEach(x=>x.classList.remove('active'));b.classList.add('active');todoFilter=b.dataset.tf;renderTodos();});});
 
 // Nav
-const titles={overview:'产品总览',steam:'Steam 监控',coop:'育碧合作',pricing:'价格追踪',history:'历史销售',events:'大事记',market:'市场情报',notes:'工作备忘'};
+const titles={overview:'产品总览',steam:'Steam 监控',coop:'育碧合作',pricing:'价格追踪',history:'历史销售',sentiment:'社区舆情',marketing:'市场效果追踪',l10n:'本地化',todos:'待办事项'};
 document.querySelectorAll('.nav-item').forEach(i=>{i.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));i.classList.add('active');const s=i.dataset.s;document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s).classList.add('active');document.getElementById('pt').textContent=titles[s]||s;if(window.innerWidth<=1024) document.getElementById('sidebar').classList.remove('open');});});
 // Filters
 document.querySelectorAll('.fb').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=b.dataset.f;renderP();});});
@@ -573,7 +705,7 @@ function doSearch(){renderP();}
 // Init
 renderP();renderSteam();renderPricing();
 renderHistory('cn','cn');renderHistory('asia','asia');renderHistory('gl','gl');
-renderEvents();renderMarket();renderNotes();
+renderSentiment();renderMarketing();renderL10n();renderTodos();
 </script>
 </body>
 </html>
