@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 情报速递 | 2026-04-08</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.7;font-size:15px}
+.header{background:linear-gradient(135deg,#0a1628 0%,#1a2744 50%,#2d3f5e 100%);padding:36px 24px 28px;color:#fff;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60%;right:-15%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,180,255,0.12) 0%,transparent 70%)}
+.header h1{font-size:22px;font-weight:700;letter-spacing:1px;position:relative}
+.header .date{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;position:relative}
+.header .badge{display:inline-block;background:rgba(0,120,255,0.3);border:1px solid rgba(0,120,255,0.5);padding:2px 10px;border-radius:12px;font-size:11px;color:#7ec8ff;margin-left:8px}
+.container{max-width:720px;margin:0 auto;padding:16px}
+.section{margin-bottom:20px}
+.section-title{font-size:14px;font-weight:700;color:#0078ff;text-transform:uppercase;letter-spacing:1.5px;padding:12px 0 8px;border-bottom:2px solid #0078ff;margin-bottom:12px}
+.section-title.product{color:#e17055;border-bottom-color:#e17055}
+.section-title.watch{color:#636e72;border-bottom-color:#636e72}
+.card{background:#fff;border-radius:10px;padding:18px 20px;margin-bottom:12px;box-shadow:0 1px 8px rgba(0,0,0,0.04);border-left:4px solid #0078ff;transition:transform 0.15s}
+.card:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+.card.product{border-left-color:#e17055}
+.card.watch{border-left-color:#636e72}
+.card .num{display:inline-block;background:#0078ff;color:#fff;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;font-size:12px;font-weight:700;margin-right:8px;flex-shrink:0}
+.card.product .num{background:#e17055}
+.card.watch .num{background:#636e72}
+.card .title{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px;display:flex;align-items:center}
+.card .body{font-size:14px;color:#444;line-height:1.7}
+.card .source{font-size:12px;color:#999;margin-top:8px}
+.card .source a{color:#0078ff;text-decoration:none}
+.card .source a:hover{text-decoration:underline}
+.tag{display:inline-block;background:#f0f6ff;color:#0078ff;font-size:11px;padding:2px 8px;border-radius:4px;margin-right:4px;font-weight:600}
+.tag.game{background:#fff3e6;color:#e17055}
+.tag.security{background:#ffe6e6;color:#d63031}
+.tag.dev{background:#e6ffe6;color:#27ae60}
+.tag.model{background:#f3e6ff;color:#8e44ad}
+.tag.biz{background:#e6f7ff;color:#0984e3}
+.tag.labor{background:#fff0e6;color:#d35400}
+.tag.xr{background:#e6fff7;color:#00b894}
+.footer{text-align:center;padding:24px;font-size:11px;color:#b0b8c1}
+@media(max-width:768px){.header{padding:24px 16px 20px}.header h1{font-size:18px}.container{padding:10px}.card{padding:14px 16px}.card .title{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>AI 情报速递<span class="badge">Daily Brief</span></h1>
+<div class="date">2026-04-08 Wednesday</div>
+</div>
+<div class="container">
+
+<div class="section">
+<div class="section-title">Top Signals</div>
+
+<div class="card">
+<div class="title"><span class="num">1</span>Anthropic 发布 Claude Mythos Preview，联合 11 家巨头启动 Project Glasswing</div>
+<div class="body">
+<span class="tag security">安全</span><span class="tag model">前沿模型</span>
+Anthropic 联合苹果、微软、谷歌、英伟达、AWS、Linux 基金会等 12 家机构启动 Project Glasswing 网络安全项目，同时发布最强前沿模型 Claude Mythos Preview。该模型在软件漏洞挖掘能力上已超越大多数人类安全专家——自主发现 OpenBSD 存在 27 年的远程崩溃漏洞、FFmpeg 经 500 万次自动化测试未检出的 16 年陈旧漏洞。SWE-bench Verified 78.5%（Opus 4.6 为 70.1%），Terminal-Bench 2.0 达 92.1%。定价：输入 $25/M tokens，输出 $125/M tokens。暂不公开发布，仅向 40+ 关键基础设施维护组织开放。Anthropic 承诺 1 亿美元使用额度 + 400 万美元开源捐赠。
+<div class="source">Anthropic / IT之家 04-07~08 | <a href="https://www.anthropic.com/claude-mythos-preview-system-card">System Card</a></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title"><span class="num">2</span>OpenAI 曝光"暗工厂"：100 万行代码、10 亿 tokens/天、零人工审查</div>
+<div class="body">
+<span class="tag dev">工程提效</span>
+OpenAI 揭晓"Dark Factory"项目——采用"极端线束工程"方法实现完全自主的 AI 编码生产线：管理 100 万行代码，每天处理 10 亿个 Token，0% 人工编写、0% 人工审查。标志着 AI 驱动的软件工程从"辅助"走向"全自主"的关键转折点。<strong>对游戏行业启示</strong>：大规模自动化内容生产（关卡、任务、UI 代码的批量生成与迭代）正在从概念变为现实。
+<div class="source">AIToolly 04-08 | <a href="https://aitoolly.com/ai-news/article/2026-04-08-openais-first-dark-factory-revealed-extreme-harness-engineering-for-token-billionaires-and-billion-t">原文链接</a></div>
+</div>
+</div>
+
+<div class="card">
+<div class="title"><span class="num">3</span>智谱 GLM-5.1 开源：744B MoE 架构，编码能力超 Claude Opus</div>
+<div class="body">
+<span class="tag model">开源模型</span>
+智谱 AI（Z.ai）发布 GLM-5.1，744B MoE 架构、200K 上下文窗口、MIT 协议开源。SWE-Bench Pro 58.4%，超越 GPT-5.4 和 Claude Opus 4.6。全程基于华为昇腾 910B 芯片训练，部署成本低于同级别模型。支持长达 8 小时自主执行，定位为"Agent 模型"。国产大模型在编码和 Agent 能力上的里程碑突破。
+<div class="source">智谱 AI / CSDN 03-27~04-08 | <a href="https://docs.bigmodel.cn/cn/guide/models/text/glm-5">官方文档</a></div>
+</div>
+</div>
+
+</div>
+
+<div class="section">
+<div class="section-title product">Product & Tech</div>
+
+<div class="card product">
+<div class="title"><span class="num">4</span>Google Gemma 4 + LiteRT-LM：本地 AI 进入新纪元</div>
+<div class="body">
+<span class="tag game">游戏相关</span><span class="tag dev">边缘计算</span>
+Google DeepMind 发布 Gemma 4 系列开源模型（31B / 26B MoE / E4B / E2B），支持 140+ 语言和设备端代理工作流。同步推出 LiteRT-LM 开源推理框架，专为资源受限设备优化——支持结构化输出、CPU/GPU 动态调度。<strong>对游戏行业意义</strong>：更智能的本地 NPC 对话、实时游戏逻辑生成成为可能，无需云端连接即可在手机/PC 上运行。已上线 Google AI Studio、Hugging Face、Kaggle、Ollama。
+<div class="source">Google DeepMind / Edge AI Vision 04-02~08 | <a href="https://developers.googleblog.com/en/bring-state-of-the-art-agentic-skills-to-the-edge-with-gemma-4/">官方博客</a></div>
+</div>
+</div>
+
+<div class="card product">
+<div class="title"><span class="num">5</span>AI 编码工具 4 月排名：Claude Code 榜首，Codex 紧追</div>
+<div class="body">
+<span class="tag dev">开发提效</span>
+TokenCalculator 发布 4 月排名：Claude Code（Opus 4.6）凭复杂多文件任务和仓库级重构能力稳居 CLI 编码 No.1；OpenAI Codex 以后台代理和 PR-ready 输出紧随其后；Cursor 保有最佳 IDE 交互体验。Google Antigravity/Gemini CLI 被列入"落后梯队"（1月上线后更新稀少）。<strong>工作提效建议</strong>：当前最优方案仍是 Cursor（日常）+ Claude Code（复杂任务）组合。
+<div class="source">TokenCalculator 04-05 | <a href="https://tokencalculator.com/blog/best-ai-ide-cli-tools-april-2026-claude-code-wins">原文链接</a></div>
+</div>
+</div>
+
+<div class="card product">
+<div class="title"><span class="num">6</span>Claude Cowork 引发"SaaS 末日"，AI Agent 替代传统软件加速</div>
+<div class="body">
+<span class="tag biz">行业影响</span>
+Anthropic 发布 Claude Cowork 法律 AI 代理（合同审查、NDA 分类），直接导致法律科技和 SaaS 类股票大幅抛售。同期 Medialister 推出 MCP 服务器让 AI 助手直接对接媒体市场。趋势已明确：AI Agent 正从"工具辅助"变为"直接替代 SaaS"，工作流从"人→软件→结果"转变为"人→AI Agent→结果"。
+<div class="source">humAI.blog 04-07 | <a href="https://www.humai.blog/ai-news-trends-april-2026-complete-monthly-digest/">原文链接</a></div>
+</div>
+</div>
+
+</div>
+
+<div class="section">
+<div class="section-title watch">Watchlist</div>
+
+<div class="card watch">
+<div class="title"><span class="num">7</span>Q1 科技裁员近 8 万人，半数归因于 AI 自动化</div>
+<div class="body">
+<span class="tag labor">劳动力</span>
+Nikkei Asia 数据：2026 年 Q1 科技行业裁员 78,557 人（美国占 76.7%），近半数直接归因于 AI 工作流自动化。Bloomberg 同期报道"AI FOMO"正迫使员工延长工作时间。<strong>游戏行业启示</strong>：AI 工具链成熟加速"以少胜多"团队模式，中小工作室竞争力可能因此大幅提升。
+<div class="source">Nikkei / Bloomberg / LLM Stats 04-08 | <a href="https://llm-stats.com/ai-news">原文链接</a></div>
+</div>
+</div>
+
+<div class="card watch">
+<div class="title"><span class="num">8</span>Android XR 自动空间化：2D→3D 沉浸体验一键转换</div>
+<div class="body">
+<span class="tag xr">XR</span><span class="tag game">游戏相关</span>
+Google 在三星 Galaxy XR 头显推出"自动空间化"实验功能，传统 2D 应用、网站和视频可一键转换为沉浸式 3D 体验。<strong>对游戏行业意义</strong>：降低 XR 内容制作门槛——现有游戏 Web 端和移动端内容可快速适配 XR 设备，无需从零开发。
+<div class="source">AIToolly / Google 04-08 | <a href="https://aitoolly.com/ai-news/2026-04-08">原文链接</a></div>
+</div>
+</div>
+
+</div>
+
+</div>
+<div class="footer">AI 情报速递 | Claw Daily Brief | 2026-04-08</div>
+</body>
+</html>
