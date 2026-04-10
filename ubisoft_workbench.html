@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K9单机发行工作台 | Publishing Workbench</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
 :root{--bg:#f8f9fb;--card:#fff;--text:#1a1a2e;--sub:#5a6172;--mute:#9aa0ad;--border:#e8ecf1;--blue:#2563eb;--navy:#0f172a;--red:#dc2626;--green:#16a34a;--orange:#ea580c;--purple:#7c3aed;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased}
 .layout{display:flex;min-height:100vh}
 .sidebar{width:240px;background:#0f172a;color:#fff;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s}
 .sidebar-header{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.08)}
@@ -76,6 +75,10 @@ tr:hover td{background:#fafbfc}
 .tab-btn{padding:8px 16px;font-size:13px;font-weight:600;color:var(--mute);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
 .tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
 .menu-btn{display:none;background:none;border:none;font-size:20px;cursor:pointer;padding:4px;color:var(--navy)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:99}
+.overlay.open{display:block}
+th .sort-arrow{font-size:10px;margin-left:3px;color:var(--mute)}
+th.sorted .sort-arrow{color:var(--blue)}
 @media(max-width:1024px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.menu-btn{display:block}.chart-g{grid-template-columns:1fr}}
 @media(max-width:640px){.content{padding:16px}.topbar{padding:12px 16px}.topbar .search{width:160px}}
 </style>
@@ -98,12 +101,13 @@ tr:hover td{background:#fafbfc}
     <div class="nav-item" data-s="l10n"><span class="emoji">🌐</span>本地化</div>
     <div class="nav-item" data-s="todos"><span class="emoji">✅</span>待办事项</div>
   </nav>
-  <div class="sidebar-footer">更新于 2026-04-08 · V2.3</div>
+  <div class="sidebar-footer">更新于 2026-04-10 · V2.4</div>
 </aside>
 
 <div class="main">
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open')"></div>
 <div class="topbar">
-  <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+  <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')">☰</button>
   <h2 id="pt">产品总览</h2>
   <input type="text" class="search" placeholder="搜索产品、合同号..." id="gs" oninput="doSearch()">
 </div>
@@ -112,26 +116,25 @@ tr:hover td{background:#fafbfc}
 <!-- ===== 1. 产品总览 ===== -->
 <div class="section active" id="sec-overview">
 <div class="stat-row">
-  <div class="stat-card"><div class="label">在架产品</div><div class="value blue">120</div><div class="delta">PC + Console + Mobile</div></div>
-  <div class="stat-card"><div class="label">🇨🇳 中国区 YTD</div><div class="value green">—</div><div class="delta">待接入数据源</div></div>
-  <div class="stat-card"><div class="label">🇨🇳 Net Revenue</div><div class="value green">—</div><div class="delta">USD · 待接入</div></div>
-  <div class="stat-card"><div class="label">🌏 亚洲区 YTD</div><div class="value orange">—</div><div class="delta">待接入数据源</div></div>
-  <div class="stat-card"><div class="label">🌏 Net Revenue</div><div class="value orange">—</div><div class="delta">USD · 待接入</div></div>
-  <div class="stat-card"><div class="label">Steam 峰值</div><div class="value red">56,890</div><div class="delta">R6S · 04-05</div></div>
+  <div class="stat-card"><div class="label">合作产品</div><div class="value blue" id="stat-total">—</div><div class="delta">PC 平台</div></div>
+  <div class="stat-card"><div class="label">即将发售</div><div class="value orange" id="stat-new">—</div><div class="delta">未上架</div></div>
+  <div class="stat-card"><div class="label">已签约</div><div class="value green" id="stat-signed">—</div><div class="delta">合同状态</div></div>
+  <div class="stat-card"><div class="label">国区在售</div><div class="value blue" id="stat-avail">—</div><div class="delta">cn_available=是</div></div>
+  <div class="stat-card"><div class="label">Steam 峰值</div><div class="value red" id="stat-peak">—</div><div class="delta" id="stat-peak-d">—</div></div>
+  <div class="stat-card"><div class="label">🇨🇳 评论占比 avg</div><div class="value purple" id="stat-cnr">—</div><div class="delta">有数据产品平均</div></div>
 </div>
-<div class="warn-box"><span style="font-size:16px">⚠️</span><div><b>数据源待接入：</b>中国区/亚洲区销售数据（销量 + Net Revenue）当前为占位结构，等育碧数据门户上线后可通过 API / Excel 导入。</div></div>
+<div class="warn-box"><span style="font-size:16px">💡</span><div><b>数据来源：</b>产品数据来自育碧合作产品 Excel 数据库（120款）。中文评论占比来自 Steam API。销量/Revenue 数据待育碧数据门户上线后接入。</div></div>
 <div class="tw">
-  <div class="tw-h"><h3>📋 产品目录</h3><span class="cnt" id="pc">120 款</span>
+  <div class="tw-h"><h3>📋 产品目录</h3><span class="cnt" id="pc">— 款</span>
     <div class="flts">
-      <span class="fb active" data-f="all">全部</span><span class="fb" data-f="live">运营中</span><span class="fb" data-f="upcoming">即将发售</span><span class="fb" data-f="legacy">经典</span>
-      <span class="fb" data-f="f-ac">刺客信条</span><span class="fb" data-f="f-fc">孤岛惊魂</span><span class="fb" data-f="f-tc">汤姆克兰西</span>
+      <span class="fb active" data-f="all">全部</span>
+      <span class="fb" data-f="f-ac">刺客信条</span><span class="fb" data-f="f-fc">孤岛惊魂</span><span class="fb" data-f="f-tc">汤姆克兰西</span><span class="fb" data-f="f-ot">其他</span>
     </div>
   </div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>产品名称</th><th>系列</th><th>平台</th><th>状态</th><th>年份</th>
-    <th style="border-left:2px solid #dbeafe">🇨🇳 销量</th><th>🇨🇳 Rev</th>
-    <th style="border-left:2px solid #fef3c7">🌏 销量</th><th>🌏 Rev</th>
-    <th style="border-left:2px solid var(--border)">Steam</th><th>评价</th>
+    <th>产品名称</th><th>系列</th><th>年份</th>
+    <th style="border-left:2px solid #dbeafe">国区价格</th><th>折扣</th>
+    <th style="border-left:2px solid #fef3c7">Steam 在线</th><th>好评率</th><th>🇨🇳 评论占比</th><th>备注</th>
   </tr></thead><tbody id="ptb"></tbody></table></div>
 </div>
 </div>
@@ -376,72 +379,22 @@ tr:hover td{background:#fafbfc}
 
 <script>
 // ===== DATA =====
-const P=[
-{n:"AC Shadows",c:"刺客信条：影",s:"刺客信条",pl:["PC","PS5","Xbox"],st:"live",y:2025,sm:0,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Mirage",c:"刺客信条：幻景",s:"刺客信条",pl:["PC","PS5","Xbox","PS4"],st:"live",y:2023,sm:428,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Valhalla",c:"英灵殿",s:"刺客信条",pl:["PC","PS5","Xbox","PS4"],st:"live",y:2020,sm:3960,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Odyssey",c:"奥德赛",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"live",y:2018,sm:5352,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Origins",c:"起源",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"live",y:2017,sm:900,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Syndicate",c:"枭雄",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"legacy",y:2015,sm:1072,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Unity",c:"大革命",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:935,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC IV Black Flag",c:"黑旗",s:"刺客信条",pl:["PC","PS4","Xbox"],st:"legacy",y:2013,sm:27,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC III Remastered",c:"刺客信条3重制",s:"刺客信条",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2019,sm:19,rv:"多半好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC II",c:"刺客信条2",s:"刺客信条",pl:["PC"],st:"legacy",y:2009,sm:32,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Brotherhood",c:"兄弟会",s:"刺客信条",pl:["PC"],st:"legacy",y:2010,sm:1,rv:"特别好评",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"Assassin's Creed",c:"刺客信条1",s:"刺客信条",pl:["PC"],st:"legacy",y:2007,sm:148,rv:"褒贬不一",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Nexus VR",c:"VR版",s:"刺客信条",pl:["VR"],st:"live",y:2023,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Hexe",c:"女巫",s:"刺客信条",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Jade (手游)",c:"翡翠",s:"刺客信条",pl:["Mobile"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"AC Infinity",c:"无限",s:"刺客信条",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ac",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry 6",c:"孤岛惊魂6",s:"孤岛惊魂",pl:["PC","PS5","Xbox"],st:"live",y:2021,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry 5",c:"孤岛惊魂5",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"live",y:2018,sm:2983,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry 4",c:"孤岛惊魂4",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:1401,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry 3",c:"孤岛惊魂3",s:"孤岛惊魂",pl:["PC"],st:"legacy",y:2012,sm:983,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry New Dawn",c:"新曙光",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"legacy",y:2019,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry Primal",c:"原始杀戮",s:"孤岛惊魂",pl:["PC","PS4","Xbox"],st:"legacy",y:2016,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry 2",c:"孤岛惊魂2",s:"孤岛惊魂",pl:["PC"],st:"legacy",y:2008,sm:0,rv:"多半好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Far Cry Blood Dragon",c:"血龙",s:"孤岛惊魂",pl:["PC"],st:"legacy",y:2013,sm:0,rv:"特别好评",f:"fc",cn:null,cr:null,as:null,ar:null},
-{n:"Rainbow Six Siege",c:"彩虹六号：围攻",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"live",y:2015,sm:56890,rv:"特别好评",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"R6 Extraction",c:"异种",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"live",y:2022,sm:0,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"The Division 2",c:"全境封锁2",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"live",y:2019,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"The Division",c:"全境封锁",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"live",y:2016,sm:1304,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Ghost Recon Breakpoint",c:"断点",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"live",y:2019,sm:2074,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Ghost Recon Wildlands",c:"荒野",s:"汤姆克兰西",pl:["PC","PS4","Xbox"],st:"legacy",y:2017,sm:92,rv:"褒贬不一",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Splinter Cell Blacklist",c:"黑名单",s:"汤姆克兰西",pl:["PC"],st:"legacy",y:2013,sm:12,rv:"特别好评",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"XDefiant",c:"XDefiant",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Division Resurgence",c:"全境封锁：曙光",s:"汤姆克兰西",pl:["Mobile"],st:"live",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Splinter Cell Remake",c:"细胞分裂重制",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Ghost Recon (New)",c:"幽灵行动新作",s:"汤姆克兰西",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"tc",cn:null,cr:null,as:null,ar:null},
-{n:"Star Wars Outlaws",c:"亡命之徒",s:"星球大战",pl:["PC","PS5","Xbox"],st:"live",y:2024,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Prince of Persia TLC",c:"失落的王冠",s:"波斯王子",pl:["PC","PS5","Xbox","Switch"],st:"live",y:2024,sm:20,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Skull and Bones",c:"碧海黑帆",s:"独立IP",pl:["PC","PS5","Xbox"],st:"live",y:2024,sm:0,rv:"差评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"For Honor",c:"荣耀战魂",s:"独立IP",pl:["PC","PS4","Xbox"],st:"live",y:2017,sm:130,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Riders Republic",c:"极限国度",s:"独立IP",pl:["PC","PS5","Xbox"],st:"live",y:2021,sm:501,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Trackmania",c:"赛道狂飙",s:"赛道狂飙",pl:["PC"],st:"live",y:2020,sm:2516,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"The Crew 2",c:"飙酷车神2",s:"飙酷车神",pl:["PC","PS4","Xbox"],st:"live",y:2018,sm:1826,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Crew Motorfest",c:"动力节",s:"飙酷车神",pl:["PC","PS5","Xbox"],st:"live",y:2023,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Watch Dogs 2",c:"看门狗2",s:"看门狗",pl:["PC","PS4","Xbox"],st:"legacy",y:2016,sm:1139,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Watch Dogs Legion",c:"看门狗：军团",s:"看门狗",pl:["PC","PS5","Xbox"],st:"legacy",y:2020,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Watch Dogs",c:"看门狗1",s:"看门狗",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:2,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Immortals Fenyx Rising",c:"渡神纪",s:"独立IP",pl:["PC","PS5","Xbox","Switch"],st:"legacy",y:2020,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"South Park TFBW",c:"南方公园完整破碎",s:"南方公园",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2017,sm:499,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"South Park SoT",c:"真理之杖",s:"南方公园",pl:["PC","PS4","Xbox"],st:"legacy",y:2014,sm:344,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Anno 1800",c:"纪元1800",s:"纪元",pl:["PC"],st:"live",y:2019,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Brawlhalla",c:"格斗哈拉",s:"独立IP",pl:["PC","PS5","Xbox","Switch","Mobile"],st:"live",y:2017,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Steep",c:"极限巅峰",s:"独立IP",pl:["PC","PS4","Xbox"],st:"legacy",y:2016,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Rayman Legends",c:"雷曼传奇",s:"雷曼",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2013,sm:0,rv:"好评如潮",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Valiant Hearts",c:"勇敢的心",s:"独立IP",pl:["PC","PS4","Xbox","Switch","Mobile"],st:"legacy",y:2014,sm:0,rv:"好评如潮",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Child of Light",c:"光之子",s:"独立IP",pl:["PC","PS4","Xbox","Switch"],st:"legacy",y:2014,sm:0,rv:"特别好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Just Dance 2026",c:"舞力全开2026",s:"舞力全开",pl:["PS5","Xbox","Switch"],st:"live",y:2025,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Just Dance 2025",c:"舞力全开2025",s:"舞力全开",pl:["PS5","Xbox","Switch"],st:"live",y:2024,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Mario+Rabbids Sparks",c:"星耀之愿",s:"疯兔",pl:["Switch"],st:"live",y:2022,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Rocksmith+",c:"摇滚史密斯+",s:"独立IP",pl:["PC","PS4","Xbox"],st:"live",y:2022,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Avatar Pandora",c:"潘多拉边境",s:"阿凡达",pl:["PC","PS5","Xbox"],st:"live",y:2023,sm:0,rv:"多半好评",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"UNO",c:"UNO",s:"桌游",pl:["PC","PS4","Xbox"],st:"live",y:2016,sm:0,rv:"褒贬不一",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"Anomaly Metal",c:"异变金属",s:"独立IP",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"BG&E 2",c:"超越善恶2",s:"独立IP",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-{n:"PoP Sands Remake",c:"时之沙重制",s:"波斯王子",pl:["PC","PS5","Xbox"],st:"upcoming",y:2026,sm:0,rv:"-",f:"ot",cn:null,cr:null,as:null,ar:null},
-];
+let P=[];  // Loaded from products.json
+
+// Load product data from external JSON
+async function loadProducts(){
+  try{
+    const resp=await fetch('products.json?t='+Date.now());
+    P=await resp.json();
+    console.log('Loaded '+P.length+' products from products.json');
+  }catch(e){
+    console.warn('Failed to load products.json, using empty array:',e);
+  }
+}
+
+
+// Chinese review ratios by appid (from Steam API 2026-04-10)
+const CNR={3159330:0,3035570:null,1240440:5.0,2208920:5.0,812140:33.7,582160:34.6,368500:33.1,289650:26.5,242050:15.5,911400:27.0,33230:28.4,48190:21.4,15100:5.1,2369390:12.0,552520:13.8,298110:11.0,220240:5.6,939960:12.0,371660:14.7,19900:2.9,233270:2.5,359550:13.2,1451480:0.4,2379390:0.4,365590:29.6,2221490:null,460930:24.2,2231380:null,235600:10.9,304390:11.9,2225070:1.1,646910:12.8,447040:36.9,243470:19.0,2289850:null,1245620:21.8,2221920:21.8,488790:4.3,213670:4.2,916440:23.0,291550:1.7,460920:26.4,242550:3.7,260230:17.9,256290:13.5,1682210:9.1,2225880:0.0,470220:3.3,2344520:27.4,2853730:null};
 
 // Pricing data by franchise
 const PRC=[
@@ -613,22 +566,30 @@ function fH(v){if(v==null) return '<span style="color:#cbd5e1;font-size:11px">�
 function spark(d){const v=d.filter(x=>x>0);if(v.length<2) return '';const mx=Math.max(...v),mn=Math.min(...v),w=60,h=18;const pts=v.map((x,i)=>`${(i/(v.length-1))*w},${h-((x-mn)/(mx-mn||1))*h}`).join(' ');return `<svg width="${w}" height="${h}" style="vertical-align:middle"><polyline points="${pts}" fill="none" stroke="#3b82f6" stroke-width="1.5"/></svg>`;}
 
 let curFilter='all';
+const fMap={'f-ac':'ac','f-fc':'fc','f-tc':'tc','f-ot':'ot'};
+function fCnr(aid){const v=CNR[aid];if(v==null) return '<span style="color:var(--mute);font-size:11px">—</span>';const c=v>=25?'var(--green)':v>=10?'var(--blue)':'var(--mute)';return `<span style="color:${c};font-weight:600">${v}%</span>`;}
 function renderP(){
   let d=P.slice();
-  if(curFilter==='live') d=d.filter(p=>p.st==='live');
-  else if(curFilter==='upcoming') d=d.filter(p=>p.st==='upcoming');
-  else if(curFilter==='legacy') d=d.filter(p=>p.st==='legacy');
-  else if(curFilter.startsWith('f-')) d=d.filter(p=>p.f==={['f-ac']:'ac',['f-fc']:'fc',['f-tc']:'tc'}[curFilter]);
+  if(fMap[curFilter]) d=d.filter(p=>p.f===fMap[curFilter]);
   const q=document.getElementById('gs').value.toLowerCase();
   if(q) d=d.filter(p=>p.n.toLowerCase().includes(q)||p.c.includes(q)||p.s.includes(q));
+  // Split: upcoming (unreleased) vs back catalog (everything else)
+  const newR=d.filter(p=>p.avail==='未发售').sort((a,b)=>b.y-a.y);
+  const backC=d.filter(p=>p.avail!=='未发售').sort((a,b)=>b.y-a.y);
   document.getElementById('pc').textContent=d.length+' 款';
-  document.getElementById('ptb').innerHTML=d.map(p=>{
-    const plT=p.pl.map(x=>{const c=x==='PC'?'tag-pc':x.includes('PS')?'tag-ps':x.includes('Xbox')?'tag-xbox':x==='Switch'?'tag-switch':'tag-mobile';return `<span class="tag ${c}">${x}</span>`;}).join(' ');
-    const sC=p.st==='live'?'tag-live':p.st==='upcoming'?'tag-up':'tag-legacy';
-    const sT=p.st==='live'?'运营中':p.st==='upcoming'?'即将发售':'经典';
+  document.getElementById('stat-total').textContent=P.length;
+  document.getElementById('stat-new').textContent=P.filter(p=>p.avail==='未发售').length;
+  const mkRow=p=>{
     const sm=p.sm>0?p.sm.toLocaleString():'—';
-    return `<tr><td><div class="gn">${p.n}</div><div class="gs">${p.c}</div></td><td>${p.s}</td><td>${plT}</td><td><span class="tag ${sC}">${sT}</span></td><td>${p.y}</td><td style="text-align:right;border-left:2px solid #dbeafe;font-weight:600">${fS(p.cn)}</td><td style="text-align:right;font-weight:600">${fR(p.cr)}</td><td style="text-align:right;border-left:2px solid #fef3c7;font-weight:600">${fS(p.as)}</td><td style="text-align:right;font-weight:600">${fR(p.ar)}</td><td style="text-align:right;border-left:2px solid var(--border);font-weight:600;font-variant-numeric:tabular-nums">${sm}</td><td style="font-size:12px;color:var(--sub)">${p.rv}</td></tr>`;
-  }).join('');
+    const priceStr=p.price!=null?`¥${p.price}`:'<span style="color:var(--mute);font-size:11px">—</span>';
+    const discStr=p.disc?`<span style="color:var(--red);font-weight:600">${p.disc}</span>`:'—';
+    const rvStr=p.rv?p.rv:'—';
+    return `<tr><td><div class="gn">${p.n}</div><div class="gs">${p.c}</div></td><td>${p.s}</td><td>${p.y||'—'}</td><td style="text-align:right;border-left:2px solid #dbeafe">${priceStr}</td><td style="text-align:center">${discStr}</td><td style="text-align:right;border-left:2px solid #fef3c7;font-weight:600;font-variant-numeric:tabular-nums">${sm}</td><td style="font-size:12px;color:var(--sub)">${rvStr}</td><td style="text-align:center">${fCnr(p.aid)}</td><td style="font-size:11px;color:var(--mute)">${p.notes||''}</td></tr>`;
+  };
+  let html='';
+  if(newR.length){html+=`<tr class="grp-hdr"><td colspan="9">🚀 新发售 / 即将发售 (${newR.length})</td></tr>`;html+=newR.map(mkRow).join('');}
+  if(backC.length){html+=`<tr class="grp-hdr"><td colspan="9">📚 Back Catalog (${backC.length})</td></tr>`;html+=backC.map(mkRow).join('');}
+  document.getElementById('ptb').innerHTML=html;
 }
 function renderSteam(){
   document.getElementById('stb').innerHTML=STEAM.map(s=>{
@@ -691,19 +652,157 @@ document.querySelectorAll('[data-tf]').forEach(b=>{b.addEventListener('click',()
 
 // Nav
 const titles={overview:'产品总览',steam:'Steam 监控',coop:'育碧合作',pricing:'价格追踪',history:'历史销售',sentiment:'社区舆情',marketing:'市场效果追踪',l10n:'本地化',todos:'待办事项'};
-document.querySelectorAll('.nav-item').forEach(i=>{i.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));i.classList.add('active');const s=i.dataset.s;document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s).classList.add('active');document.getElementById('pt').textContent=titles[s]||s;if(window.innerWidth<=1024) document.getElementById('sidebar').classList.remove('open');});});
-// Filters
-document.querySelectorAll('.fb').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=b.dataset.f;renderP();});});
+document.querySelectorAll('.nav-item').forEach(i=>{i.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));i.classList.add('active');const s=i.dataset.s;document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s).classList.add('active');document.getElementById('pt').textContent=titles[s]||s;if(window.innerWidth<=1024){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('open');}});});
+// Product Filters
+document.querySelectorAll('.fb[data-f]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fb[data-f]').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=b.dataset.f;renderP();});});
 // Coop tabs
 document.querySelectorAll('.tab-btn[data-ct]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn[data-ct]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.ct-panel').forEach(p=>p.style.display='none');document.getElementById('ct-'+b.dataset.ct).style.display='block';});});
 // History tabs
 document.querySelectorAll('.tab-btn[data-ht]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn[data-ht]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.ht-panel').forEach(p=>p.style.display='none');document.getElementById('ht-'+b.dataset.ht).style.display='block';});});
 function doSearch(){renderP();}
 
-// Init
-renderP();renderSteam();renderPricing();
-renderHistory('cn','cn');renderHistory('asia','asia');renderHistory('gl','gl');
-renderSentiment();renderMarketing();renderL10n();renderTodos();
+// ===== CANVAS CHARTS =====
+function drawLineChart(){
+  const c=document.getElementById('ct1');if(!c)return;
+  const ctx=c.getContext('2d');
+  const top5=STEAM.slice(0,5);
+  const W=c.parentElement.clientWidth-36,H=180;
+  c.width=W;c.height=H;
+  const colors=['#2563eb','#dc2626','#16a34a','#ea580c','#7c3aed'];
+  const labels=['04-03','04-04','04-05'];
+  const allV=top5.flatMap(s=>s.sp.filter(v=>v>0));
+  const mx=Math.max(...allV),mn=Math.min(...allV);
+  const pad={t:20,r:16,b:30,l:56};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  // grid
+  ctx.strokeStyle='#e8ecf1';ctx.lineWidth=0.5;
+  for(let i=0;i<4;i++){const y=pad.t+ch*i/3;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+    ctx.fillStyle='#9aa0ad';ctx.font='10px sans-serif';ctx.textAlign='right';
+    const v=mx-(mx-mn)*i/3;ctx.fillText(v>=1000?(v/1000).toFixed(1)+'K':Math.round(v),pad.l-6,y+3);
+  }
+  // x labels
+  ctx.textAlign='center';ctx.fillStyle='#9aa0ad';
+  labels.forEach((l,i)=>{ctx.fillText(l,pad.l+cw*i/(labels.length-1),H-6);});
+  // lines
+  top5.forEach((s,si)=>{
+    ctx.strokeStyle=colors[si];ctx.lineWidth=2;ctx.beginPath();
+    const pts=s.sp.filter(v=>v>0);
+    pts.forEach((v,i)=>{
+      const x=pad.l+cw*i/(pts.length-1||1);
+      const y=pad.t+ch*(1-(v-mn)/(mx-mn||1));
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    // label at end
+    const last=pts[pts.length-1],lx=pad.l+cw,ly=pad.t+ch*(1-(last-mn)/(mx-mn||1));
+    ctx.fillStyle=colors[si];ctx.font='bold 10px sans-serif';ctx.textAlign='left';
+    ctx.fillText(s.c,lx+4,ly+3);
+  });
+}
+function drawPieChart(){
+  const c=document.getElementById('ct2');if(!c)return;
+  const ctx=c.getContext('2d');
+  const W=c.parentElement.clientWidth-36,H=180;
+  c.width=W;c.height=H;
+  const total=STEAM.reduce((a,s)=>a+s.v,0);
+  const top5=STEAM.slice(0,5);
+  const rest=total-top5.reduce((a,s)=>a+s.v,0);
+  const data=[...top5.map(s=>({n:s.c,v:s.v})),{n:'其他',v:rest}];
+  const colors=['#2563eb','#dc2626','#16a34a','#ea580c','#7c3aed','#94a3b8'];
+  const cx=W/2-40,cy=H/2,r=Math.min(cx,cy)-10;
+  let angle=-Math.PI/2;
+  data.forEach((d,i)=>{
+    const slice=d.v/total*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,angle,angle+slice);ctx.closePath();
+    ctx.fillStyle=colors[i];ctx.fill();
+    // label
+    const mid=angle+slice/2;
+    const lx=cx+Math.cos(mid)*(r+14),ly=cy+Math.sin(mid)*(r+14);
+    ctx.fillStyle='#1a1a2e';ctx.font='10px sans-serif';ctx.textAlign=mid>Math.PI/2&&mid<Math.PI*1.5?'right':'left';
+    ctx.fillText(d.n+' '+(d.v/total*100).toFixed(0)+'%',lx,ly+3);
+    angle+=slice;
+  });
+}
+
+// ===== TABLE SORTING =====
+let sortState={};
+function makeTableSortable(tbodyId,dataArr,renderFn,cols){
+  const tb=document.getElementById(tbodyId);if(!tb)return;
+  const thead=tb.closest('table').querySelector('thead tr');
+  if(!thead)return;
+  Array.from(thead.children).forEach((th,i)=>{
+    if(!cols[i])return;
+    th.innerHTML=th.textContent.trim()+' <span class="sort-arrow">&#x25B4;&#x25BE;</span>';
+    th.addEventListener('click',()=>{
+      const key=tbodyId+'-'+i;
+      const dir=sortState[key]==='asc'?'desc':'asc';
+      sortState[key]=dir;
+      thead.querySelectorAll('th').forEach(h=>h.classList.remove('sorted'));
+      th.classList.add('sorted');
+      th.querySelector('.sort-arrow').textContent=dir==='asc'?'\u25B4':'\u25BE';
+      dataArr.sort((a,b)=>{
+        let va=cols[i](a),vb=cols[i](b);
+        if(typeof va==='string') va=va.toLowerCase();
+        if(typeof vb==='string') vb=vb.toLowerCase();
+        if(va==null) return 1;if(vb==null) return -1;
+        return dir==='asc'?(va>vb?1:-1):(va<vb?1:-1);
+      });
+      renderFn();
+    });
+  });
+}
+
+// ===== DYNAMIC STATS =====
+function updateStats(){
+  const badge=document.querySelector('.nav-item[data-s="overview"] .badge');
+  if(badge) badge.textContent=P.length;
+  const sBadge=document.querySelector('.nav-item[data-s="steam"] .badge');
+  if(sBadge) sBadge.textContent=STEAM.length;
+  // Overview stats
+  const el=id=>document.getElementById(id);
+  if(el('stat-total')) el('stat-total').textContent=P.length;
+  const newCount=P.filter(p=>p.st==='upcoming'||(p.st==='live'&&p.y>=2024)).length;
+  if(el('stat-new')) el('stat-new').textContent=newCount;
+  const signed=P.filter(p=>p.contract==='已签约').length;
+  if(el('stat-signed')) el('stat-signed').textContent=signed;
+  const avail=P.filter(p=>p.avail==='是').length;
+  if(el('stat-avail')) el('stat-avail').textContent=avail;
+  // Steam peak
+  const peak=STEAM.length?STEAM[0]:null;
+  if(peak&&el('stat-peak')){el('stat-peak').textContent=peak.v.toLocaleString();el('stat-peak-d').textContent=peak.c;}
+  // CN review avg
+  const cnrVals=P.map(p=>CNR[p.aid]).filter(v=>v!=null&&v>0);
+  if(cnrVals.length&&el('stat-cnr')){
+    const avg=(cnrVals.reduce((a,v)=>a+v,0)/cnrVals.length).toFixed(1);
+    el('stat-cnr').textContent=avg+'%';
+  }
+  // Todo badge
+  const todoBadge=document.querySelector('.nav-item[data-s="todos"] .badge');
+  const pending=TODOS.filter(t=>t.st!=='done').length;
+  if(todoBadge) todoBadge.textContent=pending;else{
+    const todoNav=document.querySelector('.nav-item[data-s="todos"]');
+    if(todoNav){const b=document.createElement('span');b.className='badge';b.textContent=pending;todoNav.appendChild(b);}
+  }
+}
+
+// Init: load products from JSON first, then render everything
+async function init(){
+  await loadProducts();
+  renderP();renderSteam();renderPricing();
+  renderHistory('cn','cn');renderHistory('asia','asia');renderHistory('gl','gl');
+  renderSentiment();renderMarketing();renderL10n();renderTodos();
+  updateStats();
+  setTimeout(()=>{drawLineChart();drawPieChart();},100);
+  window.addEventListener('resize',()=>{drawLineChart();drawPieChart();});
+  makeTableSortable('ptb',P,renderP,[
+    p=>p.n,p=>p.s,p=>p.y,p=>p.price,p=>p.disc,p=>p.sm,p=>p.rv?parseFloat(p.rv):0,p=>CNR[p.aid],null
+  ]);
+  makeTableSortable('stb',STEAM,renderSteam,[
+    s=>s.r,s=>s.n,s=>s.v,s=>s.d,s=>s.w,null
+  ]);
+}
+init();
 </script>
 </body>
 </html>
