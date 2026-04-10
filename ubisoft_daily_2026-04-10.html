@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>育碧情报日报 | 2026-04-10</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --accent: #1a73e8;
+    --accent2: #e8f0fe;
+    --red: #d32f2f;
+    --green: #2e7d32;
+    --text: #202124;
+    --text2: #5f6368;
+    --border: #e0e0e0;
+    --ubi-blue: #0070ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0,112,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .header .date {
+    font-size: 16px;
+    opacity: 0.8;
+    position: relative;
+  }
+  .header .badge {
+    display: inline-block;
+    background: var(--ubi-blue);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+    position: relative;
+  }
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent2);
+  }
+  .section-title .icon {
+    font-size: 24px;
+  }
+  .stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .stock-card {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stock-card .label {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 4px;
+  }
+  .stock-card .value {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .stock-card .value.up { color: var(--red); }
+  .stock-card .value.down { color: var(--green); }
+  .stock-note {
+    font-size: 14px;
+    color: var(--text2);
+    padding: 12px 16px;
+    background: var(--accent2);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .news-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .tag-hot { background: #fce4ec; color: #c62828; }
+  .tag-new { background: #e8f5e9; color: #2e7d32; }
+  .tag-update { background: #e3f2fd; color: #1565c0; }
+  .tag-esport { background: #f3e5f5; color: #7b1fa2; }
+  .tag-event { background: #fff3e0; color: #e65100; }
+  .news-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .news-item p {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 4px;
+  }
+  .news-item .source {
+    font-size: 12px;
+    color: #9e9e9e;
+  }
+  .r6s-header {
+    background: linear-gradient(135deg, #2a1a3a 0%, #1a2a4a 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .r6s-header h3 { font-size: 18px; }
+  .discussion-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .discussion-item:last-child { border-bottom: none; }
+  .discussion-item h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .discussion-item h4 .live-badge {
+    background: #d32f2f;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .discussion-item p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .other-games {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .other-game-card {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .other-game-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .other-game-card p {
+    font-size: 13px;
+    color: var(--text2);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text2);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr:hover { background: var(--accent2); }
+  .rank { font-weight: 700; color: var(--accent); width: 32px; }
+  .rank-1 { color: #f9a825; font-size: 16px; }
+  .rank-2 { color: #90a4ae; font-size: 16px; }
+  .rank-3 { color: #a1887f; font-size: 16px; }
+  .game-name { font-weight: 600; }
+  .count { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .change-up { color: var(--red); font-weight: 600; }
+  .change-down { color: var(--green); font-weight: 600; }
+  .change-new { color: var(--accent); font-weight: 600; }
+  .trend-box {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .trend-box h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .trend-item {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text2);
+    font-size: 13px;
+  }
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .header { padding: 20px; }
+    .header h1 { font-size: 22px; }
+    .stock-grid { grid-template-columns: repeat(2, 1fr); }
+    .other-games { grid-template-columns: 1fr; }
+    table { font-size: 13px; }
+    thead th, tbody td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎮 育碧情报日报</h1>
+  <div class="date">2026年4月10日 周五 | Ubisoft Daily Intelligence</div>
+  <div class="badge">UBI.PA: €4.116 ▲ +4.33%</div>
+</div>
+
+<!-- 模块1：股价与市值 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">📈</span>
+    <span>股价与市值</span>
+  </div>
+  <div class="stock-grid">
+    <div class="stock-card">
+      <div class="label">当前价格</div>
+      <div class="value">€4.116</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">涨跌幅</div>
+      <div class="value up">+4.33%</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">市值</div>
+      <div class="value">€5.31亿</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">成交量</div>
+      <div class="value" style="font-size:20px">924K</div>
+    </div>
+  </div>
+  <div class="stock-note">
+    💡 今日大幅反弹+4.33%，为近两周最大单日涨幅。开盘€3.958，日内最高€4.139。52周区间€3.70-€11.70，RSI 52.67（中性）。下一财报日：5月14日。
+  </div>
+</div>
+
+<!-- 模块2：新闻动态 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">📰</span>
+    <span>新闻动态</span>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-hot">🔥 重磅</span>
+    <h3>AC Black Flag Resynced 4/16公布</h3>
+    <p>多方消息源证实，《刺客信条IV：黑旗》重制版定名「Assassin's Creed Black Flag Resynced」，将于4月16日正式公布。据传发售日不远，可能年内上线。</p>
+    <div class="source">Insider Gaming / TechPowerUp / PSU</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">更新</span>
+    <h3>AC Shadows 1.1.10大更新（4/7上线）</h3>
+    <p>免费解锁Bo武器、支持5层异常叠加、修复Yasuke技能、优化PS5 Pro PSSR 2和Switch 2性能表现。</p>
+    <div class="source">Ubisoft官方 / ComicBook / DSO Gaming</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-new">🆕 新品</span>
+    <h3>Morbid Metal 抢先体验上线</h3>
+    <p>育碧发行的Roguelite动作游戏《异变金属》4/8-9登陆Steam EA，首日媒体口碑积极，被评为"视觉最惊艳的Roguelike之一"。Steam在线3,311人。</p>
+    <div class="source">GameSpew / PushSquare / Fextralife</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-event">回归</span>
+    <h3>XDefiant 付费回归（4/20）</h3>
+    <p>原免费FPS《XDefiant》将于4/20以付费模式重新上线，命名"Phoenix Protocol"。行业罕见的F2P→Premium逆转案例。</p>
+    <div class="source">Happy Gamer</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">热度</span>
+    <h3>The Division 2: Rise Up 持续火热</h3>
+    <p>Y8S1「Rise Up」4/2上线后玩家回流明显，Steam在线稳居育碧第2（9,747人）。新赛季带来Black Tusk阵营、Escalation难度、装备上限×1.5。</p>
+    <div class="source">Ubisoft官方 / Division Wiki</div>
+  </div>
+</div>
+
+<!-- 模块3：社交讨论 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">💬</span>
+    <span>社交讨论</span>
+  </div>
+
+  <div class="r6s-header">
+    <span style="font-size:28px">🎯</span>
+    <div>
+      <h3>Rainbow Six Siege 社区热点</h3>
+      <div style="font-size:13px;opacity:0.8">Y11S1 Silent Hunt | Steam在线 48,965</div>
+    </div>
+  </div>
+
+  <div class="discussion-item">
+    <h4>🔴 Community Checkpoint #2 今日直播 <span class="live-badge">LIVE</span></h4>
+    <p>第二期「社区检查站」今天12PM EST / 5PM UTC开播。开发团队将讨论：<strong>Ranked地图池轮换</strong>（社区强烈要求调整）、<strong>赛季中平衡性调整</strong>（针对当前Entry meta）、<strong>Y11S1运营反馈回应</strong>。这是育碧加强社区沟通的重要举措，首期直播获得积极反响。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4>⚖️ Silent Hunt 赛季运营讨论</h4>
+    <p>Y11S1上线约2个月，社区对Solid Snake联动、Ranked 3.0系统讨论持续。部分玩家认为当前Entry meta过于激进（Ash/Zofia使用率飙升），期待今日直播给出平衡方案。Villa地图重做后的竞技表现也是热议焦点。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4>📊 Steam在线数据回升</h4>
+    <p>R6S今日Steam在线48,965人（日+1.3%），连续两天回升。社区认为Community Checkpoint带来的关注度有助于玩家回流，但周环比仍下降22.6%，周末数据是关键观察窗口。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4>🏆 电竞赛事改革</h4>
+    <p>2026赛季采用全新赛程：2场Major + Blast联赛体系。社区讨论新赛制对战队生态的影响，以及Fortress替代Skyscraper后的竞技地图池适应期。部分选手反馈新地图池增加了战术深度。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4>⚠️ 4/5服务器宕机余波</h4>
+    <p>4月5日大规模服务器中断后，社区对育碧服务器稳定性的质疑仍未消散。Reddit多个帖子要求官方提供更透明的故障报告和补偿方案。</p>
+  </div>
+
+  <div style="margin-top:20px">
+    <h4 style="font-size:16px;font-weight:600;margin-bottom:12px">🎮 其他育碧游戏讨论</h4>
+    <div class="other-games">
+      <div class="other-game-card">
+        <h4>The Division 2</h4>
+        <p>Rise Up赛季回流潮，Reddit讨论装备上限提升和新Exotic武器Build</p>
+      </div>
+      <div class="other-game-card">
+        <h4>AC Shadows</h4>
+        <p>1.1.10更新后Switch 2玩家反馈性能改善明显，好评增加</p>
+      </div>
+      <div class="other-game-card">
+        <h4>Morbid Metal</h4>
+        <p>Steam评价积极，变身系统和视觉品质获赞，玩家期待PS5版</p>
+      </div>
+      <div class="other-game-card">
+        <h4>XDefiant</h4>
+        <p>F2P→付费争议持续，社区对Phoenix Protocol策略意见分歧</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 模块4：Steam在线 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">🎮</span>
+    <span>Steam 在线人数 Top 20</span>
+  </div>
+  <div style="font-size:13px;color:var(--text2);margin-bottom:12px">
+    数据采集: 2026-04-10 20:30 CST | 日环比基准: 04-09 | 周同比基准: 04-03
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>游戏</th>
+        <th style="text-align:right">当前在线</th>
+        <th style="text-align:right">日环比</th>
+        <th style="text-align:right">周同比</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank rank-1">1</td>
+        <td class="game-name">Rainbow Six Siege</td>
+        <td class="count" style="text-align:right">48,965</td>
+        <td class="change-up" style="text-align:right">+1.3%</td>
+        <td class="change-down" style="text-align:right">-22.6%</td>
+      </tr>
+      <tr>
+        <td class="rank rank-2">2</td>
+        <td class="game-name">The Division 2</td>
+        <td class="count" style="text-align:right">9,747</td>
+        <td class="change-down" style="text-align:right">-2.3%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank rank-3">3</td>
+        <td class="game-name">AC Odyssey</td>
+        <td class="count" style="text-align:right">3,603</td>
+        <td class="change-down" style="text-align:right">-2.5%</td>
+        <td class="change-down" style="text-align:right">-25.8%</td>
+      </tr>
+      <tr>
+        <td class="rank">4</td>
+        <td class="game-name">Morbid Metal 🆕</td>
+        <td class="count" style="text-align:right">3,311</td>
+        <td class="change-up" style="text-align:right">+5.6%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">5</td>
+        <td class="game-name">AC Valhalla</td>
+        <td class="count" style="text-align:right">2,854</td>
+        <td class="change-down" style="text-align:right">-0.4%</td>
+        <td class="change-down" style="text-align:right">-27.9%</td>
+      </tr>
+      <tr>
+        <td class="rank">6</td>
+        <td class="game-name">R6 Extraction</td>
+        <td class="count" style="text-align:right">1,858</td>
+        <td class="change-down" style="text-align:right">-4.8%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">7</td>
+        <td class="game-name">Far Cry 5</td>
+        <td class="count" style="text-align:right">1,824</td>
+        <td class="change-up" style="text-align:right">+2.0%</td>
+        <td class="change-down" style="text-align:right">-33.3%</td>
+      </tr>
+      <tr>
+        <td class="rank">8</td>
+        <td class="game-name">Trackmania</td>
+        <td class="count" style="text-align:right">1,654</td>
+        <td class="change-up" style="text-align:right">+2.9%</td>
+        <td class="change-down" style="text-align:right">-27.2%</td>
+      </tr>
+      <tr>
+        <td class="rank">9</td>
+        <td class="game-name">The Crew 2</td>
+        <td class="count" style="text-align:right">1,543</td>
+        <td class="change-up" style="text-align:right">+15.8%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">10</td>
+        <td class="game-name">AC Shadows</td>
+        <td class="count" style="text-align:right">1,401</td>
+        <td class="change-up" style="text-align:right">+12.4%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">11</td>
+        <td class="game-name">Ghost Recon Breakpoint</td>
+        <td class="count" style="text-align:right">1,321</td>
+        <td class="change-up" style="text-align:right">+4.9%</td>
+        <td class="change-down" style="text-align:right">-25.1%</td>
+      </tr>
+      <tr>
+        <td class="rank">12</td>
+        <td class="game-name">Far Cry 4</td>
+        <td class="count" style="text-align:right">901</td>
+        <td class="change-up" style="text-align:right">+5.5%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">13</td>
+        <td class="game-name">The Division</td>
+        <td class="count" style="text-align:right">829</td>
+        <td class="change-down" style="text-align:right">-2.7%</td>
+        <td class="change-down" style="text-align:right">-34.2%</td>
+      </tr>
+      <tr>
+        <td class="rank">14</td>
+        <td class="game-name">Watch Dogs 2</td>
+        <td class="count" style="text-align:right">819</td>
+        <td class="change-up" style="text-align:right">+7.9%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">15</td>
+        <td class="game-name">AC Syndicate</td>
+        <td class="count" style="text-align:right">675</td>
+        <td class="change-up" style="text-align:right">+7.3%</td>
+        <td class="change-down" style="text-align:right">-34.8%</td>
+      </tr>
+      <tr>
+        <td class="rank">16</td>
+        <td class="game-name">AC Unity</td>
+        <td class="count" style="text-align:right">625</td>
+        <td class="change-down" style="text-align:right">-3.8%</td>
+        <td class="change-down" style="text-align:right">-28.7%</td>
+      </tr>
+      <tr>
+        <td class="rank">17</td>
+        <td class="game-name">Far Cry 3</td>
+        <td class="count" style="text-align:right">585</td>
+        <td class="change-up" style="text-align:right">+6.2%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+      <tr>
+        <td class="rank">18</td>
+        <td class="game-name">AC Origins</td>
+        <td class="count" style="text-align:right">555</td>
+        <td class="change-down" style="text-align:right">-3.1%</td>
+        <td class="change-down" style="text-align:right">-38.3%</td>
+      </tr>
+      <tr>
+        <td class="rank">19</td>
+        <td class="game-name">South Park TFBW</td>
+        <td class="count" style="text-align:right">359</td>
+        <td class="change-down" style="text-align:right">-0.6%</td>
+        <td class="change-down" style="text-align:right">-29.5%</td>
+      </tr>
+      <tr>
+        <td class="rank">20</td>
+        <td class="game-name">Assassins Creed II</td>
+        <td class="count" style="text-align:right">294</td>
+        <td class="change-down" style="text-align:right">-3.6%</td>
+        <td class="change-new" style="text-align:right">NEW</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="trend-box">
+    <h4>📊 趋势观察</h4>
+    <div class="trend-item">🔵 <span><strong>R6S</strong> 连续两日回升（+1.3%），今日Community Checkpoint直播或带动进一步回流</span></div>
+    <div class="trend-item">🟢 <span><strong>Division 2</strong> 稳居第2（9,747人），Rise Up赛季回流效应持续</span></div>
+    <div class="trend-item">🆕 <span><strong>Morbid Metal</strong> EA第2天增长+5.6%（3,311人），口碑发酵中</span></div>
+    <div class="trend-item">📈 <span><strong>AC Shadows</strong> 日涨12.4%，1.1.10更新刺激玩家活跃</span></div>
+    <div class="trend-item">🚀 <span><strong>The Crew 2</strong> 日涨15.8%，涨幅最大，可能与近期促销有关</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  育碧情报日报 | K9 合作部 | 数据来源: Euronext / Steam API / Web Search<br>
+  生成时间: 2026-04-10 20:30 CST
+</div>
+
+</body>
+</html>
