@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>育碧情报速递 | 2026-04-11</title>
+<title>育碧情报日报 | 2026-04-11</title>
 <style>
 :root{--bg:#f5f7fa;--card:#fff;--text:#1a1a2e;--sub:#666;--mute:#999;--border:#f0f2f5;--red:#c0392b;--blue:#2980b9;--navy:#1a237e;--green:#2e7d32;--radius:10px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -16,8 +16,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .header .badge{display:inline-block;background:rgba(255,60,60,0.25);border:1px solid rgba(255,60,60,0.4);padding:1px 8px;border-radius:10px;font-size:10px;color:#ff9999;margin-left:6px;vertical-align:middle}
 .container{padding:0 12px 12px}
 .sec-title{font-size:13px;font-weight:600;padding:7px 10px;margin:14px 0 8px;border-left:3px solid;border-radius:3px;letter-spacing:.3px}
+.sec-title.stock{color:#6a1b9a;background:#f3e5f5;border-left-color:#8e24aa}
 .sec-title.news{color:var(--red);background:#fef2f0;border-left-color:var(--red)}
 .sec-title.steam{color:var(--navy);background:#e8eaf6;border-left-color:#3949ab}
+.stock-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stock-item{background:var(--card);border-radius:var(--radius);padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.stock-label{font-size:11px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.stock-val{font-size:18px;font-weight:700;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums}
+.stock-val .up{color:#e53935;font-size:13px;font-weight:600}
+.stock-val .dn{color:#43a047;font-size:13px;font-weight:600}
 .card{background:var(--card);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04);border-left:3px solid var(--red)}
 .card .hd{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
 .card .num{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;min-width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
@@ -48,17 +55,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
   .header{padding:22px 16px 18px}.header h1{font-size:18px}
   .card{padding:12px 14px}.card .ttl{font-size:13px}.card .bd{font-size:12px}
   .steam-row{padding:7px 10px}.steam-name{font-size:12px}.steam-count{font-size:13px}
+  .stock-val{font-size:16px}
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-<h1>育碧情报速递<span class="badge">Ubisoft Daily</span></h1>
+<h1>育碧情报日报<span class="badge">Ubisoft Daily</span></h1>
 <div class="date">2026-04-11 周六</div>
 </div>
 
 <div class="container">
+
+<!-- 资本市场 -->
+
+<div class="sec-title stock">资本市场</div>
+<div class="stock-grid">
+  <div class="stock-item"><div class="stock-label">UBI.PA</div><div class="stock-val">&euro;4.00 <span class="up">+0.0%</span></div></div>
+  <div class="stock-item"><div class="stock-label">市值</div><div class="stock-val">€5.1亿</div></div>
+</div>
 
 <!-- 新闻 -->
 <div class="sec-title news">最新动态</div>
@@ -66,7 +82,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 
 <!-- Steam 在线 -->
 <div class="sec-title steam">Steam 实时在线</div>
-<div class="legend">采集 2026-04-11 14:34 CST &middot; 周六 &middot; 总在线 95,025</div>
+<div class="legend">采集 2026-04-11 16:16 CST &middot; 周六 &middot; 总在线 95,025</div>
 
 <div class="steam-list">
 <div class="steam-row top3"><span class="steam-rank">1</span><div class="steam-name">Rainbow Six Siege<span class="cn">彩虹六号</span></div><div class="steam-data"><div class="steam-count">60,814</div><div class="steam-chg"><span class="fl">&ndash;</span></div></div></div>
@@ -96,6 +112,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 
 </div>
 
-<div class="footer">育碧情报速递 &middot; Claw for Tian &middot; 2026-04-11</div>
+<div class="footer">育碧情报日报 &middot; Claw for Tian &middot; 2026-04-11</div>
 </body>
 </html>
