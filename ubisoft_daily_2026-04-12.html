@@ -42,20 +42,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .buzz-card{border-left-color:#00897b}
 .buzz-plat{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;background:#e0f2f1;color:#00695c;font-weight:700;margin-right:6px;flex-shrink:0}
 .steam-list{display:flex;flex-direction:column;gap:4px}
-.steam-row{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;background:var(--card);padding:8px 12px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+.steam-row{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:start;background:var(--card);padding:8px 12px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
 .steam-row.top3{background:linear-gradient(135deg,#fff9f0 0%,#fff 100%);border-left:3px solid #e67e22}
-.steam-rank{font-size:12px;font-weight:700;color:var(--mute);text-align:center}
+.steam-rank{font-size:12px;font-weight:700;color:var(--mute);text-align:center;margin-top:2px}
 .steam-row.top3 .steam-rank{color:#e67e22}
+.steam-info{min-width:0}
 .steam-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .steam-name .cn{font-size:11px;font-weight:400;color:var(--mute);margin-left:4px}
-.steam-note{font-size:10px;color:var(--sub);font-weight:400;white-space:normal;margin-top:2px;line-height:1.3}
+.steam-status{font-size:10px;font-weight:500;margin-top:3px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steam-status.sale{color:#e65100}
+.steam-status.free{color:#1565c0}
+.steam-status.update{color:#546e7a}
 .stag{display:inline-block;font-size:8px;padding:1px 4px;border-radius:3px;margin-left:4px;font-weight:700;vertical-align:middle;line-height:1.4}
 .stag.news-tag{background:#e8f5e9;color:#2e7d32}
 .stag.sale-tag{background:#fff3e0;color:#e65100}
 .stag.free-tag{background:#e3f2fd;color:#1565c0}
-.steam-data{text-align:right;white-space:nowrap}
+.stag.update-tag{background:#eceff1;color:#546e7a}
+.steam-data{text-align:right;white-space:nowrap;margin-top:2px}
 .steam-count{font-size:14px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
-.steam-chg{font-size:10px;margin-top:1px}
+.steam-chg{font-size:11px;margin-top:1px;font-weight:600}
 .steam-chg .up{color:#e53935}
 .steam-chg .dn{color:#43a047}
 .steam-chg .fl{color:#ccc}
@@ -90,85 +95,90 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 
 <!-- 新闻 -->
 <div class="sec-title news">最新动态</div>
-<a class="card" href="https://www.psu.com/news/rumour-assassins-creed-black-flag-resynced-set-for-april-16-reveal-with-a-release-not-far-off/" target="_blank" rel="noopener">
-<div class="hd"><span class="num">1</span><span class="ttl">AC Black Flag Resynced reportedly set for April 16 reveal, r</span></div>
-<div class="bd"><span class="tag ip">PSU</span></div>
+<a class="card" href="https://store.steampowered.com/news/app/3159330/view/1829528821306645" target="_blank" rel="noopener">
+<div class="hd"><span class="num">1</span><span class="ttl">Assassin's Creed Shadows получила поддержку мыши на Nintendo</span></div>
+<div class="bd"><span class="tag ip">刺客信条</span></div>
 <div class="src">2026-04-09</div>
 </a>
-<a class="card" href="https://store.steampowered.com/news/app/1866130/view/502854353360520062" target="_blank" rel="noopener">
-<div class="hd"><span class="num">2</span><span class="ttl">Ubisoft new game Morbid Metal launches in Early Access on Ap</span></div>
-<div class="bd"><span class="tag ip">Steam</span></div>
-<div class="src">2026-04-08</div>
+<a class="card" href="https://store.steampowered.com/news/app/2208920/view/1829528821306219" target="_blank" rel="noopener">
+<div class="hd"><span class="num">2</span><span class="ttl">Get Assassin's Creed Valhalla and 7 other games for under $2</span></div>
+<div class="bd"><span class="tag ip">刺客信条</span></div>
+<div class="src">2026-04-09</div>
 </a>
-<a class="card" href="https://www.eurogamer.net/amazon-shakes-up-luna-streaming-service-removing-access-to-individual-games-third-party-subscriptions-and-its-bring-your-own-library-feature" target="_blank" rel="noopener">
-<div class="hd"><span class="num">3</span><span class="ttl">Amazon Luna drops EA, Ubisoft & GOG games from cloud streami</span></div>
-<div class="bd"><span class="tag ip">Eurogamer</span></div>
-<div class="src">2026-04-11</div>
+
+
+<!-- 社区热议 -->
+<div class="sec-title buzz">社区热议</div>
+<a class="card buzz-card" href="https://www.reddit.com/r/assassinscreed/comments/1sfardg/assassins_creed_shadows_title_update_1110_release/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/assassinscreed</span><span class="ttl">Assassin's Creed Shadows Title Update 1.1.10 - Release </span></div>
+<div class="bd">https://preview.redd.it/djr4wdezfutg1.jpg?width=1920&format=pjpg&auto=webp&s=1b4</div>
+<div class="src">04-08 06:25</div>
 </a>
-<a class="card" href="https://www.ubisoft.com/en-us/game/rainbow-six/siege/news-updates/roadmap" target="_blank" rel="noopener">
-<div class="hd"><span class="num">4</span><span class="ttl">R6 Siege 2026 Season: esports overhaul + Solid Snake crossov</span></div>
-<div class="bd"><span class="tag ip">Ubisoft</span></div>
-<div class="src">2026-04-10</div>
+<a class="card buzz-card" href="https://www.reddit.com/r/assassinscreed/comments/1rsuoej/assassins_creed_time_to_register_for_our/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/assassinscreed</span><span class="ttl">Assassin's Creed - Time to register for our newsletters</span></div>
+<div class="bd">Hello fellow Assassins,  Every step you took across feudal Japan left its mark, </div>
+<div class="src">03-14 02:00</div>
 </a>
-<a class="card" href="https://news.ubisoft.com/en-gb/" target="_blank" rel="noopener">
-<div class="hd"><span class="num">5</span><span class="ttl">April Fools: For Honor, R6 Siege, Crew Motorfest celebrate w</span></div>
-<div class="bd"><span class="tag ip">Ubisoft News</span></div>
-<div class="src">2026-04-01</div>
+<a class="card buzz-card" href="https://www.reddit.com/r/thedivision/comments/1sc8uao/y8s1_rise_up_escalation_prototype_megathread/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/thedivision</span><span class="ttl">Y8S1 Rise Up - Escalation / Prototype Megathread</span></div>
+<div class="bd">Escalation / Prototype Megathread   => Official Launch Trailer => Rise Up Season</div>
+<div class="src">04-04 21:09</div>
+</a>
+<a class="card buzz-card" href="https://www.reddit.com/r/thedivision/comments/1shg5xu/daily_thread_fashion_friday/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/thedivision</span><span class="ttl">Daily Thread - Fashion Friday</span></div>
+<div class="bd">Greetings Agents! You're getting ready for a fun weekend, with time off from a l</div>
+<div class="src">04-10 16:00</div>
+</a>
+<a class="card buzz-card" href="https://www.reddit.com/r/farcry/comments/1s8vn0t/farcry_community_interest_form/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/farcry</span><span class="ttl">FARCRY Community Interest Form</span></div>
+<div class="bd">Oh hello there!  A quick reminder for anyone who missed it the first time. If yo</div>
+<div class="src">04-01 02:25</div>
+</a>
+<a class="card buzz-card" href="https://www.reddit.com/r/farcry/comments/1reeez2/far_cry_coop_megathread/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/farcry</span><span class="ttl">Far Cry Co-Op MEGATHREAD</span></div>
+<div class="bd">Lots of individual posts like these popping up, so let's do one big one! Looking</div>
+<div class="src">02-25 22:17</div>
+</a>
+<a class="card buzz-card" href="https://space.bilibili.com/14971640" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">B站 育碧中国</span><span class="ttl">育碧中国 B站官方频道</span></div>
+<div class="bd">游戏预告、CG、活动直播</div>
+<div class="src">2026-04-12</div>
+</a>
+<a class="card buzz-card" href="https://weibo.com/ubisoft" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">微博 育碧Ubisoft</span><span class="ttl">育碧 官方微博</span></div>
+<div class="bd">中文官方资讯发布</div>
+<div class="src">2026-04-12</div>
 </a>
 
 
 <!-- Steam 在线 -->
 <div class="sec-title steam">Steam 实时在线</div>
-<div class="legend">采集 2026-04-12 13:41 CST &middot; 周日 &middot; 总在线 114,210 &middot; 变化=vs昨日</div>
+<div class="legend">采集 2026-04-12 14:13 CST &middot; 周日 &middot; 总在线 106,269 &middot; ▲▼=vs昨日</div>
 
 <div class="steam-list">
-<div class="steam-row top3"><span class="steam-rank">1</span><div class="steam-name">Rainbow Six Siege<span class="cn">彩虹六号</span></div><div class="steam-data"><div class="steam-count">75,277</div><div class="steam-chg"><span class="dn">-1.2%</span></div><div class="steam-peak">峰 87,639</div></div></div>
-<div class="steam-row top3"><span class="steam-rank">2</span><div class="steam-name">The Division 2<span class="cn">全境封锁</span></div><div class="steam-data"><div class="steam-count">10,585</div><div class="steam-chg"><span class="dn">-27.5%</span></div><div class="steam-peak">峰 11,877</div></div></div>
-<div class="steam-row top3"><span class="steam-rank">3</span><div class="steam-name">Brawlhalla<span class="cn">格斗哈拉</span></div><div class="steam-data"><div class="steam-count">8,946</div><div class="steam-chg"><span class="dn">-18.9%</span></div><div class="steam-peak">峰 12,324</div></div></div>
-<div class="steam-row"><span class="steam-rank">4</span><div class="steam-name">For Honor<span class="cn">荣耀战魂</span></div><div class="steam-data"><div class="steam-count">3,869</div><div class="steam-chg"><span class="dn">-13.1%</span></div><div class="steam-peak">峰 4,262</div></div></div>
-<div class="steam-row"><span class="steam-rank">5</span><div class="steam-name">Anno 1800<span class="cn">纪元</span></div><div class="steam-data"><div class="steam-count">2,509</div><div class="steam-chg"><span class="dn">-39.6%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">6</span><div class="steam-name">Assassin's Creed Valhalla<span class="cn">刺客信条</span></div><div class="steam-data"><div class="steam-count">2,449</div><div class="steam-chg"><span class="dn">-47.4%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">7</span><div class="steam-name">Assassin's Creed Shadows<span class="cn">刺客信条</span></div><div class="steam-data"><div class="steam-count">2,283</div><div class="steam-chg"><span class="dn">-41.4%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">8</span><div class="steam-name">The Crew Motorfest<span class="cn">飙酷车神</span></div><div class="steam-data"><div class="steam-count">1,988</div><div class="steam-chg"><span class="dn">-49.5%</span></div><div class="steam-peak">峰 1,997</div></div></div>
-<div class="steam-row"><span class="steam-rank">9</span><div class="steam-name">Ghost Recon Breakpoint<span class="cn">幽灵行动</span></div><div class="steam-data"><div class="steam-count">1,419</div><div class="steam-chg"><span class="dn">-42.1%</span></div><div class="steam-peak">峰 1,589</div></div></div>
-<div class="steam-row"><span class="steam-rank">10</span><div class="steam-name">Avatar: Frontiers of Pandora<span class="cn">阿凡达</span></div><div class="steam-data"><div class="steam-count">1,204</div><div class="steam-chg"><span class="dn">-42.9%</span></div><div class="steam-peak">峰 1,695</div></div></div>
-<div class="steam-row"><span class="steam-rank">11</span><div class="steam-name">Far Cry 6<span class="cn">孤岛惊魂</span></div><div class="steam-data"><div class="steam-count">963</div><div class="steam-chg"><span class="dn">-50.0%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">12</span><div class="steam-name">Trackmania<span class="cn">赛道狂飙</span></div><div class="steam-data"><div class="steam-count">877</div><div class="steam-chg"><span class="dn">-53.4%</span></div><div class="steam-peak">峰 1,312</div></div></div>
-<div class="steam-row"><span class="steam-rank">13</span><div class="steam-name">Star Wars Outlaws<span class="cn">星球大战</span></div><div class="steam-data"><div class="steam-count">434</div><div class="steam-chg"><span class="dn">-40.2%</span></div><div class="steam-peak">峰 574</div></div></div>
-<div class="steam-row"><span class="steam-rank">14</span><div class="steam-name">UNO<span class="cn">UNO</span></div><div class="steam-data"><div class="steam-count">298</div><div class="steam-chg"><span class="up">+124.1%</span></div><div class="steam-peak">峰 354</div></div></div>
-<div class="steam-row"><span class="steam-rank">15</span><div class="steam-name">Riders Republic<span class="cn">极限国度</span></div><div class="steam-data"><div class="steam-count">269</div><div class="steam-chg"><span class="dn">-43.6%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">16</span><div class="steam-name">South Park: The Fractured But Whole<span class="cn">南方公园</span></div><div class="steam-data"><div class="steam-count">262</div><div class="steam-chg"><span class="dn">-24.7%</span></div><div class="steam-peak">峰 359</div></div></div>
-<div class="steam-row"><span class="steam-rank">17</span><div class="steam-name">Assassin's Creed Mirage<span class="cn">刺客信条</span></div><div class="steam-data"><div class="steam-count">174</div><div class="steam-chg"><span class="dn">-54.7%</span></div><div class="steam-peak">峰 184</div></div></div>
-<div class="steam-row"><span class="steam-rank">18</span><div class="steam-name">Skull and Bones<span class="cn">碧海黑帆</span></div><div class="steam-data"><div class="steam-count">151</div><div class="steam-chg"><span class="dn">-48.8%</span></div><div class="steam-peak">峰 170</div></div></div>
-<div class="steam-row"><span class="steam-rank">19</span><div class="steam-name">Watch Dogs: Legion<span class="cn">看门狗</span></div><div class="steam-data"><div class="steam-count">137</div><div class="steam-chg"><span class="dn">-43.2%</span></div><div class="steam-peak">峰 140</div></div></div>
-<div class="steam-row"><span class="steam-rank">20</span><div class="steam-name">Prince of Persia: The Lost Crown<span class="cn">波斯王子</span></div><div class="steam-data"><div class="steam-count">93</div><div class="steam-chg"><span class="dn">-34.0%</span></div><div class="steam-peak">峰 94</div></div></div>
-<div class="steam-row"><span class="steam-rank">21</span><div class="steam-name">Rocksmith+<span class="cn">摇滚史密斯</span></div><div class="steam-data"><div class="steam-count">23</div><div class="steam-chg"><span class="dn">-56.6%</span></div><div class="steam-peak">峰 38</div></div></div>
+<div class="steam-row top3"><span class="steam-rank">1</span><div class="steam-info"><div class="steam-name">Rainbow Six Siege<span class="cn">彩虹六号</span></div></div><div class="steam-data"><div class="steam-count">68,500</div><div class="steam-chg"><span class="dn">▼10.1%</span></div><div class="steam-peak">峰 87,639</div></div></div>
+<div class="steam-row top3"><span class="steam-rank">2</span><div class="steam-info"><div class="steam-name">The Division 2<span class="cn">全境封锁</span></div></div><div class="steam-data"><div class="steam-count">10,278</div><div class="steam-chg"><span class="dn">▼29.6%</span></div><div class="steam-peak">峰 11,877</div></div></div>
+<div class="steam-row top3"><span class="steam-rank">3</span><div class="steam-info"><div class="steam-name">Brawlhalla<span class="cn">格斗哈拉</span></div></div><div class="steam-data"><div class="steam-count">8,067</div><div class="steam-chg"><span class="dn">▼26.9%</span></div><div class="steam-peak">峰 12,324</div></div></div>
+<div class="steam-row"><span class="steam-rank">4</span><div class="steam-info"><div class="steam-name">For Honor<span class="cn">荣耀战魂</span></div></div><div class="steam-data"><div class="steam-count">3,675</div><div class="steam-chg"><span class="dn">▼17.5%</span></div><div class="steam-peak">峰 4,262</div></div></div>
+<div class="steam-row"><span class="steam-rank">5</span><div class="steam-info"><div class="steam-name">Anno 1800<span class="cn">纪元</span></div></div><div class="steam-data"><div class="steam-count">2,647</div><div class="steam-chg"><span class="dn">▼36.2%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">6</span><div class="steam-info"><div class="steam-name">Assassin's Creed Valhalla<span class="cn">刺客信条</span></div></div><div class="steam-data"><div class="steam-count">2,520</div><div class="steam-chg"><span class="dn">▼45.9%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">7</span><div class="steam-info"><div class="steam-name">Assassin's Creed Shadows<span class="cn">刺客信条</span></div></div><div class="steam-data"><div class="steam-count">2,323</div><div class="steam-chg"><span class="dn">▼40.4%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">8</span><div class="steam-info"><div class="steam-name">The Crew Motorfest<span class="cn">飙酷车神</span></div></div><div class="steam-data"><div class="steam-count">1,975</div><div class="steam-chg"><span class="dn">▼49.9%</span></div><div class="steam-peak">峰 1,997</div></div></div>
+<div class="steam-row"><span class="steam-rank">9</span><div class="steam-info"><div class="steam-name">Ghost Recon Breakpoint<span class="cn">幽灵行动</span></div></div><div class="steam-data"><div class="steam-count">1,398</div><div class="steam-chg"><span class="dn">▼43.0%</span></div><div class="steam-peak">峰 1,589</div></div></div>
+<div class="steam-row"><span class="steam-rank">10</span><div class="steam-info"><div class="steam-name">Avatar: Frontiers of Pandora<span class="cn">阿凡达</span></div></div><div class="steam-data"><div class="steam-count">1,166</div><div class="steam-chg"><span class="dn">▼44.7%</span></div><div class="steam-peak">峰 1,695</div></div></div>
+<div class="steam-row"><span class="steam-rank">11</span><div class="steam-info"><div class="steam-name">Far Cry 6<span class="cn">孤岛惊魂</span></div></div><div class="steam-data"><div class="steam-count">1,028</div><div class="steam-chg"><span class="dn">▼46.6%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">12</span><div class="steam-info"><div class="steam-name">Trackmania<span class="cn">赛道狂飙</span><span class="stag free-tag">FREE WEEKEND</span></div><div class="steam-status free">🎮 免费周末</div></div><div class="steam-data"><div class="steam-count">856</div><div class="steam-chg"><span class="dn">▼54.5%</span></div><div class="steam-peak">峰 1,312</div></div></div>
+<div class="steam-row"><span class="steam-rank">13</span><div class="steam-info"><div class="steam-name">Star Wars Outlaws<span class="cn">星球大战</span></div></div><div class="steam-data"><div class="steam-count">436</div><div class="steam-chg"><span class="dn">▼39.9%</span></div><div class="steam-peak">峰 574</div></div></div>
+<div class="steam-row"><span class="steam-rank">14</span><div class="steam-info"><div class="steam-name">Riders Republic<span class="cn">极限国度</span></div></div><div class="steam-data"><div class="steam-count">278</div><div class="steam-chg"><span class="dn">▼41.7%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">15</span><div class="steam-info"><div class="steam-name">UNO<span class="cn">UNO</span></div></div><div class="steam-data"><div class="steam-count">263</div><div class="steam-chg"><span class="up">▲97.7%</span></div><div class="steam-peak">峰 354</div></div></div>
+<div class="steam-row"><span class="steam-rank">16</span><div class="steam-info"><div class="steam-name">South Park: The Fractured But Whole<span class="cn">南方公园</span></div></div><div class="steam-data"><div class="steam-count">240</div><div class="steam-chg"><span class="dn">▼31.0%</span></div><div class="steam-peak">峰 359</div></div></div>
+<div class="steam-row"><span class="steam-rank">17</span><div class="steam-info"><div class="steam-name">Assassin's Creed Mirage<span class="cn">刺客信条</span></div></div><div class="steam-data"><div class="steam-count">192</div><div class="steam-chg"><span class="dn">▼50.0%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">18</span><div class="steam-info"><div class="steam-name">Skull and Bones<span class="cn">碧海黑帆</span></div></div><div class="steam-data"><div class="steam-count">172</div><div class="steam-chg"><span class="dn">▼41.7%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">19</span><div class="steam-info"><div class="steam-name">Watch Dogs: Legion<span class="cn">看门狗</span></div></div><div class="steam-data"><div class="steam-count">144</div><div class="steam-chg"><span class="dn">▼40.2%</span></div></div></div>
+<div class="steam-row"><span class="steam-rank">20</span><div class="steam-info"><div class="steam-name">Prince of Persia: The Lost Crown<span class="cn">波斯王子</span></div></div><div class="steam-data"><div class="steam-count">90</div><div class="steam-chg"><span class="dn">▼36.2%</span></div><div class="steam-peak">峰 94</div></div></div>
+<div class="steam-row"><span class="steam-rank">21</span><div class="steam-info"><div class="steam-name">Rocksmith+<span class="cn">摇滚史密斯</span></div></div><div class="steam-data"><div class="steam-count">21</div><div class="steam-chg"><span class="dn">▼60.4%</span></div><div class="steam-peak">峰 38</div></div></div>
 </div>
 
-
-
-<!-- 社区热议 -->
-<div class="sec-title buzz">社区热议</div>
-<a class="card buzz-card" href="https://www.reddit.com/r/ubisoft/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/ubisoft</span><span class="ttl">Ubisoft Community</span></div>
-<div class="bd">育碧官方社区</div>
-</a>
-<a class="card buzz-card" href="https://www.reddit.com/r/assassinscreed/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/assassinscreed</span><span class="ttl">Black Flag Resynced hype: April 16 reveal?</span></div>
-<div class="bd">黑旗重制版即将公布引热议</div>
-</a>
-<a class="card buzz-card" href="https://www.reddit.com/r/Rainbow6/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/Rainbow6</span><span class="ttl">Rainbow Six Siege Y11 Roadmap Discussion</span></div>
-<div class="bd">Y11赛季路线图讨论</div>
-</a>
-<a class="card buzz-card" href="https://twitter.com/Ubisoft" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Twitter/X @Ubisoft</span><span class="ttl">Ubisoft Official Twitter</span></div>
-<div class="bd">育碧官方推特</div>
-</a>
-<a class="card buzz-card" href="https://space.bilibili.com/14971640" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">B站 育碧</span><span class="ttl">育碧中国 Bilibili</span></div>
-<div class="bd">育碧中国B站官方</div>
-</a>
 
 
 </div>
