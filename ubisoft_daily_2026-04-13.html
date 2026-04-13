@@ -20,20 +20,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .sec-title.news{color:var(--red);background:#fef2f0;border-left-color:var(--red)}
 .sec-title.steam{color:var(--navy);background:#e8eaf6;border-left-color:#3949ab}
 .sec-title.buzz{color:#00695c;background:#e0f2f1;border-left-color:#00897b}
-.sec-title.db-sec{color:#1565c0;background:#e3f2fd;border-left-color:#1976d2}
-.db-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
-.db-item{display:flex;flex-direction:column;align-items:center;background:var(--card);border-radius:var(--radius);padding:10px 8px;box-shadow:0 1px 4px rgba(0,0,0,0.04);text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s;border:1px solid var(--border)}
-.db-item:active{transform:scale(0.97)}
-.db-name{font-size:13px;font-weight:700;color:var(--text)}
-.db-en{font-size:10px;color:var(--mute);margin-top:2px}
-.db-link{display:inline-block;font-size:11px;margin-left:4px;text-decoration:none;vertical-align:middle;opacity:0.6;transition:opacity .15s}
-.db-link:hover{opacity:1}
+.sec-title.trend{color:#e65100;background:#fff3e0;border-left-color:#ef6c00}
 .stock-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .stock-item{background:var(--card);border-radius:var(--radius);padding:12px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
 .stock-label{font-size:11px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
 .stock-val{font-size:18px;font-weight:700;color:var(--text);margin-top:4px;font-variant-numeric:tabular-nums}
 .stock-val .up{color:#e53935;font-size:13px;font-weight:600}
 .stock-val .dn{color:#43a047;font-size:13px;font-weight:600}
+.stock-note{font-size:11px;color:var(--sub);padding:8px 12px;background:var(--card);border-radius:var(--radius);margin-top:6px;box-shadow:0 1px 3px rgba(0,0,0,0.03);line-height:1.6}
 .card{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04);border-left:3px solid var(--red);transition:box-shadow .15s,transform .15s;cursor:pointer}
 .card:active{transform:scale(0.98);box-shadow:0 0 0 rgba(0,0,0,0)}
 .card .hd{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
@@ -41,12 +35,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .card .ttl{font-size:14px;font-weight:700;color:var(--text);line-height:1.4}
 .card .bd{font-size:12.5px;color:var(--sub);line-height:1.6;margin-top:2px}
 .card .src{font-size:10px;color:var(--mute);margin-top:5px}
-.card .src a{color:var(--blue);text-decoration:none}
 .tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;margin-right:2px;font-weight:600;vertical-align:middle}
+.tag.hot{background:#fce4ec;color:#c62828}
 .tag.update{background:#e3f2fd;color:#1565c0}
-.tag.ip{background:#fce4ec;color:#c62828}
-.tag.new-tag{background:#c8e6c9;color:#2e7d32}
-.card.nolink{cursor:default;pointer-events:none}
+.tag.new{background:#e8f5e9;color:#2e7d32}
+.tag.back{background:#fff3e0;color:#e65100}
+.tag.ip{background:#f3e5f5;color:#6a1b9a}
 .buzz-card{border-left-color:#00897b}
 .buzz-plat{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;background:#e0f2f1;color:#00695c;font-weight:700;margin-right:6px;flex-shrink:0}
 .steam-list{display:flex;flex-direction:column;gap:4px}
@@ -62,7 +56,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .steam-status.free{color:#1565c0}
 .steam-status.update{color:#546e7a}
 .stag{display:inline-block;font-size:8px;padding:1px 4px;border-radius:3px;margin-left:4px;font-weight:700;vertical-align:middle;line-height:1.4}
-.stag.news-tag{background:#e8f5e9;color:#2e7d32}
 .stag.sale-tag{background:#fff3e0;color:#e65100}
 .stag.free-tag{background:#e3f2fd;color:#1565c0}
 .stag.update-tag{background:#eceff1;color:#546e7a}
@@ -72,9 +65,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .steam-chg .up{color:#e53935}
 .steam-chg .dn{color:#43a047}
 .steam-chg .fl{color:#ccc}
-.steam-peak{font-size:9px;color:var(--mute);margin-top:1px}
+.steam-wk{font-size:9px;color:var(--mute);margin-top:1px}
 .note{font-size:11.5px;color:var(--sub);padding:10px 12px;background:var(--card);border-radius:var(--radius);margin-top:6px;box-shadow:0 1px 3px rgba(0,0,0,0.03);line-height:1.6}
-.legend{display:flex;gap:12px;justify-content:center;font-size:10px;color:var(--mute);padding:4px 0 2px}
+.trend-list{display:flex;flex-direction:column;gap:6px}
+.trend-item{background:var(--card);border-radius:var(--radius);padding:10px 14px;box-shadow:0 1px 3px rgba(0,0,0,0.03);font-size:13px;line-height:1.6;border-left:3px solid #ef6c00}
+.trend-idx{display:inline-block;color:#ef6c00;font-weight:700;margin-right:6px}
+.legend{display:flex;gap:12px;justify-content:center;font-size:10px;color:var(--mute);padding:4px 0 2px;flex-wrap:wrap}
 .footer{text-align:center;padding:16px 12px;font-size:10px;color:#c0c8d0}
 @media(max-width:400px){
   .header{padding:22px 16px 18px}.header h1{font-size:18px}
@@ -94,94 +90,225 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 <div class="container">
 
 <!-- 资本市场 -->
-
 <div class="sec-title stock">资本市场</div>
 <div class="stock-grid">
-  <div class="stock-item"><div class="stock-label">UBI.PA</div><div class="stock-val">&euro;4.00 <span class="up">+0.0%</span></div></div>
-  <div class="stock-item"><div class="stock-label">市值</div><div class="stock-val">€5.1亿</div></div>
+  <div class="stock-item"><div class="stock-label">UBI.PA</div><div class="stock-val">&euro;4.00 <span class="dn">--</span></div></div>
+  <div class="stock-item"><div class="stock-label">市值</div><div class="stock-val">&euro;5.1亿</div></div>
+  <div class="stock-item"><div class="stock-label">52周区间</div><div class="stock-val">&euro;1.89&ndash;14.3</div></div>
+  <div class="stock-item"><div class="stock-label">状态</div><div class="stock-val" style="font-size:13px">周末休市</div></div>
 </div>
+<div class="stock-note">上周五(4/10)收盘 &euro;4.00。育碧继续推进降本增效，3月裁减 Red Storm 105人并停止该工作室游戏开发。2月法国总部目标缩编 200 人。股价从去年高点持续下行，目前处于历史低位区间。市场等待 4/16 黑旗重制版官宣催化。</div>
 
-<!-- 新闻 -->
-<div class="sec-title news">最新动态</div>
-<div class="card nolink"><div class="bd">近3天无重要新闻</div></div>
+<!-- 新闻动态 -->
+<div class="sec-title news">新闻动态</div>
+
+<a class="card" href="https://www.taptap.cn/moment/791387261743664276" target="_blank" rel="noopener">
+<div class="hd"><span class="num">1</span><span class="ttl">刺客信条4：黑旗重制版 4月16日正式官宣</span></div>
+<div class="bd"><span class="tag hot">重磅</span><span class="tag ip">刺客信条</span> 项目代号 Resynced，育碧已确定 4/16 正式公布。预计 2026 夏季登陆 PC/PS5/Xbox。最新 AC Shadows TU1.1.10 补丁中被玩家发现黑旗彩蛋。</div>
+<div class="src">TapTap / GamingProMax &middot; 2026-04</div>
+</a>
+
+<a class="card" href="https://www.ubisoft.com/en-us/game/assassins-creed/news/7FaeuAMRqHnMTH2qvUGwV1/ac-shadows-title-update-1110-release-notes" target="_blank" rel="noopener">
+<div class="hd"><span class="num">2</span><span class="ttl">AC Shadows TU1.1.10 上线 + Switch 2 鼠标键盘支持</span></div>
+<div class="bd"><span class="tag update">更新</span><span class="tag ip">刺客信条</span> 4/7 发布 TU1.1.10，修复大量 Bug 并优化性能。同步更新 Switch 2 版本，新增鼠标键盘支持及 PS5 Pro PSSR 增强视觉效果。</div>
+<div class="src">Ubisoft / NintendoLife / ScreenRant &middot; 2026-04-07</div>
+</a>
+
+<a class="card" href="https://mp1st.com/news/the-division-2-year-8-april-crossplay-new-content-dlc-announced" target="_blank" rel="noopener">
+<div class="hd"><span class="num">3</span><span class="ttl">全境封锁2 第8年路线图：跨平台联机+中央公园DLC</span></div>
+<div class="bd"><span class="tag hot">重磅</span><span class="tag ip">全境封锁</span> Year 8 于 4月启动，带来跨平台联机、新赛季 Rise Up、新 Escalation 难度和 Prototype 装备品质。Central Park DLC 年内推出。</div>
+<div class="src">MP1st / G2A / KitGuru &middot; 2026-03~04</div>
+</a>
+
+<a class="card" href="https://siege.gg/news/rainbow-six-sieges-second-community-checkpoint-to-take-place-on-april-10" target="_blank" rel="noopener">
+<div class="hd"><span class="num">4</span><span class="ttl">R6 围攻X 第二次社区座谈会 4/10 举行</span></div>
+<div class="bd"><span class="tag update">更新</span><span class="tag ip">彩虹六号</span> 开发者与社区面对面讨论热门议题和未来改进计划。v3.32 补丁（4/1）带来 ShieldGuard 增强和稳定性修复。Y11 路线图含 Solid Snake 联动干员。</div>
+<div class="src">Siege.gg / Asumetech &middot; 2026-04</div>
+</a>
+
+<a class="card" href="https://www.ign.com/articles/ubisoft-laying-off-100-staff-and-ending-game-development-at-ghost-recon-studio-red-storm-entertainment" target="_blank" rel="noopener">
+<div class="hd"><span class="num">5</span><span class="ttl">Red Storm 工作室停止游戏开发，裁员105人</span></div>
+<div class="bd"><span class="tag hot">重磅</span><span class="tag ip">育碧</span> 彩虹六号创始工作室 Red Storm Entertainment 不再开发游戏。育碧持续降本，2月法国总部再裁 200 人。</div>
+<div class="src">IGN / GameSpot / Variety &middot; 2026-03-19</div>
+</a>
+
+<a class="card" href="https://zh-cn.ubisoft.com/news" target="_blank" rel="noopener">
+<div class="hd"><span class="num">6</span><span class="ttl">纪元日特别直播 4/9 举行 + Anno 117 GDC 技术分享</span></div>
+<div class="bd"><span class="tag new">新品</span><span class="tag ip">纪元</span> 纪元系列 28 周年纪念，研发团队举办特别直播。GDC 2026 育碧展示 Anno 117: Pax Romana 图形技术方案。</div>
+<div class="src">育碧中文官网 &middot; 2026-04-09</div>
+</a>
 
 <!-- 社区热议 -->
 <div class="sec-title buzz">社区热议</div>
-<a class="card buzz-card" href="https://www.reddit.com/r/ubisoft/hot/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/ubisoft</span><span class="ttl">r/ubisoft 热门讨论</span></div>
-<div class="bd">点击查看社区热帖</div>
-<div class="src">2026-04-13</div>
-</a>
-<a class="card buzz-card" href="https://www.reddit.com/r/Rainbow6/hot/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/Rainbow6</span><span class="ttl">r/Rainbow6 热门讨论</span></div>
-<div class="bd">点击查看社区热帖</div>
-<div class="src">2026-04-13</div>
-</a>
+
 <a class="card buzz-card" href="https://www.reddit.com/r/assassinscreed/hot/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/assassinscreed</span><span class="ttl">r/assassinscreed 热门讨论</span></div>
-<div class="bd">点击查看社区热帖</div>
+<div class="hd"><span class="buzz-plat">Reddit r/assassinscreed</span><span class="ttl">黑旗重制版传言引爆讨论：4/16 官宣倒计时</span></div>
+<div class="bd">TU1.1.10 隐藏彩蛋被扒出，社区确信黑旗重制板即将公布。玩家热议重制版应保留哪些经典元素。</div>
 <div class="src">2026-04-13</div>
 </a>
+
+<a class="card buzz-card" href="https://www.reddit.com/r/Rainbow6/hot/" target="_blank" rel="noopener">
+<div class="hd"><span class="buzz-plat">Reddit r/Rainbow6</span><span class="ttl">围攻X 社区座谈反馈 + Y11S1 平衡讨论</span></div>
+<div class="bd">4/10 Community Checkpoint 后玩家讨论 ShieldGuard 改动和新赛季 Solid Snake 干员预期。在线人数持续强劲。</div>
+<div class="src">2026-04-13</div>
+</a>
+
 <a class="card buzz-card" href="https://www.reddit.com/r/thedivision/hot/" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">Reddit r/thedivision</span><span class="ttl">r/thedivision 热门讨论</span></div>
-<div class="bd">点击查看社区热帖</div>
+<div class="hd"><span class="buzz-plat">Reddit r/thedivision</span><span class="ttl">全境封锁2 Year 8 首赛季 Rise Up 体验反馈</span></div>
+<div class="bd">跨平台联机即将到来，社区讨论 Prototype 装备品质和新 Escalation 难度的体验。中央公园 DLC 备受期待。</div>
 <div class="src">2026-04-13</div>
 </a>
+
 <a class="card buzz-card" href="https://space.bilibili.com/14971640" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">B站 育碧中国</span><span class="ttl">育碧中国 B站官方频道</span></div>
-<div class="bd">游戏预告、CG、活动直播</div>
+<div class="hd"><span class="buzz-plat">B站 育碧中国</span><span class="ttl">育碧中国官方频道</span></div>
+<div class="bd">游戏预告、CG、活动直播 &middot; 纪元日直播回放可看</div>
 <div class="src">2026-04-13</div>
 </a>
+
 <a class="card buzz-card" href="https://weibo.com/ubisoft" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">微博 育碧Ubisoft</span><span class="ttl">育碧 官方微博</span></div>
+<div class="hd"><span class="buzz-plat">微博 育碧Ubisoft</span><span class="ttl">育碧官方微博</span></div>
 <div class="bd">中文官方资讯发布</div>
 <div class="src">2026-04-13</div>
 </a>
-<a class="card buzz-card" href="https://tieba.baidu.com/f?kw=%E8%82%B2%E7%A2%A7" target="_blank" rel="noopener">
-<div class="hd"><span class="buzz-plat">贴吧 育碧吧</span><span class="ttl">百度贴吧 育碧吧</span></div>
-<div class="bd">国内玩家讨论社区</div>
-<div class="src">2026-04-13</div>
-</a>
 
-
-<!-- Steam 在线 -->
-<div class="sec-title steam">Steam 实时在线</div>
-<div class="legend">采集 2026-04-13 09:00 CST &middot; 周一 &middot; 总在线 134,845 &middot; ▲▼=vs昨日</div>
+<!-- Steam 在线 Top 20 -->
+<div class="sec-title steam">Steam 实时在线 Top 20</div>
+<div class="legend">采集 2026-04-13 09:00 CST &middot; 周一 &middot; 总在线 134,845 &middot; vs昨日(周六09:00) &middot; vs上周(4/6 周日)</div>
 
 <div class="steam-list">
-<div class="steam-row top3"><span class="steam-rank">1</span><div class="steam-info"><div class="steam-name">Rainbow Six Siege<span class="cn">彩虹六号</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=e11000000262" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">93,952</div><div class="steam-chg"><span class="up">▲37.2%</span></div></div></div>
-<div class="steam-row top3"><span class="steam-rank">2</span><div class="steam-info"><div class="steam-name">Brawlhalla<span class="cn">格斗哈拉</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=efabf76ddb69f8f1ad8f036e7797463fe" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">12,010</div><div class="steam-chg"><span class="up">▲48.9%</span></div></div></div>
-<div class="steam-row top3"><span class="steam-rank">3</span><div class="steam-info"><div class="steam-name">The Division 2<span class="cn">全境封锁</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=e592cb9e375274ee75f974134904c52f5" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">10,761</div><div class="steam-chg"><span class="up">▲4.7%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">4</span><div class="steam-info"><div class="steam-name">For Honor<span class="cn">荣耀战魂</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=efc6133cd4902e3191d786c5bac52baed" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">4,110</div><div class="steam-chg"><span class="up">▲11.8%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">5</span><div class="steam-info"><div class="steam-name">Assassin's Creed Valhalla<span class="cn">刺客信条</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=ec8c7db30dbfd9717d6cad4ca2fd0acc8" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">1,902</div><div class="steam-chg"><span class="dn">▼24.5%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">6</span><div class="steam-info"><div class="steam-name">The Crew Motorfest<span class="cn">飙酷车神</span></div></div><div class="steam-data"><div class="steam-count">1,786</div><div class="steam-chg"><span class="dn">▼9.6%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">7</span><div class="steam-info"><div class="steam-name">Avatar: Frontiers of Pandora<span class="cn">阿凡达</span></div></div><div class="steam-data"><div class="steam-count">1,759</div><div class="steam-chg"><span class="up">▲50.9%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">8</span><div class="steam-info"><div class="steam-name">Anno 1800<span class="cn">纪元</span></div></div><div class="steam-data"><div class="steam-count">1,578</div><div class="steam-chg"><span class="dn">▼40.4%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">9</span><div class="steam-info"><div class="steam-name">Trackmania<span class="cn">赛道狂飙</span><span class="stag free-tag">FREE WEEKEND</span></div><div class="steam-status free">🎮 免费周末</div></div><div class="steam-data"><div class="steam-count">1,475</div><div class="steam-chg"><span class="up">▲72.3%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">10</span><div class="steam-info"><div class="steam-name">Assassin's Creed Shadows<span class="cn">刺客信条</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=ec8c7db30dbfd9717d6cad4ca2fd0acc8" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">1,457</div><div class="steam-chg"><span class="dn">▼37.3%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">11</span><div class="steam-info"><div class="steam-name">Ghost Recon Breakpoint<span class="cn">幽灵行动</span></div></div><div class="steam-data"><div class="steam-count">1,446</div><div class="steam-chg"><span class="up">▲3.4%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">12</span><div class="steam-info"><div class="steam-name">Far Cry 6<span class="cn">孤岛惊魂</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=ecdbcc18175fb0aafee424cdb9cb73a35" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">786</div><div class="steam-chg"><span class="dn">▼23.5%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">13</span><div class="steam-info"><div class="steam-name">Star Wars Outlaws<span class="cn">星球大战</span></div></div><div class="steam-data"><div class="steam-count">539</div><div class="steam-chg"><span class="up">▲23.6%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">14</span><div class="steam-info"><div class="steam-name">South Park: The Fractured But Whole<span class="cn">南方公园</span></div></div><div class="steam-data"><div class="steam-count">358</div><div class="steam-chg"><span class="up">▲49.2%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">15</span><div class="steam-info"><div class="steam-name">UNO<span class="cn">UNO</span></div></div><div class="steam-data"><div class="steam-count">227</div><div class="steam-chg"><span class="dn">▼13.7%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">16</span><div class="steam-info"><div class="steam-name">Assassin's Creed Mirage<span class="cn">刺客信条</span><a class="db-link" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=ec8c7db30dbfd9717d6cad4ca2fd0acc8" target="_blank" title="DataBrain 舆情">&#x1F4CA;</a></div></div><div class="steam-data"><div class="steam-count">170</div><div class="steam-chg"><span class="dn">▼11.5%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">17</span><div class="steam-info"><div class="steam-name">Skull and Bones<span class="cn">碧海黑帆</span></div></div><div class="steam-data"><div class="steam-count">168</div><div class="steam-chg"><span class="dn">▼2.3%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">18</span><div class="steam-info"><div class="steam-name">Riders Republic<span class="cn">极限国度</span></div></div><div class="steam-data"><div class="steam-count">126</div><div class="steam-chg"><span class="dn">▼54.7%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">19</span><div class="steam-info"><div class="steam-name">Watch Dogs: Legion<span class="cn">看门狗</span></div></div><div class="steam-data"><div class="steam-count">109</div><div class="steam-chg"><span class="dn">▼24.3%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">20</span><div class="steam-info"><div class="steam-name">Prince of Persia: The Lost Crown<span class="cn">波斯王子</span></div></div><div class="steam-data"><div class="steam-count">84</div><div class="steam-chg"><span class="dn">▼6.7%</span></div></div></div>
-<div class="steam-row"><span class="steam-rank">21</span><div class="steam-info"><div class="steam-name">Rocksmith+<span class="cn">摇滚史密斯</span></div></div><div class="steam-data"><div class="steam-count">42</div><div class="steam-chg"><span class="up">▲100.0%</span></div></div></div>
+
+<div class="steam-row top3"><span class="steam-rank">1</span>
+<div class="steam-info"><div class="steam-name">Rainbow Six Siege<span class="cn">彩虹六号</span></div><div class="steam-status update">Y11S1 v3.32 ShieldGuard + Community Checkpoint 4/10</div></div>
+<div class="steam-data"><div class="steam-count">93,952</div>
+<div class="steam-chg"><span class="up">&#9650;8.7%</span></div>
+<div class="steam-wk">vs上周 <span class="dn">&#9660;0.5%</span></div></div></div>
+
+<div class="steam-row top3"><span class="steam-rank">2</span>
+<div class="steam-info"><div class="steam-name">Brawlhalla<span class="cn">格斗哈拉</span></div><div class="steam-status update">Bloomhalla 2026 春季活动进行中</div></div>
+<div class="steam-data"><div class="steam-count">12,010</div>
+<div class="steam-chg"><span class="dn">&#9660;2.5%</span></div>
+<div class="steam-wk">vs上周 +5.7%</div></div></div>
+
+<div class="steam-row top3"><span class="steam-rank">3</span>
+<div class="steam-info"><div class="steam-name">The Division 2<span class="cn">全境封锁</span></div><div class="steam-status update">Year 8 Rise Up 赛季上线</div></div>
+<div class="steam-data"><div class="steam-count">10,761</div>
+<div class="steam-chg"><span class="dn">&#9660;9.4%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">4</span>
+<div class="steam-info"><div class="steam-name">For Honor<span class="cn">荣耀战魂</span></div></div>
+<div class="steam-data"><div class="steam-count">4,110</div>
+<div class="steam-chg"><span class="dn">&#9660;3.6%</span></div>
+<div class="steam-wk">vs上周 +7.3%</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">5</span>
+<div class="steam-info"><div class="steam-name">Anno 1800<span class="cn">纪元</span></div></div>
+<div class="steam-data"><div class="steam-count">2,647</div>
+<div class="steam-chg"><span class="dn">&#9660;21.2%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">6</span>
+<div class="steam-info"><div class="steam-name">Assassin's Creed Valhalla<span class="cn">刺客信条</span></div></div>
+<div class="steam-data"><div class="steam-count">1,902</div>
+<div class="steam-chg"><span class="dn">&#9660;11.3%</span></div>
+<div class="steam-wk">vs上周 <span class="dn">&#9660;9.7%</span></div></div></div>
+
+<div class="steam-row"><span class="steam-rank">7</span>
+<div class="steam-info"><div class="steam-name">The Crew Motorfest<span class="cn">飙酷车神</span></div></div>
+<div class="steam-data"><div class="steam-count">1,786</div>
+<div class="steam-chg"><span class="dn">&#9660;10.6%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">8</span>
+<div class="steam-info"><div class="steam-name">Avatar: Frontiers of Pandora<span class="cn">阿凡达</span></div></div>
+<div class="steam-data"><div class="steam-count">1,759</div>
+<div class="steam-chg"><span class="up">&#9650;3.8%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">9</span>
+<div class="steam-info"><div class="steam-name">Anno 1800<span class="cn">纪元</span></div></div>
+<div class="steam-data"><div class="steam-count">1,578</div>
+<div class="steam-chg"><span class="dn">&#9660;21.2%</span></div>
+<div class="steam-wk">vs上周 <span class="dn">&#9660;20.3%</span></div></div></div>
+
+<div class="steam-row"><span class="steam-rank">10</span>
+<div class="steam-info"><div class="steam-name">Trackmania<span class="cn">赛道狂飙</span><span class="stag free-tag">F2P</span></div></div>
+<div class="steam-data"><div class="steam-count">1,475</div>
+<div class="steam-chg"><span class="up">&#9650;12.4%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">11</span>
+<div class="steam-info"><div class="steam-name">Assassin's Creed Shadows<span class="cn">刺客信条</span><span class="stag update-tag">TU1.1.10</span></div></div>
+<div class="steam-data"><div class="steam-count">1,457</div>
+<div class="steam-chg"><span class="dn">&#9660;16.8%</span></div>
+<div class="steam-wk">vs上周 <span class="dn">&#9660;26.1%</span></div></div></div>
+
+<div class="steam-row"><span class="steam-rank">12</span>
+<div class="steam-info"><div class="steam-name">Ghost Recon Breakpoint<span class="cn">幽灵行动</span></div></div>
+<div class="steam-data"><div class="steam-count">1,446</div>
+<div class="steam-chg"><span class="dn">&#9660;9.0%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">13</span>
+<div class="steam-info"><div class="steam-name">Far Cry 6<span class="cn">孤岛惊魂</span></div></div>
+<div class="steam-data"><div class="steam-count">786</div>
+<div class="steam-chg"><span class="dn">&#9660;8.3%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">14</span>
+<div class="steam-info"><div class="steam-name">Star Wars Outlaws<span class="cn">星球大战</span></div></div>
+<div class="steam-data"><div class="steam-count">539</div>
+<div class="steam-chg"><span class="dn">&#9660;6.1%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">15</span>
+<div class="steam-info"><div class="steam-name">South Park: TFBW<span class="cn">南方公园</span></div></div>
+<div class="steam-data"><div class="steam-count">358</div>
+<div class="steam-chg"><span class="fl">&ndash;</span></div>
+<div class="steam-wk">&ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">16</span>
+<div class="steam-info"><div class="steam-name">Riders Republic<span class="cn">极限国度</span></div></div>
+<div class="steam-data"><div class="steam-count">278</div>
+<div class="steam-chg"><span class="dn">&#9660;10.6%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">17</span>
+<div class="steam-info"><div class="steam-name">UNO<span class="cn">UNO</span></div></div>
+<div class="steam-data"><div class="steam-count">227</div>
+<div class="steam-chg"><span class="dn">&#9660;26.3%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">18</span>
+<div class="steam-info"><div class="steam-name">Assassin's Creed Mirage<span class="cn">刺客信条</span></div></div>
+<div class="steam-data"><div class="steam-count">170</div>
+<div class="steam-chg"><span class="dn">&#9660;5.6%</span></div>
+<div class="steam-wk">vs上周 <span class="dn">&#9660;17.5%</span></div></div></div>
+
+<div class="steam-row"><span class="steam-rank">19</span>
+<div class="steam-info"><div class="steam-name">Skull and Bones<span class="cn">碧海黑帆</span></div></div>
+<div class="steam-data"><div class="steam-count">168</div>
+<div class="steam-chg"><span class="dn">&#9660;1.2%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
+<div class="steam-row"><span class="steam-rank">20</span>
+<div class="steam-info"><div class="steam-name">Watch Dogs: Legion<span class="cn">看门狗</span></div></div>
+<div class="steam-data"><div class="steam-count">109</div>
+<div class="steam-chg"><span class="dn">&#9660;20.4%</span></div>
+<div class="steam-wk">vs上周 &ndash;</div></div></div>
+
 </div>
 
+<div class="note">当前无限时折扣。赛道狂飙 F2P 模式；彩虹六号围攻X 免费运营。阿凡达 / 波斯王子 / 碧海黑帆维持 &yen;128 低价。</div>
 
-
-<!-- DataBrain 舆情 -->
-<div class="sec-title db-sec">DataBrain 舆情速览</div>
-<div class="db-grid"><a class="db-item" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=e592cb9e375274ee75f974134904c52f5" target="_blank"><span class="db-name">全境封锁</span><span class="db-en">The Division</span></a>
-<a class="db-item" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=ec8c7db30dbfd9717d6cad4ca2fd0acc8" target="_blank"><span class="db-name">刺客信条</span><span class="db-en">Assassin's Creed</span></a>
-<a class="db-item" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=ecdbcc18175fb0aafee424cdb9cb73a35" target="_blank"><span class="db-name">孤岛惊魂</span><span class="db-en">Far Cry</span></a>
-<a class="db-item" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=e11000000262" target="_blank"><span class="db-name">彩虹六号</span><span class="db-en">Rainbow Six</span></a>
-<a class="db-item" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=efabf76ddb69f8f1ad8f036e7797463fe" target="_blank"><span class="db-name">格斗哈拉</span><span class="db-en">Brawlhalla</span></a>
-<a class="db-item" href="https://databrain.woa.com/v2/opinion/Overview/KeyMetrics?gameid=efc6133cd4902e3191d786c5bac52baed" target="_blank"><span class="db-name">荣耀战魂</span><span class="db-en">For Honor</span></a>
+<!-- 趋势观察 -->
+<div class="sec-title trend">趋势观察</div>
+<div class="trend-list">
+<div class="trend-item"><span class="trend-idx">1.</span>彩虹六号围攻X 周一早间 93,952 人在线，环比周六增长 8.7%，工作日早间数据反而高于周末，说明亚洲/欧洲玩家基数占主导。Y11S1 持续吸引玩家回流。</div>
+<div class="trend-item"><span class="trend-idx">2.</span>黑旗重制版 4/16 官宣在即，AC Shadows TU1.1.10 暗藏彩蛋被社区发现。这是育碧近期最大的产品催化剂，可能影响股价和市场预期。</div>
+<div class="trend-item"><span class="trend-idx">3.</span>全境封锁2 Year 8 启动强劲，Rise Up 赛季和跨平台联机预期支撑万人在线。Central Park DLC 将是下半年关键内容。</div>
+<div class="trend-item"><span class="trend-idx">4.</span>育碧降本力度加大：Red Storm 105人裁减+停止开发，法国总部 200 人缩编。预计短期运营成本压缩，但长期研发产能存隐忧。</div>
+<div class="trend-item"><span class="trend-idx">5.</span>AC Shadows 周一在线 1,457 人，较上周同期下滑 26%，进入长尾期。Switch 2 版本更新（鼠标键盘支持）可能带来新一波关注。</div>
 </div>
 
 </div>
