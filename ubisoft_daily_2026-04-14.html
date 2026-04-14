@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>育碧情报日报 | 2026-04-14</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --accent: #1a73e8;
+    --accent2: #e8f0fe;
+    --red: #d32f2f;
+    --green: #2e7d32;
+    --text: #202124;
+    --text2: #5f6368;
+    --border: #e0e0e0;
+    --ubi-blue: #0070ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0,112,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; position: relative; }
+  .header .date { font-size: 16px; opacity: 0.8; position: relative; }
+  .header .badge {
+    display: inline-block;
+    background: var(--ubi-blue);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+    position: relative;
+  }
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent2);
+  }
+  .section-title .icon { font-size: 24px; }
+  .stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .stock-card {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stock-card .label { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+  .stock-card .value { font-size: 24px; font-weight: 700; }
+  .stock-card .value.up { color: var(--red); }
+  .stock-card .value.down { color: var(--green); }
+  .stock-note {
+    font-size: 14px;
+    color: var(--text2);
+    padding: 12px 16px;
+    background: var(--accent2);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .news-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .tag-hot { background: #fce4ec; color: #c62828; }
+  .tag-new { background: #e8f5e9; color: #2e7d32; }
+  .tag-update { background: #e3f2fd; color: #1565c0; }
+  .tag-esport { background: #f3e5f5; color: #7b1fa2; }
+  .tag-event { background: #fff3e0; color: #e65100; }
+  .tag-back { background: #e0f7fa; color: #00695c; }
+  .news-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .news-item h3 a { color: inherit; text-decoration: none; }
+  .news-item h3 a:hover { color: var(--accent); text-decoration: underline; }
+  .news-item p { font-size: 14px; color: var(--text2); margin-bottom: 4px; }
+  .news-item .source { font-size: 12px; color: #9e9e9e; }
+  .discussion-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .discussion-item:last-child { border-bottom: none; }
+  .discussion-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .discussion-item h4 .platform-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .badge-reddit { background: #ff4500; color: white; }
+  .badge-weibo { background: #e6162d; color: white; }
+  .badge-bilibili { background: #00a1d6; color: white; }
+  .discussion-item p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text2);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr:hover { background: var(--accent2); }
+  .rank { font-weight: 700; color: var(--accent); width: 32px; }
+  .rank-1 { color: #f9a825; font-size: 16px; }
+  .rank-2 { color: #90a4ae; font-size: 16px; }
+  .rank-3 { color: #a1887f; font-size: 16px; }
+  .game-name { font-weight: 600; }
+  .count { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .change-up { color: var(--red); font-weight: 600; }
+  .change-down { color: var(--green); font-weight: 600; }
+  .price-tag { font-size: 11px; padding: 1px 6px; border-radius: 3px; margin-left: 6px; }
+  .discount-tag { background: #e8f5e9; color: #2e7d32; }
+  .free-tag { background: #e3f2fd; color: #1565c0; }
+  .trend-box {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .trend-box h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+  .trend-item {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 6px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.6;
+  }
+  .trend-item .bullet { flex-shrink: 0; }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text2);
+    font-size: 13px;
+  }
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .header { padding: 20px; }
+    .header h1 { font-size: 22px; }
+    .stock-grid { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 13px; }
+    thead th, tbody td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>育碧情报日报</h1>
+  <div class="date">2026年4月14日 周二 | Ubisoft Daily Intelligence</div>
+  <div class="badge">UBI.PA: &euro;4.19 &#9650; +4.75%</div>
+</div>
+
+<!-- 模块1：资本市场 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">&#128200;</span>
+    <span>资本市场</span>
+  </div>
+  <div class="stock-grid">
+    <div class="stock-card">
+      <div class="label">收盘价（4/13）</div>
+      <div class="value">&euro;4.19</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">涨跌幅</div>
+      <div class="value up">+4.75%</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">市值</div>
+      <div class="value">&euro;5.4亿</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">成交量</div>
+      <div class="value" style="font-size:20px">1.27M</div>
+    </div>
+  </div>
+  <div class="stock-note">
+    周一大涨4.75%，连续两个交易日上涨，收于&euro;4.19（上周五&euro;4.00）。开盘&euro;3.98，日内高点&euro;4.22。黑旗重制版4/16公布预期+印尼评级泄露引发市场关注。52周区间&euro;1.89-&euro;11.70。今日为周二交易日，关注欧洲时段开盘走势。
+  </div>
+</div>
+
+<!-- 模块2：新闻动态 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">&#128240;</span>
+    <span>新闻动态</span>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-hot">重磅</span>
+    <h3><a href="https://www.gamesradar.com/games/action/massive-007-first-light-spoilers-and-assassins-creed-4-black-flag-remake-details-are-just-the-start-of-a-huge-leak-from-an-indonesian-ratings-board/" target="_blank">印尼评级机构大规模泄露：黑旗重制+007新情报曝光</a></h3>
+    <p>印尼游戏评级系统安全漏洞导致多款未发售游戏信息泄露。AC Black Flag Resynced 新内容细节和 007: First Light 剧情关键剧透被公开。Ubisoft 和 IO Interactive 均受影响。</p>
+    <div class="source">GamesRadar / VGC / TechRaptor | 4月14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-hot">重磅</span>
+    <h3><a href="https://playersforlife.com/2026/04/13/assassin-s-creed-black-flag-remake-to-include-new-content/" target="_blank">AC Black Flag Resynced 4/16正式公布倒计时</a></h3>
+    <p>黑旗重制版定名「Assassin's Creed Black Flag Resynced」，将于4月16日（后天）正式公布。消息称将包含新的故事内容和升级的游戏机制，发售日可能不远。印尼评级泄露进一步证实项目存在。</p>
+    <div class="source">Insider Gaming / PSU / PlayersForLife | 4月9-13日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">更新</span>
+    <h3><a href="https://www.strafe.com/news/read/r6s-y11s1-1-new-changes-designers-notes/" target="_blank">R6S Y11S1.2 设计师笔记公布：Smoke 盾牌回归</a></h3>
+    <p>彩虹六号围攻 Y11S1.2 中期平衡更新设计师笔记发布。Smoke 重新获得机动护盾，Rauora 增强，多位干员战术定位调整。这是继 Solid Snake 联动后本赛季最重要的平衡补丁。</p>
+    <div class="source">Ubisoft / Strafe / bo3.gg | 4月13日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-event">回归</span>
+    <h3><a href="https://happygamer.com/xdefiant-premium-relaunch-april-2026-ubisoft-146920/" target="_blank">XDefiant「凤凰协议」4/20付费回归 定价$67.67</a></h3>
+    <p>经过一年全面重制，XDefiant 以付费买断制（$67.67）于4月20日重新上线。取消微交易/战斗通行证模式，基于汤姆克兰西宇宙深度拓展。F2P转Premium为行业罕见实验，社区反应两极化。</p>
+    <div class="source">HappyGamer | 4月13日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">更新</span>
+    <h3><a href="https://store.steampowered.com/news/app/2853730/view/1829528821315480" target="_blank">碧海黑帆 4/14 维护更新 + 已知问题修复</a></h3>
+    <p>Skull and Bones 今日进行维护更新，修复已知问题。当前Steam在线仅120人，较昨日168人继续下滑。游戏整体热度持续低迷。</p>
+    <div class="source">Steam Community | 4月14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">热度</span>
+    <h3><a href="https://www.sportskeeda.com/mmo/when-will-the-division-2-servers-back-online-y8s1-april-9-2026" target="_blank">全境封锁2 Y8S1 Rise Up 持续运营中</a></h3>
+    <p>Y8S1「Rise Up」上线近两周，4/9完成原型装备系统修复维护。Steam在线9,732人（日-9.6%，周-16.2%），新赛季红利正在消退，Central Park DLC和Survivors模式仍值得期待。</p>
+    <div class="source">Ubisoft / SportsKeeda | 4月9-14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-new">新品</span>
+    <h3><a href="https://gamerant.com/ac-shadows-update-today-patch-notes/" target="_blank">AC Shadows 四月更新上线 新内容持续扩展</a></h3>
+    <p>刺客信条：影 四月新补丁带来额外内容和功能优化。当前Steam在线1,257人（日-13.7%），1.1.10大更新（Bo武器/性能优化）效果在逐步释放中。</p>
+    <div class="source">Game Rant | 4月8日</div>
+  </div>
+</div>
+
+<!-- 模块3：社区热议 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">&#128172;</span>
+    <span>社区热议</span>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-badge badge-reddit">Reddit</span> AC Black Flag 泄露引发社区狂欢</h4>
+    <p>印尼评级泄露后，r/assassinscreed 涌入大量关于黑旗重制版新内容的讨论。玩家对「新故事内容」的加入表示期待，同时担忧是否会改变原作经典体验。4/16公布日临近，社区热度飙升。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-badge badge-reddit">Reddit</span> R6S Y11S1.2 平衡调整引发热议</h4>
+    <p>r/Rainbow6 围绕设计师笔记展开激烈讨论。Smoke 盾牌回归被老玩家称为「最好的消息」，但部分人担心防守方 meta 再次失衡。Rauora 增强后的 entry meta 变化也是焦点话题。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-badge badge-reddit">Reddit</span> XDefiant 付费回归定价争议</h4>
+    <p>r/ubisoft 对 XDefiant 凤凰协议的 $67.67 定价展开激烈辩论。支持者认为取消微交易值得付费，反对者质疑一款曾经免费的游戏凭什么要价近70美元。帖子获得1,800+点赞。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-badge badge-reddit">Reddit</span> 全境封锁2 Rise Up 赛季反馈</h4>
+    <p>r/thedivision 讨论 Y8S1 上线两周后的体验。原型装备系统 bug 已通过 4/9 维护修复，玩家期待 Survivors 模式和 Central Park DLC 的更多消息。整体社区氛围积极。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-badge badge-bilibili">B站</span> 黑旗重制版预热视频热度上涨</h4>
+    <p>随着4/16公布日临近，B站出现大量黑旗重制版相关预测和回顾视频。「刺客信条4黑旗」搜索热度近一周环比上升显著，国内玩家关注中文配音和国区定价。</p>
+  </div>
+</div>
+
+<!-- 模块4：Steam 在线 Top 21 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">&#127918;</span>
+    <span>Steam 在线监控</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>游戏</th>
+        <th>在线人数</th>
+        <th>日环比</th>
+        <th>周同比</th>
+        <th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank rank-1">1</td>
+        <td class="game-name">Rainbow Six Siege</td>
+        <td class="count">84,810</td>
+        <td class="change-down">-9.7%</td>
+        <td class="change-down">-4.4%</td>
+        <td><span class="price-tag free-tag">FREE</span> Y11S1.2 设计师笔记</td>
+      </tr>
+      <tr>
+        <td class="rank rank-2">2</td>
+        <td class="game-name">Brawlhalla</td>
+        <td class="count">11,047</td>
+        <td class="change-down">-8.0%</td>
+        <td class="change-down">-0.6%</td>
+        <td><span class="price-tag free-tag">FREE</span></td>
+      </tr>
+      <tr>
+        <td class="rank rank-3">3</td>
+        <td class="game-name">The Division 2</td>
+        <td class="count">9,732</td>
+        <td class="change-down">-9.6%</td>
+        <td class="change-down">-16.2%</td>
+        <td>Y8S1 Rise Up</td>
+      </tr>
+      <tr>
+        <td class="rank">4</td>
+        <td class="game-name">For Honor</td>
+        <td class="count">3,707</td>
+        <td class="change-down">-9.8%</td>
+        <td class="change-down">-6.0%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">5</td>
+        <td class="game-name">Avatar: Frontiers of Pandora</td>
+        <td class="count">1,642</td>
+        <td class="change-down">-6.7%</td>
+        <td class="change-up">+0.2%</td>
+        <td><span class="price-tag discount-tag">-35%</span> &yen;83</td>
+      </tr>
+      <tr>
+        <td class="rank">6</td>
+        <td class="game-name">AC Valhalla</td>
+        <td class="count">1,592</td>
+        <td class="change-down">-16.3%</td>
+        <td class="change-down">-9.6%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">7</td>
+        <td class="game-name">The Crew Motorfest</td>
+        <td class="count">1,536</td>
+        <td class="change-down">-14.0%</td>
+        <td class="change-down">-13.9%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">8</td>
+        <td class="game-name">Anno 1800</td>
+        <td class="count">1,428</td>
+        <td class="change-down">-9.5%</td>
+        <td class="change-down">-7.0%</td>
+        <td>Anno Day 4/9 直播已结束</td>
+      </tr>
+      <tr>
+        <td class="rank">9</td>
+        <td class="game-name">Ghost Recon Breakpoint</td>
+        <td class="count">1,366</td>
+        <td class="change-down">-5.5%</td>
+        <td class="change-down">-0.4%</td>
+        <td><span class="price-tag discount-tag">-80%</span> &yen;60</td>
+      </tr>
+      <tr>
+        <td class="rank">10</td>
+        <td class="game-name">Trackmania</td>
+        <td class="count">1,271</td>
+        <td class="change-down">-13.8%</td>
+        <td class="change-down">-10.2%</td>
+        <td><span class="price-tag free-tag">FREE</span></td>
+      </tr>
+      <tr>
+        <td class="rank">11</td>
+        <td class="game-name">AC Shadows</td>
+        <td class="count">1,257</td>
+        <td class="change-down">-13.7%</td>
+        <td class="change-down">-16.6%</td>
+        <td>四月更新上线</td>
+      </tr>
+      <tr>
+        <td class="rank">12</td>
+        <td class="game-name">Far Cry 6</td>
+        <td class="count">733</td>
+        <td class="change-down">-6.7%</td>
+        <td class="change-down">-2.8%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">13</td>
+        <td class="game-name">Star Wars Outlaws</td>
+        <td class="count">427</td>
+        <td class="change-down">-20.8%</td>
+        <td class="change-down">-21.4%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">14</td>
+        <td class="game-name">South Park</td>
+        <td class="count">324</td>
+        <td class="change-down">-9.5%</td>
+        <td class="change-down">-12.7%</td>
+        <td><span class="price-tag discount-tag">-70%</span> &yen;44</td>
+      </tr>
+      <tr>
+        <td class="rank">15</td>
+        <td class="game-name">UNO</td>
+        <td class="count">186</td>
+        <td class="change-down">-18.1%</td>
+        <td class="change-down">-25.6%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">16</td>
+        <td class="game-name">AC Mirage</td>
+        <td class="count">134</td>
+        <td class="change-down">-21.2%</td>
+        <td class="change-down">-18.3%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">17</td>
+        <td class="game-name">Skull and Bones</td>
+        <td class="count">120</td>
+        <td class="change-down">-28.6%</td>
+        <td class="change-down">-22.6%</td>
+        <td>今日维护更新</td>
+      </tr>
+      <tr>
+        <td class="rank">18</td>
+        <td class="game-name">Watch Dogs: Legion</td>
+        <td class="count">102</td>
+        <td class="change-down">-6.4%</td>
+        <td class="change-down">-23.3%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">19</td>
+        <td class="game-name">Riders Republic</td>
+        <td class="count">100</td>
+        <td class="change-down">-20.6%</td>
+        <td class="change-down">-13.0%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">20</td>
+        <td class="game-name">Prince of Persia: TLC</td>
+        <td class="count">76</td>
+        <td class="change-down">-9.5%</td>
+        <td class="change-up">+1.3%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">21</td>
+        <td class="game-name">Rocksmith+</td>
+        <td class="count">40</td>
+        <td class="change-down">-4.8%</td>
+        <td class="change-down">-2.4%</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="trend-box">
+    <h4>Steam 数据摘要</h4>
+    <div class="trend-item"><span class="bullet">&#9679;</span> 21款游戏总在线 <strong>121,400</strong> 人（采集时间 08:57 CST），因周二早间时段普遍低于周日/周一</div>
+    <div class="trend-item"><span class="bullet">&#9679;</span> R6S 84,810 稳居第一但较周日下降 9.7%，工作日回落属正常波动</div>
+    <div class="trend-item"><span class="bullet">&#9679;</span> 当前折扣：Ghost Recon BP -80%（&yen;60）/ Avatar -35%（&yen;83）/ South Park -70%（&yen;44）</div>
+  </div>
+</div>
+
+<!-- 模块5：趋势观察 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">&#128161;</span>
+    <span>趋势观察</span>
+  </div>
+  <div class="trend-box" style="margin-top:0">
+    <div class="trend-item">
+      <span class="bullet" style="color:#d32f2f">&#10070;</span>
+      <span><strong>黑旗重制版进入公布倒计时（4/16）。</strong>印尼评级泄露提前曝光新内容细节，Ubisoft 周一股价反弹+4.75%部分受此催化。4/16公布当天股价和社区反应是短期核心看点。</span>
+    </div>
+    <div class="trend-item">
+      <span class="bullet" style="color:#e65100">&#10070;</span>
+      <span><strong>XDefiant「凤凰协议」4/20上线定价$67.67。</strong>F2P转Premium的商业实验极其罕见，成功则可能开创新模式，失败则强化F2P不可逆的行业共识。社区反应两极化。</span>
+    </div>
+    <div class="trend-item">
+      <span class="bullet" style="color:#1565c0">&#10070;</span>
+      <span><strong>全境封锁2 Y8S1新赛季红利消退中。</strong>Steam在线从峰值10,761降至9,732（周-16.2%），Rise Up首波热度正在回落。Survivors模式和Central Park DLC能否接力维持热度是关键。</span>
+    </div>
+    <div class="trend-item">
+      <span class="bullet" style="color:#7b1fa2">&#10070;</span>
+      <span><strong>R6S Y11S1.2 平衡补丁即将落地。</strong>Smoke盾牌回归+Rauora增强将显著改变攻防meta，是本赛季最重要的中期调整。社区整体反馈积极，有望刺激回流。</span>
+    </div>
+    <div class="trend-item">
+      <span class="bullet" style="color:#2e7d32">&#10070;</span>
+      <span><strong>印尼评级泄露事件影响面广。</strong>除育碧外，IO Interactive 的 007: First Light 也受波及。此类第三方评级系统安全漏洞可能促使发行商重新评估全球分级送审策略。</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  K9 单机发行 | 育碧情报日报 | 数据采集时间 2026-04-14 08:57 CST<br>
+  Steam 数据来源: Steam API | 股价数据来源: Euronext Paris | 新闻综合自公开渠道<br>
+  <a href="https://tianxixi626.github.io/ai-daily/ubisoft_workbench.html" style="color:var(--accent)">K9 单机发行工作台</a>
+</div>
+
+</body>
+</html>
