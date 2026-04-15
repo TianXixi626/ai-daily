@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>育碧情报日报 | 2026-04-15</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --accent: #1a73e8;
+    --accent2: #e8f0fe;
+    --red: #d32f2f;
+    --green: #2e7d32;
+    --text: #202124;
+    --text2: #5f6368;
+    --border: #e0e0e0;
+    --ubi-blue: #0070ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0,112,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .header .date {
+    font-size: 16px;
+    opacity: 0.8;
+    position: relative;
+  }
+  .header .badge {
+    display: inline-block;
+    background: var(--ubi-blue);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+    position: relative;
+  }
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent2);
+  }
+  .section-title .icon { font-size: 24px; }
+  .stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .stock-card {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stock-card .label {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 4px;
+  }
+  .stock-card .value {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .stock-card .value.up { color: var(--red); }
+  .stock-card .value.down { color: var(--green); }
+  .stock-note {
+    font-size: 14px;
+    color: var(--text2);
+    padding: 12px 16px;
+    background: var(--accent2);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .news-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .tag-hot { background: #fce4ec; color: #c62828; }
+  .tag-new { background: #e8f5e9; color: #2e7d32; }
+  .tag-update { background: #e3f2fd; color: #1565c0; }
+  .tag-return { background: #f3e5f5; color: #7b1fa2; }
+  .tag-event { background: #fff3e0; color: #e65100; }
+  .news-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .news-item h3 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .news-item h3 a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .news-item p {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 4px;
+  }
+  .news-item .source {
+    font-size: 12px;
+    color: #9e9e9e;
+  }
+  .discussion-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .discussion-item:last-child { border-bottom: none; }
+  .discussion-item h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .discussion-item h4 .live-badge {
+    background: #d32f2f;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .discussion-item p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .platform-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .platform-reddit { background: #ff4500; color: white; }
+  .platform-bilibili { background: #00a1d6; color: white; }
+  .platform-weibo { background: #e6162d; color: white; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--bg);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text2);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr:hover { background: var(--accent2); }
+  .rank { font-weight: 700; color: var(--accent); width: 32px; }
+  .rank-1 { color: #f9a825; font-size: 16px; }
+  .rank-2 { color: #90a4ae; font-size: 16px; }
+  .rank-3 { color: #a1887f; font-size: 16px; }
+  .game-name { font-weight: 600; }
+  .count { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .change-up { color: var(--red); font-weight: 600; }
+  .change-down { color: var(--green); font-weight: 600; }
+  .change-flat { color: var(--text2); font-weight: 600; }
+  .discount-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+  .free-badge {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1565c0;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+  .trend-box {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .trend-box h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .trend-item {
+    font-size: 13px;
+    color: var(--text2);
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text2);
+    font-size: 13px;
+  }
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .header { padding: 20px; }
+    .header h1 { font-size: 22px; }
+    .stock-grid { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 13px; }
+    thead th, tbody td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>育碧情报日报</h1>
+  <div class="date">2026年4月15日 周三 | Ubisoft Daily Intelligence</div>
+  <div class="badge">UBI.PA: ~EUR4.19 | 黑旗重制明日揭晓</div>
+</div>
+
+<!-- 资本市场 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">📈</span>
+    <span>资本市场</span>
+  </div>
+  <div class="stock-grid">
+    <div class="stock-card">
+      <div class="label">收盘价（4/14）</div>
+      <div class="value up">EUR4.19</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">涨跌幅</div>
+      <div class="value up">+4.75%</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">市值</div>
+      <div class="value">~EUR5.6亿</div>
+    </div>
+    <div class="stock-card">
+      <div class="label">成交量（4/14）</div>
+      <div class="value">1.27M</div>
+    </div>
+  </div>
+  <div class="stock-note">
+    育碧股价延续上周涨势收报EUR4.19（+4.75%），连续两个交易日上涨。市场对明日黑旗重制版（Resynced）官宣预期持续发酵，叠加《全境封锁2》Rise Up 赛季运营表现稳健、R6S Y11S1.2 平衡更新获社区好评，推动短线情绪向好。当前市值约EUR5.6亿，52 周低点EUR1.86。LSE 数据显示分析师目标价EUR6.67（持有）。
+  </div>
+</div>
+
+<!-- 新闻动态 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">📰</span>
+    <span>新闻动态</span>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-hot">重磅</span>
+    <h3><a href="https://www.psu.com/news/assassins-creed-black-flag-resynced-reportedly-to-include-extra-content-including-a-cast-of-new-characters-and-stories/" target="_blank">刺客信条：黑旗 Resynced 明日（4/16）正式揭晓，新角色+新剧情曝光</a></h3>
+    <p>多方来源确认育碧将于4月16日独立公布《刺客信条4：黑旗》重制版，正式名称为"Resynced"。印尼评级机构 IGRS 泄露显示本作新增角色和故事内容，不仅仅是画面翻新。育碧将独立举办揭晓活动，不依附于主机厂商展示。</p>
+    <div class="source">PlayStation Universe / Insider Gaming / Ali213 | 4月14-15日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-hot">重磅</span>
+    <h3><a href="https://www.gamesradar.com/games/action/massive-007-first-light-spoilers-and-assassins-creed-4-black-flag-remake-details-are-just-the-start-of-a-huge-leak-from-an-indonesian-ratings-board/" target="_blank">印尼评级机构大规模泄露：007 First Light / 黑旗重制 / 更多游戏剧透外流</a></h3>
+    <p>印尼游戏评级机构 IGRS 因安全漏洞，泄露 007: First Light（IO Interactive）超1小时实机画面、黑旗重制版细节、《刀剑神域》新作等多款未发布游戏内容。数千名开发者邮箱同时外泄。育碧已启动法律手段应对。</p>
+    <div class="source">GamesRadar / VGC / IGN | 4月13-14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">更新</span>
+    <h3><a href="https://updatecrazy.com/rainbow-six-siege-r6-update-1-000-138-patch-notes-y11s1-2-april-14-2026/" target="_blank">R6S Y11S1.2 更新上线：Rauora 大幅加强 + Jackal/Smoke 调整</a></h3>
+    <p>4月14日推送的中赛季平衡更新（v1.000.138）对 Rauora D.O.M. 面板发射器射程提升至25米、改为固定弹药、增加 HP；Jackal 可穿天花板扫描，Smoke 毒气改为压力触发。社区整体反馈正面。</p>
+    <div class="source">Ubisoft / UpdateCrazy / R6 Wiki | 4月14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">更新</span>
+    <h3><a href="https://store.steampowered.com/news/app/2853730/view/1829528821315480" target="_blank">碧海黑帆 4/14 维护更新 + 已知问题修复</a></h3>
+    <p>碧海黑帆推送4月14日维护更新，修复多个已知 Bug。游戏当前 Steam 在线仅 122 人，国区售价 ¥128 未变动。运营状态持续低迷。</p>
+    <div class="source">Steam Community | 4月14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-event">运营</span>
+    <h3><a href="https://www.ubisoft.com/en-gb/game/the-division/the-division-2/news-updates" target="_blank">全境封锁2 Rise Up 赛季持续运营，Central Park DLC 路线图公布</a></h3>
+    <p>Division 2 Rise Up 赛季（4月2日上线）进入第三周，Black Tusk 反攻剧情推进中。2026路线图已公布跨平台联机、Central Park DLC 和新 Extraction 模式。当前 Steam 在线 8,458 人，较昨日有所回落。</p>
+    <div class="source">Ubisoft / G2A News | 4月初</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-return">回归</span>
+    <h3><a href="https://happygamer.com/xdefiant-premium-relaunch-april-2026-ubisoft-146920/" target="_blank">XDefiant 凤凰协议（Phoenix Protocol）4/20 回归，转为买断制 $67.67</a></h3>
+    <p>此前关停的育碧 FPS 游戏 XDefiant 以"凤凰协议"之名回归，由第三方工作室接手运营，从 F2P 转为买断制（$67.67）。计划4月20日重新上线，社区对定价争议较大。</p>
+    <div class="source">HappyGamer | 4月14日</div>
+  </div>
+
+  <div class="news-item">
+    <span class="tag tag-update">更新</span>
+    <h3><a href="https://www.msn.com/en-us/gaming/gaming-platforms/assassin-s-creed-shadows-gets-new-update-for-april-2026/ar-AA20nZKR" target="_blank">刺客信条 Shadows TU1.1.10 更新 + PS5 Pro 强化补丁</a></h3>
+    <p>Shadows 推送 Title Update 1.1.10，包含新内容和 PS5 Pro 增强。Steam 今日在线 1,124 人（日环比 -10.6%），周环比 -15.6%。</p>
+    <div class="source">MSN / ScreenRant | 4月初</div>
+  </div>
+
+</div>
+
+<!-- 社区热议 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">💬</span>
+    <span>社区热议</span>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-tag platform-reddit">Reddit</span> r/Rainbow6 — Y11S1.2 设计师笔记热议 <span class="live-badge">HOT</span></h4>
+    <p>R6S 社区对 Y11S1.2 平衡更新讨论热烈。Rauora 的大幅 Buff 被认为是"从冷板凳到 Meta"的转变，Jackal 天花板扫描引发"攻方太强"争议。Happy E.D. Day（围攻十周年）话题引发老玩家怀旧潮。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-tag platform-reddit">Reddit</span> r/assassinscreed — 黑旗重制 Resynced 倒计时讨论</h4>
+    <p>r/assassinscreed 对明日黑旗 Resynced 公布预期高涨，讨论新增剧情是否会改变爱德华结局、海战系统是否参考碧海黑帆技术。Shadows TU1.1.10 更新帖获较多关注。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-tag platform-reddit">Reddit</span> r/thedivision — 全境封锁1 全球事件 Onslaught</h4>
+    <p>全境封锁1 同步举办 Onslaught 全球事件吸引老玩家回归，讨论帖分享最佳 Build。Division 2 的"里程碑庆祝"每日话题也在活跃中。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-tag platform-bilibili">B站</span> 刺客信条黑旗重制预热视频播放量 6 万+</h4>
+    <p>B站UP主发布《刺客信条4：黑旗 重制版4月16日官宣》视频，播放量 59,514，弹幕 68，玩家评论以期待和怀旧为主。游民星空、Ali213 同步发布重制版细节解读。</p>
+  </div>
+
+  <div class="discussion-item">
+    <h4><span class="platform-tag platform-reddit">Reddit</span> r/ubisoft — 印尼评级泄露与育碧法律应对</h4>
+    <p>r/ubisoft 讨论印尼评级机构 IGRS 大规模泄露事件对育碧的影响，多数玩家对黑旗重制泄露表示"早知道了"，但对 007 First Light 剧透表示关注和同情 IO Interactive。</p>
+  </div>
+
+</div>
+
+<!-- Steam 在线 Top 20 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">🎮</span>
+    <span>Steam 在线 Top 21</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>游戏</th>
+        <th>在线人数</th>
+        <th>日环比</th>
+        <th>周同比</th>
+        <th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank rank-1">1</td>
+        <td class="game-name">彩虹六号：围攻 X</td>
+        <td class="count">82,535</td>
+        <td class="change-down">-2.7%</td>
+        <td class="change-down">-4.7%</td>
+        <td><span class="free-badge">FREE</span> Y11S1.2</td>
+      </tr>
+      <tr>
+        <td class="rank rank-2">2</td>
+        <td class="game-name">格斗哈拉 Brawlhalla</td>
+        <td class="count">10,665</td>
+        <td class="change-down">-3.5%</td>
+        <td class="change-down">-1.9%</td>
+        <td><span class="free-badge">FREE</span></td>
+      </tr>
+      <tr>
+        <td class="rank rank-3">3</td>
+        <td class="game-name">全境封锁2</td>
+        <td class="count">8,458</td>
+        <td class="change-down">-13.1%</td>
+        <td class="change-down">-27.8%</td>
+        <td>Rise Up S3</td>
+      </tr>
+      <tr>
+        <td class="rank">4</td>
+        <td class="game-name">荣耀战魂 For Honor</td>
+        <td class="count">3,859</td>
+        <td class="change-up">+4.1%</td>
+        <td class="change-down">-2.5%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">5</td>
+        <td class="game-name">阿凡达：潘多拉边境</td>
+        <td class="count">1,651</td>
+        <td class="change-up">+0.5%</td>
+        <td class="change-up">+8.5%</td>
+        <td><span class="discount-badge">-35%</span> ¥83</td>
+      </tr>
+      <tr>
+        <td class="rank">6</td>
+        <td class="game-name">刺客信条：英灵殿</td>
+        <td class="count">1,558</td>
+        <td class="change-down">-2.1%</td>
+        <td class="change-down">-6.1%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">7</td>
+        <td class="game-name">幽灵行动：断点</td>
+        <td class="count">1,528</td>
+        <td class="change-up">+11.9%</td>
+        <td class="change-up">+9.1%</td>
+        <td><span class="discount-badge">-80%</span> ¥60</td>
+      </tr>
+      <tr>
+        <td class="rank">8</td>
+        <td class="game-name">飙酷车神 Motorfest</td>
+        <td class="count">1,488</td>
+        <td class="change-down">-3.1%</td>
+        <td class="change-down">-16.8%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">9</td>
+        <td class="game-name">纪元 Anno 1800</td>
+        <td class="count">1,332</td>
+        <td class="change-down">-6.7%</td>
+        <td class="change-down">-8.1%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">10</td>
+        <td class="game-name">赛道狂飙 Trackmania</td>
+        <td class="count">1,267</td>
+        <td class="change-flat">-0.3%</td>
+        <td class="change-down">-2.8%</td>
+        <td><span class="free-badge">FREE</span></td>
+      </tr>
+      <tr>
+        <td class="rank">11</td>
+        <td class="game-name">刺客信条 Shadows</td>
+        <td class="count">1,124</td>
+        <td class="change-down">-10.6%</td>
+        <td class="change-down">-15.6%</td>
+        <td>TU1.1.10</td>
+      </tr>
+      <tr>
+        <td class="rank">12</td>
+        <td class="game-name">孤岛惊魂6</td>
+        <td class="count">691</td>
+        <td class="change-down">-5.7%</td>
+        <td class="change-down">-6.1%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">13</td>
+        <td class="game-name">星球大战：亡命之徒</td>
+        <td class="count">384</td>
+        <td class="change-down">-10.1%</td>
+        <td class="change-down">-22.0%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">14</td>
+        <td class="game-name">南方公园：完整破碎</td>
+        <td class="count">306</td>
+        <td class="change-down">-5.6%</td>
+        <td class="change-up">+3.0%</td>
+        <td><span class="discount-badge">-70%</span> ¥44</td>
+      </tr>
+      <tr>
+        <td class="rank">15</td>
+        <td class="game-name">UNO</td>
+        <td class="count">189</td>
+        <td class="change-up">+1.6%</td>
+        <td class="change-down">-3.6%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">16</td>
+        <td class="game-name">刺客信条 Mirage</td>
+        <td class="count">151</td>
+        <td class="change-up">+12.7%</td>
+        <td class="change-down">-6.2%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">17</td>
+        <td class="game-name">碧海黑帆</td>
+        <td class="count">122</td>
+        <td class="change-up">+1.7%</td>
+        <td class="change-down">-29.1%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">18</td>
+        <td class="game-name">极限国度</td>
+        <td class="count">101</td>
+        <td class="change-up">+1.0%</td>
+        <td class="change-down">-9.0%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">19</td>
+        <td class="game-name">看门狗：军团</td>
+        <td class="count">77</td>
+        <td class="change-down">-24.5%</td>
+        <td class="change-down">-12.5%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">20</td>
+        <td class="game-name">波斯王子：失落的王冠</td>
+        <td class="count">65</td>
+        <td class="change-down">-14.5%</td>
+        <td class="change-flat">0.0%</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rank">21</td>
+        <td class="game-name">摇滚史密斯+</td>
+        <td class="count">29</td>
+        <td class="change-down">-27.5%</td>
+        <td class="change-down">-21.6%</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="trend-box">
+    <h4>价格异动</h4>
+    <div class="trend-item">&#x1F4B0; 幽灵行动：断点 -80% 折扣中（¥298 → ¥60），在线人数周涨 +9.1%</div>
+    <div class="trend-item">&#x1F4B0; 阿凡达：潘多拉边境 -35%（¥128 → ¥83），周涨 +8.5%</div>
+    <div class="trend-item">&#x1F4B0; 南方公园 -70%（¥148 → ¥44），持平上周</div>
+    <div class="trend-item">&#x1F4B0; 赛道狂飙 免费周末活动进行中</div>
+  </div>
+</div>
+
+<!-- 趋势观察 -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon">📊</span>
+    <span>趋势观察</span>
+  </div>
+
+  <div class="trend-box">
+    <div class="trend-item"><strong>1.</strong> 黑旗 Resynced 揭晓在即（4/16）：印尼评级泄露叠加育碧主动预热，市场预期充分。本作将是育碧 FY27 最关键发行标的之一，若内容含新增剧情+现代化海战，有望复制 Shadows 首发热度。需关注揭晓后的预购反馈和社区口碑。</div>
+    <div class="trend-item"><strong>2.</strong> 全境封锁2 Rise Up 赛季在线回落：从昨日 9,732 降至 8,458（-13.1%），较一周前 11,723 降幅达 27.8%。赛季上线两周后玩家热情消退，与历史规律一致。Central Park DLC 和跨平台联机尚无具体时间线。</div>
+    <div class="trend-item"><strong>3.</strong> 彩虹六号 Y11S1.2 社区反应正面：Rauora Buff 被社区视为"正确方向"，Jackal 调整争议可控。围攻十周年情怀效应持续，但工作日在线自然回落至 82K。</div>
+    <div class="trend-item"><strong>4.</strong> XDefiant 复活定价惹争议：凤凰协议 $67.67 买断制定价在 Reddit 引发激烈讨论，多数玩家认为价格过高。4/20 上线后的留存数据将是关键观测指标。</div>
+    <div class="trend-item"><strong>5.</strong> 幽灵行动：断点 -80% 大促效果显著：日环比 +11.9%，周同比 +9.1%，1,528 人在线创近期新高。折扣带动的回流效应明显，但深折扣也反映产品生命周期末段。</div>
+  </div>
+</div>
+
+<div class="footer">
+  育碧情报日报 | K9 单机发行 | 数据采集于 2026-04-15 09:07 CST<br>
+  数据来源: Steam API / Web Search / Reddit / B站 / Euronext<br>
+  自动生成 by Claw
+</div>
+
+</body>
+</html>
