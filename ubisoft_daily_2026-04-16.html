@@ -33,8 +33,7 @@ tr:hover { background:#fafbfd; }
 .news-list li { padding:10px 0; border-bottom:1px solid #f5f5f5; display:flex; align-items:flex-start; gap:8px; }
 .news-list li:last-child { border-bottom:none; }
 .news-list .bullet { color:#0f3460; font-weight:bold; flex-shrink:0; }
-.news-list a { color:#1a73e8; text-decoration:none; font-size:14px; line-height:1.5; }
-.news-list a:hover { text-decoration:underline; }
+.news-text { font-size:14px; line-height:1.5; }
 .news-list .src { font-size:11px; color:#999; margin-top:2px; }
 .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-family:'TencentSans W5',sans-serif; white-space:nowrap; }
 .tag-esport { background:#e8f0fe; color:#1a73e8; }
@@ -44,6 +43,8 @@ tr:hover { background:#fafbfd; }
 .tag-sale { background:#fef7e0; color:#e37400; }
 .tag-stable { background:#f0f0f0; color:#666; }
 .tag-hot { background:#fff0e0; color:#e65100; }
+.tag-tech { background:#e0f2f1; color:#00796b; }
+.tag-mobile { background:#f3e5f5; color:#7b1fa2; }
 .sentiment-high { color:#1e8e3e; font-weight:bold; }
 .sentiment-mid { color:#e37400; font-weight:bold; }
 .sentiment-low { color:#d93025; font-weight:bold; }
@@ -80,49 +81,41 @@ tr:hover { background:#fafbfd; }
   <div class="card-title"><span class="icon">📈</span> 资本市场</div>
   <div class="stock-hero">
     <div class="stock-item">
-      <div class="label">UBI.PA 股价</div>
+      <div class="label">UBI.PA 收盘价</div>
       <div class="value up">€4.728</div>
       <div class="change up">+2.47%</div>
     </div>
     <div class="stock-item">
       <div class="label">市值</div>
       <div class="value">€6.21亿</div>
-      <div class="change" style="font-size:12px;color:#888;">约¥49.4亿</div>
+      <div class="change flat">131.4M股</div>
     </div>
     <div class="stock-item">
       <div class="label">成交量</div>
-      <div class="value">62.2万股</div>
-      <div class="change" style="font-size:12px;color:#888;">低于日均 160万</div>
+      <div class="value">62.2万</div>
+      <div class="change flat">均量160万 (39%)</div>
     </div>
     <div class="stock-item">
-      <div class="label">周涨幅(5日)</div>
-      <div class="value up">+18.2%</div>
-      <div class="change" style="font-size:12px;color:#888;">连涨5日</div>
+      <div class="label">52周区间</div>
+      <div class="value" style="font-size:16px">€3.70 - €11.70</div>
+      <div class="change flat">距低点 +27.7%</div>
     </div>
   </div>
-  <table>
-    <tr>
-      <th>指标</th><th>数值</th><th>指标</th><th>数值</th>
-    </tr>
-    <tr>
-      <td>开盘价</td><td>€4.610</td>
-      <td>日内最高</td><td>€4.730</td>
-    </tr>
-    <tr>
-      <td>前收盘</td><td>€4.614</td>
-      <td>日内最低</td><td>€4.480</td>
-    </tr>
-    <tr>
-      <td>52周最高</td><td>€11.695</td>
-      <td>52周最低</td><td>€3.702</td>
-    </tr>
-    <tr>
-      <td>RSI(14)</td><td>62.71（中性偏强）</td>
-      <td>下次财报</td><td>5月20日</td>
-    </tr>
-  </table>
-  <div style="margin-top:12px;padding:12px;background:#f8f9fb;border-radius:8px;font-size:13px;color:#555;">
-    📊 <strong>近5日走势：</strong>4/10 €4.000(+1.39%) → 4/13 €4.190(+4.75%) → 4/14 €4.549(+8.57%) → 4/15 €4.766(+4.77%) → 4/16 €4.728(+2.47%)。连续5个交易日收涨，累计涨幅 18.2%，RSI 升至 62.71 进入偏强区间。今日盘中冲高 €4.73 后小幅回落，成交量缩至日均的 39%，显示追涨动能减弱。市场等待催化剂：今日《黑旗 Resynced》正式公布 + 下月财报（5/20）。注意：FY2026预估EPS为-€0.57（亏损），基本面仍承压。
+
+  <div class="summary-text">
+    <strong>连涨第5日</strong>，收于€4.728（+2.47%），盘中最高触及€4.730，5日累涨约 <strong>+21.8%</strong>（4/10收盘€3.88→4/16收€4.728）。近两周从52周低点€3.70区域强势反弹，但距52周高点€11.70仍有59.6%的差距。成交量仅均量的39%，显示上涨动能有所减弱，需观察后续放量确认。下次财报日 <strong>5月20日</strong>。
+  </div>
+
+  <div class="trend-box">
+    <h4>📊 近5日走势</h4>
+    <table>
+      <tr><th>日期</th><th>收盘</th><th>涨跌幅</th><th>累计(5日)</th></tr>
+      <tr><td>4/10 周四</td><td>€3.88</td><td class="up">+0.52%</td><td>—</td></tr>
+      <tr><td>4/11 周五</td><td>€4.23</td><td class="up">+9.02%</td><td>+9.02%</td></tr>
+      <tr><td>4/14 周一</td><td>€4.43</td><td class="up">+4.73%</td><td>+14.18%</td></tr>
+      <tr><td>4/15 周二</td><td>€4.614</td><td class="up">+4.15%</td><td>+18.92%</td></tr>
+      <tr><td>4/16 周三</td><td>€4.728</td><td class="up">+2.47%</td><td>+21.86%</td></tr>
+    </table>
   </div>
 </div>
 
@@ -131,432 +124,351 @@ tr:hover { background:#fafbfd; }
   <div class="card-title"><span class="icon">📰</span> 新闻动态</div>
   <ul class="news-list">
     <li>
-      <span class="bullet">•</span>
+      <span class="bullet">●</span>
       <div>
-        <a href="https://rollingout.com/2026/04/14/assassins-creed-black-flag-reveal/" target="_blank">🔥《刺客信条：黑旗 Resynced》今日（4/16）正式公布，重制版加入新角色+新故事线，预计今夏发售</a>
-        <div class="src">Rolling Out / Insider Gaming · 4/14-4/16 | 平台：PC / PS5 / Xbox Series X|S | 印尼评级 18+</div>
+        <a href="https://siege.gg/news/rainbow-six-siege-ranked-map-pool-update-kanal-outback-skyscraper-and-theme-park-added" target="_blank" class="news-text"><span class="tag tag-hot">🔥今日</span> <strong>R6S 排位地图池更新</strong> — 新增 Kanal、Outback、Skyscraper、Theme Park 四张地图，地图池扩至17张，全平台停机60分钟</a>
+        <div class="src">Siege.gg · 4/16 | Y11S1.2 补丁后</div>
       </div>
     </li>
     <li>
-      <span class="bullet">•</span>
+      <span class="bullet">●</span>
       <div>
-        <a href="https://vulkk.com/2026/04/08/assassins-creed-shadows-update-1-1-10-changes-overview/" target="_blank">《刺客信条：影》1.1.10 更新上线：Bo Staff 武器全员解锁、PSSR 2 支持、Switch 2 键鼠适配</a>
-        <div class="src">Ubisoft Official / Vulkk / NintendoLife · 4/7</div>
+        <a href="https://in.ign.com/assassins-creed-black-flag-resynced/258341/" target="_blank" class="news-text"><span class="tag tag-new">传闻</span> <strong>《AC 黑旗 Resynced》多源爆料称今日公布</strong> — 印尼评级泄露"新角色+新故事线"，Insider Gaming 称今夏发售，截至发稿育碧官方尚未正式确认</a>
+        <div class="src">IGN / Insider Gaming / ResetEra · 4/14-4/16 | 传闻平台：PC / PS5 / XSX</div>
       </div>
     </li>
     <li>
-      <span class="bullet">•</span>
+      <span class="bullet">●</span>
       <div>
-        <a href="https://www.savingcontent.com/2026/04/10/prophecies-of-ash-dlc-for-anno-117-is-available-on-april-23rd/" target="_blank">《纪元117：罗马和平》首个DLC「灰烬的预言」4/23发售，火山岛Cinis为系列史上最大岛屿</a>
-        <div class="src">Saving Content / But Why Tho · 4/10</div>
-      </div>
-    </li>
-    <li>
-      <span class="bullet">•</span>
-      <div>
-        <a href="https://cwacanada.ca/2026/04/14/workers-approve-settlement-over-ubisoft-halifax-closure/" target="_blank">育碧 Halifax 工作室关闭和解：71名员工（含61名工会成员）投票通过赔偿协议，具体金额保密</a>
+        <a href="https://cwacanada.ca/2026/04/14/workers-approve-settlement-over-ubisoft-halifax-closure/" target="_blank" class="news-text"><span class="tag tag-stable">公司</span> <strong>育碧 Halifax 工作室关闭和解</strong> — 71名员工（含61名工会成员）投票通过赔偿协议，具体金额保密，工会称育碧以善意和专业方式谈判</a>
         <div class="src">CWA Canada · 4/14</div>
       </div>
     </li>
     <li>
-      <span class="bullet">•</span>
+      <span class="bullet">●</span>
       <div>
-        <a href="https://www.pocketgamer.biz/april-2026s-movers-and-shakers/" target="_blank">人事：前腾讯游戏全球开发VP Julien Bares 出任育碧 Creative Houses 3 & 5 总经理，负责高强度直播+休闲手游</a>
-        <div class="src">PocketGamer.biz / GamesIndustry.biz · 3/17-4/15</div>
+        <div class="news-text"><span class="tag tag-new">EA</span> <strong>《Morbid Metal》EA第二周留存良好</strong> — Steam特别好评（85%+），日均在线稳定2,700+，PS5移植成为社区最强呼声</div>
+        <div class="src">Steam · 持续更新</div>
       </div>
     </li>
     <li>
-      <span class="bullet">•</span>
+      <span class="bullet">●</span>
       <div>
-        <a href="https://siege.gg/news" target="_blank">R6 电竞：BLAST EML 2026 Kickoff 赛事进行中（3/30-4/24），各区域选拔赛白热化阶段</a>
-        <div class="src">Siege.gg · 持续更新</div>
+        <div class="news-text"><span class="tag tag-new">即将上线</span> <strong>英雄无敌：上古纪元 4/30 EA</strong> — Steam和Microsoft Store抢先体验，同步上线PC Game Pass，社区期待度高</div>
+        <div class="src">多渠道 · 4月倒计时</div>
+      </div>
+    </li>
+    <li>
+      <span class="bullet">●</span>
+      <div>
+        <div class="news-text"><span class="tag tag-esport">电竞</span> <strong>R6S BLAST EML 2026 Kickoff 赛事</strong> — 3/30-4/24 各区域选拔赛白热化，今日地图池更新将影响职业战术</div>
+        <div class="src">BLAST / Siege.gg · 持续更新</div>
       </div>
     </li>
   </ul>
 </div>
 
-<!-- 模块3: Steam 实时在线 Top 20 -->
+<!-- 模块3: Steam实时在线Top 20 -->
 <div class="card">
-  <div class="card-title"><span class="icon">🕹️</span> Steam 实时在线 Top 20</div>
-  <div style="font-size:12px;color:#888;margin-bottom:12px;">数据采集时间：2026-04-16 20:00 CST | 昨日对比基准：4/15 同时段 | 周同比基准：4/9（上周三）</div>
-  <div style="overflow-x:auto;">
+  <div class="card-title"><span class="icon">🎮</span> Steam 实时在线 Top 20</div>
+  <p style="font-size:12px; color:#888; margin-bottom:12px;">📍 采样时间：2026-04-16 20:12 CST | 日环比 = vs 4/15 | 周同比 = vs 4/9</p>
   <table>
     <tr>
       <th>#</th>
       <th>游戏</th>
-      <th style="text-align:right;">实时在线</th>
-      <th style="text-align:right;">昨日PCU</th>
-      <th style="text-align:right;">日环比</th>
-      <th style="text-align:right;">周同比</th>
-      <th>动态</th>
+      <th>当前在线</th>
+      <th>日环比</th>
+      <th>周同比</th>
+      <th>趋势</th>
     </tr>
     <tr>
       <td>1</td>
       <td><strong>Rainbow Six Siege</strong></td>
-      <td style="text-align:right;">38,467</td>
-      <td style="text-align:right;">38,580</td>
-      <td style="text-align:right;" class="down">-0.3%</td>
-      <td style="text-align:right;" class="down">-20.4%</td>
-      <td><span class="tag tag-esport">BLAST EML Kickoff 进行中·区域赛白热化</span></td>
+      <td>41,546</td>
+      <td class="up">+7.7%</td>
+      <td class="down">-3.9%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>2</td>
       <td><strong>The Division 2</strong></td>
-      <td style="text-align:right;">6,730</td>
-      <td style="text-align:right;">6,858</td>
-      <td style="text-align:right;" class="down">-1.9%</td>
-      <td style="text-align:right;" class="down">-32.6%</td>
-      <td><span class="tag tag-season">Y8S1 Rise Up 第三周·赛季热度自然回落</span></td>
+      <td>6,955</td>
+      <td class="up">+1.4%</td>
+      <td class="down">-11.4%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>3</td>
-      <td><strong>AC Odyssey</strong></td>
-      <td style="text-align:right;">2,873</td>
-      <td style="text-align:right;">2,997</td>
-      <td style="text-align:right;" class="down">-4.1%</td>
-      <td style="text-align:right;" class="down">-22.3%</td>
-      <td><span class="tag tag-stable">无折扣·长尾稳定·卡珊德拉怀旧热</span></td>
+      <td>AC Odyssey</td>
+      <td>2,990</td>
+      <td class="flat">-0.2%</td>
+      <td class="down">-5.5%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>4</td>
-      <td><strong>Morbid Metal</strong></td>
-      <td style="text-align:right;">2,788</td>
-      <td style="text-align:right;">2,749</td>
-      <td style="text-align:right;" class="up">+1.4%</td>
-      <td style="text-align:right;" class="down">-11.0%</td>
-      <td><span class="tag tag-new">EA 第二周·Steam特别好评·留存良好</span></td>
+      <td><strong>Morbid Metal</strong> <span class="tag tag-new">NEW</span></td>
+      <td>2,866</td>
+      <td class="up">+4.3%</td>
+      <td>—</td>
+      <td>🔥</td>
     </tr>
     <tr>
       <td>5</td>
-      <td><strong>AC Valhalla</strong></td>
-      <td style="text-align:right;">2,477</td>
-      <td style="text-align:right;">2,490</td>
-      <td style="text-align:right;" class="down">-0.5%</td>
-      <td style="text-align:right;" class="down">-13.5%</td>
-      <td><span class="tag tag-stable">无折扣·长尾稳定·维京RPG社区自运营</span></td>
+      <td>AC Valhalla</td>
+      <td>2,585</td>
+      <td class="up">+3.8%</td>
+      <td class="down">-3.5%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>6</td>
       <td><strong>For Honor</strong></td>
-      <td style="text-align:right;">2,461</td>
-      <td style="text-align:right;">2,602</td>
-      <td style="text-align:right;" class="down">-5.4%</td>
-      <td style="text-align:right;">—</td>
-      <td><span class="tag tag-hot">🔥 在线维持 2K+ 高位·英雄平衡调整持续讨论</span></td>
+      <td>2,545</td>
+      <td class="down">-2.3%</td>
+      <td>—</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>7</td>
-      <td><strong>Anno 1800</strong></td>
-      <td style="text-align:right;">2,327</td>
-      <td style="text-align:right;">2,316</td>
-      <td style="text-align:right;" class="up">+0.5%</td>
-      <td style="text-align:right;">—</td>
-      <td><span class="tag tag-stable">模拟经营常青·Anno 117 DLC效应带动</span></td>
+      <td>Anno 1800</td>
+      <td>2,367</td>
+      <td class="up">+2.2%</td>
+      <td>—</td>
+      <td>📈</td>
     </tr>
     <tr>
       <td>8</td>
       <td><strong>AC Shadows</strong></td>
-      <td style="text-align:right;">1,749</td>
-      <td style="text-align:right;">1,179</td>
-      <td style="text-align:right;" class="up">+48.3%</td>
-      <td style="text-align:right;" class="up">+40.4%</td>
-      <td><span class="tag tag-hot">🔥 在线暴涨·1.1.10更新+黑旗公布联动效应</span></td>
+      <td>1,799</td>
+      <td class="up">+52.6%</td>
+      <td class="up">+29.3%</td>
+      <td>🔥</td>
     </tr>
     <tr>
       <td>9</td>
-      <td><strong>R6 Extraction</strong></td>
-      <td style="text-align:right;">1,628</td>
-      <td style="text-align:right;">1,530</td>
-      <td style="text-align:right;" class="up">+6.4%</td>
-      <td style="text-align:right;" class="down">-16.6%</td>
-      <td><span class="tag tag-stable">PvE合作射击·社区自运营</span></td>
+      <td>R6 Extraction</td>
+      <td>1,694</td>
+      <td class="up">+10.7%</td>
+      <td class="down">-4.9%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>10</td>
-      <td><strong>Far Cry 5</strong></td>
-      <td style="text-align:right;">1,488</td>
-      <td style="text-align:right;">1,493</td>
-      <td style="text-align:right;" class="down">-0.3%</td>
-      <td style="text-align:right;" class="down">-16.8%</td>
-      <td><span class="tag tag-stable">无折扣·长尾稳定·反派魅力持续吸引</span></td>
+      <td>Far Cry 5</td>
+      <td>1,525</td>
+      <td class="up">+2.1%</td>
+      <td class="down">-7.3%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>11</td>
-      <td><strong>Trackmania</strong></td>
-      <td style="text-align:right;">1,482</td>
-      <td style="text-align:right;">—</td>
-      <td style="text-align:right;">—</td>
-      <td style="text-align:right;" class="down">-7.8%</td>
-      <td><span class="tag tag-stable">竞速社区·稳定运营·UGC赛道活跃</span></td>
+      <td>Trackmania</td>
+      <td>1,509</td>
+      <td class="up">+1.8%</td>
+      <td class="down">-15.3%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>12</td>
-      <td><strong>The Crew 2</strong></td>
-      <td style="text-align:right;">1,292</td>
-      <td style="text-align:right;">1,235</td>
-      <td style="text-align:right;" class="up">+4.6%</td>
-      <td style="text-align:right;" class="down">-3.1%</td>
-      <td><span class="tag tag-stable">赛车社区自运营·跨平台联机</span></td>
+      <td>The Crew 2</td>
+      <td>1,347</td>
+      <td class="up">+9.1%</td>
+      <td class="down">-1.2%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>13</td>
-      <td><strong>Ghost Recon Breakpoint</strong></td>
-      <td style="text-align:right;">1,028</td>
-      <td style="text-align:right;">1,018</td>
-      <td style="text-align:right;" class="up">+1.0%</td>
-      <td style="text-align:right;" class="down">-18.3%</td>
-      <td><span class="tag tag-stable">战术射击·昨日激增已回落至常态区间</span></td>
+      <td>Ghost Recon Breakpoint</td>
+      <td>1,028</td>
+      <td class="flat">0.0%</td>
+      <td class="down">-10.3%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>14</td>
-      <td><strong>The Division</strong></td>
-      <td style="text-align:right;">903</td>
-      <td style="text-align:right;">—</td>
-      <td style="text-align:right;">—</td>
-      <td style="text-align:right;" class="up">+6.0%</td>
-      <td><span class="tag tag-stable">初代分裂·Division 2赛季联动效应</span></td>
+      <td>The Division</td>
+      <td>931</td>
+      <td class="up">+3.1%</td>
+      <td class="down">-9.5%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>15</td>
-      <td><strong>Far Cry 4</strong></td>
-      <td style="text-align:right;">737</td>
-      <td style="text-align:right;">734</td>
-      <td style="text-align:right;" class="up">+0.4%</td>
-      <td style="text-align:right;" class="down">-13.7%</td>
-      <td><span class="tag tag-stable">经典常青·Pagan Min反派魅力</span></td>
+      <td>Far Cry 4</td>
+      <td>750</td>
+      <td class="up">+2.2%</td>
+      <td class="down">-1.1%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>16</td>
-      <td><strong>Watch Dogs 2</strong></td>
-      <td style="text-align:right;">641</td>
-      <td style="text-align:right;">629</td>
-      <td style="text-align:right;" class="up">+1.9%</td>
-      <td style="text-align:right;" class="down">-15.5%</td>
-      <td><span class="tag tag-stable">开放世界黑客·长尾稳定</span></td>
+      <td>Watch Dogs 2</td>
+      <td>652</td>
+      <td class="up">+3.7%</td>
+      <td class="down">-4.5%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>17</td>
-      <td><strong>AC Unity</strong></td>
-      <td style="text-align:right;">548</td>
-      <td style="text-align:right;">562</td>
-      <td style="text-align:right;" class="down">-2.5%</td>
-      <td style="text-align:right;" class="down">-15.7%</td>
-      <td><span class="tag tag-stable">跑酷巅峰·巴黎圣母院经典·社区怀旧</span></td>
+      <td>AC Unity</td>
+      <td>565</td>
+      <td class="up">+0.5%</td>
+      <td class="down">-1.0%</td>
+      <td>📊</td>
     </tr>
     <tr>
       <td>18</td>
-      <td><strong>AC Syndicate</strong></td>
-      <td style="text-align:right;">528</td>
-      <td style="text-align:right;">532</td>
-      <td style="text-align:right;" class="down">-0.8%</td>
-      <td style="text-align:right;" class="down">-16.1%</td>
-      <td><span class="tag tag-stable">维多利亚伦敦·长尾稳定</span></td>
+      <td>AC Syndicate</td>
+      <td>543</td>
+      <td class="up">+2.1%</td>
+      <td class="down">-9.0%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>19</td>
-      <td><strong>Far Cry 3</strong></td>
-      <td style="text-align:right;">502</td>
-      <td style="text-align:right;">506</td>
-      <td style="text-align:right;" class="down">-0.8%</td>
-      <td style="text-align:right;" class="down">-8.9%</td>
-      <td><span class="tag tag-stable">Vaas经典反派·系列口碑巅峰</span></td>
+      <td>Far Cry 3</td>
+      <td>528</td>
+      <td class="up">+4.3%</td>
+      <td class="down">-12.4%</td>
+      <td>📉</td>
     </tr>
     <tr>
       <td>20</td>
-      <td><strong>AC Origins</strong></td>
-      <td style="text-align:right;">444</td>
-      <td style="text-align:right;">1,457</td>
-      <td style="text-align:right;" class="down">-69.5%</td>
-      <td style="text-align:right;" class="down">-22.5%</td>
-      <td><span class="tag tag-sale">昨日促销效应消退·回落至常态水位</span></td>
+      <td>AC Origins</td>
+      <td>470</td>
+      <td class="up">+5.9%</td>
+      <td class="down">-14.4%</td>
+      <td>📉</td>
     </tr>
   </table>
-  </div>
-  <div style="margin-top:12px;padding:12px;background:#f8f9fb;border-radius:8px;font-size:13px;color:#555;">
-    💡 <strong>关键信号：</strong>①AC Shadows 在线暴涨 48.3%（1,179→1,749），1.1.10 更新+黑旗 Resynced 公布日联动效应显著；②AC Origins 从昨日促销高位 1,457 大幅回落至 444（-69.5%），确认为短期促销拉动；③Morbid Metal EA第二周仍维持 2,788 在线，环比微涨 +1.4%，留存表现优于多数EA新品；④Division 2 周同比 -32.6%，Y8S1 赛季热度进入自然衰减期；⑤For Honor 连续两日维持 2,400+ 高位，社区活跃度超常水平。
+
+  <div class="trend-box" style="margin-top:16px;">
+    <h4>🔍 异动与趋势</h4>
+    <ul style="list-style:none; padding:0; font-size:13px;">
+      <li style="padding:4px 0;">🔥 <strong>AC Shadows 在线暴涨52.6%</strong>（1,179→1,799），周同比+29.3%，疑似促销活动或内容更新拉动回流</li>
+      <li style="padding:4px 0;">🔥 <strong>Morbid Metal 保持热度</strong>（2,866），EA上线第9天仍稳居Top4，特别好评口碑持续</li>
+      <li style="padding:4px 0;">📈 <strong>R6S 周四回暖</strong>（41,546 +7.7%），但周同比-3.9%，仍在工作日正常波动范围</li>
+      <li style="padding:4px 0;">📉 <strong>Division 2 缓降</strong>（6,955），Rise Up赛季新鲜感消退，周同比-11.4%</li>
+      <li style="padding:4px 0;">📊 <strong>Anno 1800 持稳</strong>（2,367），DLC"灰烬预言"4/23发售前维持高位</li>
+    </ul>
   </div>
 </div>
 
 <!-- 模块4: 社区热议及舆情 -->
 <div class="card">
-  <div class="card-title"><span class="icon">📊</span> 社区热议及舆情</div>
-  <div style="font-size:12px;color:#888;margin-bottom:16px;">数据来源：DataBrain 全平台舆情监测 | 周期：2026/04/10 - 04/16</div>
+  <div class="card-title"><span class="icon">💬</span> 社区热议及舆情</div>
+  <p style="font-size:12px; color:#888; margin-bottom:12px;">📍 数据来源：DataBrain 全平台舆情监控 | 时间窗口：2026-04-10 至 2026-04-16</p>
 
-  <!-- 4.1 舆情数据总览 -->
-  <h4 style="font-size:15px;font-family:'TencentSans W7',sans-serif;margin-bottom:10px;">📋 舆情数据总览</h4>
-  <div style="overflow-x:auto;">
   <table>
     <tr>
       <th>游戏</th>
-      <th style="text-align:right;">7日声量</th>
-      <th style="text-align:right;">7日互动</th>
-      <th style="text-align:center;">情感分</th>
-      <th>核心标签（近7天）</th>
+      <th>7日声量</th>
+      <th>情感分</th>
+      <th>情感评级</th>
+      <th>舆情简评</th>
     </tr>
     <tr>
       <td><strong>R6 Siege X</strong></td>
-      <td style="text-align:right;">62,100</td>
-      <td style="text-align:right;">940万</td>
-      <td style="text-align:center;" class="sentiment-low">2.96</td>
-      <td><span class="tag tag-esport">#BLAST_EML</span> <span class="tag tag-hot">#反作弊争议</span> <span class="tag tag-season">#Rauora新干员</span></td>
-    </tr>
-    <tr>
-      <td><strong>AC Shadows</strong></td>
-      <td style="text-align:right;">6,850</td>
-      <td style="text-align:right;">8.2万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.05</td>
-      <td><span class="tag tag-new">#1.1.10更新</span> <span class="tag tag-hot">#黑旗Resynced联动</span> <span class="tag tag-season">#Bo_Staff新武器</span></td>
+      <td>66,325</td>
+      <td class="sentiment-low">2.96</td>
+      <td>⚠️ 偏低</td>
+      <td>讨论量统治级，BLAST赛事+反作弊争议双重驱动</td>
     </tr>
     <tr>
       <td><strong>For Honor</strong></td>
-      <td style="text-align:right;">7,500</td>
-      <td style="text-align:right;">95万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.03</td>
-      <td><span class="tag tag-season">#英雄平衡</span> <span class="tag tag-hot">#在线人数新高</span></td>
+      <td>6,785</td>
+      <td class="sentiment-mid">3.04</td>
+      <td>🔶 中性</td>
+      <td>社区活跃度稳定，情感中规中矩</td>
     </tr>
     <tr>
-      <td><strong>Division 2</strong></td>
-      <td style="text-align:right;">4,600</td>
-      <td style="text-align:right;">11万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.08</td>
-      <td><span class="tag tag-season">#Rise_Up赛季</span> <span class="tag tag-hot">#暗区外挂吐槽</span></td>
+      <td><strong>AC Shadows</strong></td>
+      <td>4,903</td>
+      <td class="sentiment-low">2.89</td>
+      <td>🔴 低迷</td>
+      <td>声量较高但情感分最低，弥助争议仍有惯性</td>
+    </tr>
+    <tr>
+      <td><strong>Division Resurgence</strong></td>
+      <td>4,590</td>
+      <td class="sentiment-high">3.39</td>
+      <td>🟢 良好</td>
+      <td>手游上线两周，正面期待度高</td>
+    </tr>
+    <tr>
+      <td><strong>The Division 2</strong></td>
+      <td>4,040</td>
+      <td class="sentiment-mid">3.13</td>
+      <td>🔶 中性偏上</td>
+      <td>Rise Up赛季维持稳定讨论</td>
     </tr>
     <tr>
       <td><strong>AC Valhalla</strong></td>
-      <td style="text-align:right;">3,200</td>
-      <td style="text-align:right;">4.3万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.18</td>
-      <td><span class="tag tag-stable">#维京世界观</span> <span class="tag tag-stable">#促销讨论</span></td>
+      <td>2,741</td>
+      <td class="sentiment-high">3.27</td>
+      <td>🟢 良好</td>
+      <td>折扣活动+长线运营维持好口碑</td>
     </tr>
     <tr>
-      <td><strong>Morbid Metal</strong></td>
-      <td style="text-align:right;">3,100</td>
-      <td style="text-align:right;">6.8万</td>
-      <td style="text-align:center;" class="sentiment-high">3.52</td>
-      <td><span class="tag tag-new">#EA第二周</span> <span class="tag tag-hot">#PS5移植呼声</span> <span class="tag tag-season">#Build分享</span></td>
-    </tr>
-    <tr>
-      <td><strong>Crew Motorfest</strong></td>
-      <td style="text-align:right;">2,700</td>
-      <td style="text-align:right;">10.2万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.22</td>
-      <td><span class="tag tag-stable">#赛车文化</span> <span class="tag tag-stable">#跨平台联机</span></td>
+      <td><strong>Avatar Frontiers</strong></td>
+      <td>2,193</td>
+      <td class="sentiment-high">3.24</td>
+      <td>🟢 良好</td>
+      <td>视觉与世界观仍是正面讨论核心</td>
     </tr>
     <tr>
       <td><strong>AC Odyssey</strong></td>
-      <td style="text-align:right;">1,950</td>
-      <td style="text-align:right;">4.2万</td>
-      <td style="text-align:center;" class="sentiment-high">3.38</td>
-      <td><span class="tag tag-stable">#卡珊德拉经典</span> <span class="tag tag-stable">#古希腊截图</span></td>
+      <td>2,187</td>
+      <td class="sentiment-high">3.32</td>
+      <td>🟢 良好</td>
+      <td>经典作品持续吸引新老玩家</td>
     </tr>
     <tr>
       <td><strong>Far Cry 5</strong></td>
-      <td style="text-align:right;">1,780</td>
-      <td style="text-align:right;">5.0万</td>
-      <td style="text-align:center;" class="sentiment-high">3.35</td>
-      <td><span class="tag tag-stable">#反派魅力</span> <span class="tag tag-stable">#合作模式</span></td>
-    </tr>
-    <tr>
-      <td><strong>Far Cry 3</strong></td>
-      <td style="text-align:right;">1,600</td>
-      <td style="text-align:right;">12.0万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.27</td>
-      <td><span class="tag tag-stable">#Vaas经典</span> <span class="tag tag-stable">#系列巅峰</span></td>
+      <td>1,779</td>
+      <td class="sentiment-high">3.24</td>
+      <td>🟢 良好</td>
+      <td>玩法回顾和模组分享为主</td>
     </tr>
     <tr>
       <td><strong>Anno 117</strong></td>
-      <td style="text-align:right;">380</td>
-      <td style="text-align:right;">4.2万</td>
-      <td style="text-align:center;" class="sentiment-high">3.49</td>
-      <td><span class="tag tag-dlc">#灰烬的预言DLC_4/23</span> <span class="tag tag-new">#火山岛Cinis</span></td>
+      <td>244</td>
+      <td class="sentiment-high">3.45</td>
+      <td>🟢 最高</td>
+      <td>核心粉丝期待度最高，DLC即将发售</td>
     </tr>
     <tr>
-      <td><strong>AC Origins</strong></td>
-      <td style="text-align:right;">620</td>
-      <td style="text-align:right;">3.8万</td>
-      <td style="text-align:center;" class="sentiment-high">3.43</td>
-      <td><span class="tag tag-sale">#促销引流</span> <span class="tag tag-stable">#埃及世界观</span></td>
-    </tr>
-    <tr>
-      <td><strong>AC Unity</strong></td>
-      <td style="text-align:right;">400</td>
-      <td style="text-align:right;">1.7万</td>
-      <td style="text-align:center;" class="sentiment-high">3.45</td>
-      <td><span class="tag tag-stable">#跑酷巅峰</span> <span class="tag tag-stable">#巴黎圣母院</span></td>
-    </tr>
-    <tr>
-      <td><strong>Anno 1800</strong></td>
-      <td style="text-align:right;">175</td>
-      <td style="text-align:right;">0.6万</td>
-      <td style="text-align:center;" class="sentiment-high">3.40</td>
-      <td><span class="tag tag-stable">#模拟经营经典</span> <span class="tag tag-stable">#社区MOD</span></td>
-    </tr>
-    <tr>
-      <td><strong>R6 Extraction</strong></td>
-      <td style="text-align:right;">55</td>
-      <td style="text-align:right;">130</td>
-      <td style="text-align:center;" class="sentiment-low">2.90</td>
-      <td><span class="tag tag-stable">声量极低·已停更·社区自运营</span></td>
-    </tr>
-    <tr>
-      <td><strong>Brawlhalla</strong></td>
-      <td style="text-align:right;">40</td>
-      <td style="text-align:right;">2.3万</td>
-      <td style="text-align:center;" class="sentiment-mid">3.24</td>
-      <td><span class="tag tag-stable">格斗平台·社区自运营</span></td>
+      <td><strong>Star Wars Outlaws</strong></td>
+      <td>395</td>
+      <td class="sentiment-mid">3.18</td>
+      <td>🔶 中性</td>
+      <td>声量较低，随资讯发布小幅波动</td>
     </tr>
   </table>
-  </div>
 
-  <!-- 4.2 社区热议及口碑 -->
-  <h4 style="font-size:15px;font-family:'TencentSans W7',sans-serif;margin:20px 0 10px;">💬 社区热议及口碑（近7天，标🔥为48h内热点）</h4>
-  <div class="summary-text">
-    <p style="margin-bottom:10px;">
-      <strong>🏴‍☠️ AC 黑旗 Resynced</strong>（全网热点）：🔥<strong>今日正式公布</strong>——重制版确认加入原版不存在的新角色、新故事线和增强版海战系统，预计2026年夏季发售（PC/PS5/XSX）。印尼评级 18+ 已泄露。育碧将其定位为本财年最重要发行作品之一，与新《幽灵行动》并列，承载重建品牌信誉的战略重任。社区预期普遍积极，但部分玩家对"重制版加新内容"能否平衡原作精神存有疑虑。
-    </p>
-    <p style="margin-bottom:10px;">
-      <strong>⚔️ AC Shadows</strong>（声量 6,850｜情感 3.05↑）：情感分较上周 2.89 显著回升。🔥<strong>1.1.10 更新正面反馈</strong>——Bo Staff 全员解锁受好评，PSSR 2 支持和 Switch 2 键鼠适配提升了技术口碑。黑旗 Resynced 公布日的联动效应拉高了整个 AC 系列关注度，Steam 在线 +48.3%。弥助争议热度继续降温。
-    </p>
-    <p style="margin-bottom:10px;">
-      <strong>🔫 R6 Siege X</strong>（声量 6.2万｜情感 2.96）：声量霸主但情感分继续下探至 2.96。🔥<strong>反作弊信任危机未解</strong>——高排位外挂视频持续传播，社区对 BattlEye 的质疑扩散。BLAST EML Kickoff 赛事进入区域选拔白热化阶段，为正面声量提供支撑。新干员 Rauora 的 pick rate 讨论活跃。
-    </p>
-    <p style="margin-bottom:10px;">
-      <strong>🗡️ Morbid Metal</strong>（声量 3,100｜情感 3.52·全场最高）：EA 第二周表现超预期。🔥<strong>PS5 移植呼声成为社区最强需求</strong>，Build 分享帖持续高热。开发团队快速响应 BOSS 战平衡反馈，社区信任度极高。日均在线稳定在 2,700+，EA 新品中罕见的留存曲线。
-    </p>
-    <p style="margin-bottom:10px;">
-      <strong>🎯 Division 2</strong>（声量 4,600｜情感 3.08）：Y8S1 Rise Up 赛季进入第三周，Escalation 模式 Build 讨论仍是核心话题。暗区外挂问题是负面声量主要来源，但 Manhunt 剧情推进和赛季机制整体口碑持稳。在线人数周同比 -32.6%，赛季首周热度消退属正常规律。
-    </p>
-    <p>
-      <strong>🏛️ Anno 117</strong>（声量 380｜情感 3.49）：🔥<strong>「灰烬的预言」DLC 倒计时一周</strong>（4/23发售），火山岛 Cinis 号称系列史上最大岛屿（超越 Anno 1800 Crown Falls），黑曜石经济系统成策略玩家讨论焦点。社区对罗马背景的城建和文化冲突机制评价积极。
-    </p>
-  </div>
-
-  <!-- 4.4 舆情风险提示 -->
   <div class="risk-box">
-    <h4>舆情风险提示（近48小时）</h4>
+    <h4>⚠️ 舆情风险</h4>
     <ul>
-      <li><strong>R6S 反作弊信任危机持续：</strong>高排位外挂视频仍在传播扩散，情感分连续两日低于 3.0。若官方不及时公开回应反作弊措施，可能在 BLAST EML 赛事期间引发更大范围的负面舆论。</li>
-      <li><strong>黑旗 Resynced 公布日舆论分化风险：</strong>今日正式公布，"重制版+新内容"定位可能引发原作粉丝对"是否改变原作精神"的讨论。需关注公布后 24h 内的社区情绪走向。</li>
-      <li><strong>Halifax 工作室关闭和解仍有余温：</strong>虽然赔偿协议已通过，但71人裁员事件可能被媒体在重组叙事中反复引用，影响品牌形象。</li>
+      <li><strong>AC Shadows 情感分2.89</strong>：连续多周处于育碧产品线最低位，弥助争议虽有减弱但形成惯性，需关注销量突破500万后口碑拐点是否到来</li>
+      <li><strong>R6S 情感分2.96</strong>：BLAST赛事带来高曝光但反作弊争议持续，竞技环境满意度有压力</li>
     </ul>
   </div>
 
-  <!-- 4.5 热度趋势总结 -->
   <div class="trend-box">
-    <h4>📈 热度趋势总结（近7天变化）</h4>
-    <div class="summary-text">
-      <p><strong>↑ 上升：</strong>AC Shadows（1.1.10更新+黑旗联动，Steam在线+48.3%，情感分从2.89升至3.05）、Morbid Metal（EA第二周留存优异，情感分3.52全场最高）、Anno 117（DLC倒计时一周，期待值持续走高）、For Honor（在线维持2,400+高位，社区活跃度超常）</p>
-      <p><strong>↓ 下降：</strong>Division 2（赛季第三周自然衰减，周同比-32.6%）、AC Origins（促销效应消退，在线从1,457回落至444）、R6 Siege（反作弊争议压低情感分至2.96）</p>
-      <p><strong>⭐ 焦点：</strong>AC 黑旗 Resynced 今日公布，预计将主导未来一周的育碧舆情走向。育碧股价连涨5日（+18.2%），市场情绪与产品发布节奏高度相关，需密切关注黑旗公布后的资本市场反应。</p>
-    </div>
+    <h4>📈 正面信号</h4>
+    <ul style="list-style:none; padding:0; font-size:13px;">
+      <li style="padding:4px 0;">✅ <strong>Anno 117 情感分3.45</strong>：育碧产品线中最高，DLC"灰烬预言"4/23发售+免费周末活动预计进一步拉升</li>
+      <li style="padding:4px 0;">✅ <strong>Division Resurgence 3.39</strong>：手游新品上线正面反馈超预期，有望成为育碧移动端重要增长点</li>
+      <li style="padding:4px 0;">✅ <strong>英雄无敌Olden Era</strong>：4/30 EA上线倒计时，经典IP回归社区期待度极高</li>
+    </ul>
   </div>
 </div>
 
 <!-- Footer -->
 <div class="footer">
-  <p>育碧日报 | 自动生成于 2026-04-16 20:00 CST</p>
-  <p>数据来源：StockAnalysis · Steam API · DataBrain · Ubisoft News · 游戏媒体</p>
-  <p style="margin-top:8px;color:#bbb;">内部参考，请勿外传</p>
+  <p>育碧日报 · K9合作部 · 自动生成于 2026-04-16 20:12 CST</p>
+  <p>数据来源：Euronext Paris / StockAnalysis / Steam API / DataBrain / Ubisoft Official</p>
 </div>
 
 </div>
