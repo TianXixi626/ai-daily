@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 情报速递 | 2026-04-17</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --signal: #dc2626;
+    --signal-bg: #fef2f2;
+    --product: #059669;
+    --product-bg: #ecfdf5;
+    --watch: #d97706;
+    --watch-bg: #fffbeb;
+    --tag-bg: #f1f5f9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 24px 20px 60px; }
+  
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 0 32px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 32px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .header .date {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    opacity: 0.7;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .section-title.signal { background: var(--signal-bg); color: var(--signal); }
+  .section-title.product { background: var(--product-bg); color: var(--product); }
+  .section-title.watch { background: var(--watch-bg); color: var(--watch); }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .card-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 8px;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+  .card-num.signal { background: var(--signal); }
+  .card-num.product { background: var(--product); }
+  .card-num.watch { background: var(--watch); }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .card-body {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .card-body .highlight {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .card-source {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .insight-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  .insight-tag.game { background: #fce7f3; color: #be185d; }
+  .insight-tag.work { background: #ede9fe; color: #7c3aed; }
+
+  /* Quick bullets */
+  .quick-list {
+    list-style: none;
+    padding: 0;
+  }
+  .quick-list li {
+    position: relative;
+    padding: 8px 0 8px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-bottom: 1px solid var(--border);
+  }
+  .quick-list li:last-child { border-bottom: none; }
+  .quick-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--watch);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 12px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px 40px; }
+    .header h1 { font-size: 22px; }
+    .card { padding: 16px 18px; }
+    .card-title { font-size: 15px; }
+    .card-body { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>🤖 AI 情报速递</h1>
+    <div class="date">2026 年 4 月 17 日 · 星期五</div>
+    <div class="subtitle">AI + 游戏 · AI + 工作提效</div>
+  </div>
+
+  <!-- Top Signals -->
+  <div class="section">
+    <div class="section-title signal">🔴 Top Signals</div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num signal">1</span>
+        OpenAI Codex 史上最大更新：Computer Use + 90 插件 + 心跳自动化，编程 Agent 进化为"超级应用"
+      </div>
+      <div class="card-body">
+        OpenAI 对 Codex 桌面端进行史上最大规模更新，五大核心功能同时上线：① <strong>Computer Use</strong>（仅 macOS）——Codex 可在后台操控用户电脑上任意应用，支持"看、点击、输入"，且不占用前台操作；② <strong>90+ 新插件</strong>（CircleCI、GitLab、Microsoft Suite 等）打通完整开发工具链；③ <strong>Memory 记忆预览</strong>——跨会话记住偏好和上下文，还能生成"每日简报"建议工作起点；④ <strong>Heartbeat Automations</strong>——持久化代理可自主安排未来任务并"唤醒"自己继续工作；⑤ 集成 <strong>gpt-image-1.5</strong> 在开发流中生成统一风格素材。Codex 周活跃开发者已达 <strong>300 万</strong>。
+        <br><span class="insight-tag work">💼 工作提效</span> Agent 从"写代码"进化到"操控整台电脑 + 自我调度"，这是工作自动化的分水岭时刻。
+      </div>
+      <div class="card-source">VentureBeat / OpenAI Blog · 04-16</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num signal">2</span>
+        Anthropic 发布 Claude Opus 4.7：编码能力飞跃，视觉分辨率翻 3 倍，价格不变
+      </div>
+      <div class="card-body">
+        Anthropic 正式发布 <strong>Claude Opus 4.7</strong>，距 Opus 4.6 仅 70 天。关键升级：<strong>CursorBench 58%→70%</strong>，Rakuten-SWE-Bench 解题量为 4.6 的 3 倍，视觉精度 XBOW <strong>54.5%→98.5%</strong>，支持最高 2576px 长边图像（此前 3 倍）。新增 <code>xhigh</code> effort 级别、<code>/ultrareview</code> 代码审查命令、Task Budgets 预算控制，并搭载首个<strong>网络安全自动防护机制</strong>。定价维持 $5/$25 per M tokens 不变。Opus 4.7 仍不及最强的 Mythos Preview（仅限约 50 家企业）。
+        <br><span class="insight-tag work">💼 工作提效</span> 编码 Agent 基础性能再次飙升且价格不涨，AI 编码助手性价比处于历史最优。
+      </div>
+      <div class="card-source">Anthropic / CNBC / IT之家 · 04-16~17</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num signal">3</span>
+        腾讯云发起"AI CAN DO IT"全球游戏开发黑客松，覆盖五大赛区
+      </div>
+      <div class="card-body">
+        腾讯云联合 WeTech 学院在香港大学宣布启动 <strong>2026 全球游戏开发黑客松</strong>，面向五大赛区（港澳/华东/华北/华南/东南亚），设社会公益、文化表达、叙事创新三大赛道。参赛者被鼓励将 AI 融入<strong>世界观构建、概念美术、音频设计</strong>等游戏核心要素（不仅是代码）。奖池达数百万港元，总决赛将在 9 月腾讯全球数字生态大会上举行。现场展示了港大学生用 <strong>CodeBuddy</strong> 零代码构建的 ADHD 儿童教育游戏 StarQuest。
+        <br><span class="insight-tag game">🎮 游戏行业</span> AI 正把游戏开发门槛从"会编程"降到"有想法"，设计/艺术/人文背景创作者首次被正式纳入赛道。
+      </div>
+      <div class="card-source">PR Newswire · 04-17</div>
+    </div>
+  </div>
+
+  <!-- Product & Tech -->
+  <div class="section">
+    <div class="section-title product">🟢 Product & Tech</div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num product">4</span>
+        Canva AI 2.0：从设计工具到 Agentic 创意平台，两年重构终亮相
+      </div>
+      <div class="card-body">
+        Canva 在洛杉矶 Create 大会发布 <strong>AI 2.0</strong>，耗时两年完全重构平台。核心变化：从"带 AI 的设计工具"转变为"<strong>对话式智能体创意平台</strong>"——支持自然语言编辑、持久记忆（记住品牌风格和个人偏好）、第三方集成和 Tool Calling。Q1 已完成 5 起收购（含 Simtheory 的 Agentic AI 和 Ortto 的客户数据平台）。COO 称这是"AI 2.0 而非 AI 附加"。
+        <br><span class="insight-tag work">💼 工作提效</span> 设计走向"说一句话出一套完整物料"模式，游戏营销和运营素材制作效率将大幅提升。
+      </div>
+      <div class="card-source">Canva / Fortune / TechRadar · 04-16</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num product">5</span>
+        智元机器人 4·17 大会：4 款新机器人 + 4 个 AI 大模型，具身智能冲百亿营收
+      </div>
+      <div class="card-body">
+        智元机器人（稚晖君联合创立）今日在上海举办 <strong>2026 合作伙伴大会</strong>，34 国 2500 位伙伴参会。集中发布 <strong>4 款机器人本体新品、4 个 AI 大模型和 7 个行业解决方案</strong>，同时开放具身智能数据集。智元已将四足机器人业务拆分为全资子公司<strong>"智元酷拓"</strong>，创始人邓泰华挂帅。
+        <br><span class="insight-tag game">🎮 游戏行业</span> 具身智能的感知-决策-执行链路与游戏 NPC AI 共享技术底层，机器人训练仿真数据可反哺游戏世界模型。
+      </div>
+      <div class="card-source">IT之家 / PConline / 财联社 · 04-17</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num product">6</span>
+        Google Chrome AI Mode 升级：网页链接与 AI 对话并排显示
+      </div>
+      <div class="card-body">
+        Google 升级 Chrome 内置 <strong>AI Mode</strong>，新增"并排视图"——用户在 AI 对话时可直接打开来源网页链接，不丢失上下文即可追问。这一设计解决了 AI 搜索中<strong>"来源可信度验证"</strong>的核心痛点。
+        <br><span class="insight-tag work">💼 工作提效</span> 信息检索从"AI 答案→手动验证来源"缩短为"AI 答案+来源同屏"，研究类工作效率明显提升。
+      </div>
+      <div class="card-source">TechCrunch / Creati.ai · 04-17</div>
+    </div>
+  </div>
+
+  <!-- Watchlist -->
+  <div class="section">
+    <div class="section-title watch">🟡 Watchlist</div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num watch">7</span>
+        Mozilla 推出 Thunderbolt：自托管开源企业 AI 平台，对标 Copilot
+      </div>
+      <div class="card-body">
+        Mozilla 发布 <strong>Thunderbolt</strong>，定位为 Microsoft Copilot 和 ChatGPT Enterprise 的<strong>开源替代方案</strong>。支持完全自托管部署，企业数据不出域。对注重数据主权的组织（政府、金融、游戏公司处理玩家数据）具有吸引力。
+      </div>
+      <div class="card-source">Creati.ai · 04-17</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="card-num watch">8</span>
+        快讯速览
+      </div>
+      <div class="card-body">
+        <ul class="quick-list">
+          <li><strong>福布斯 2026 AI 50 强发布</strong> — 入选公司累计融资 3056 亿美元，标志行业从"AI 依赖"转向"AI 独立商业模式"</li>
+          <li><strong>欧盟提议强制 Google 共享搜索数据</strong> — 依据 DMA 法规要求向竞争对手（含 AI 公司）开放关键搜索数据，可能重塑 AI 训练数据格局</li>
+          <li><strong>诺贝尔经济学奖得主 Simon Johnson 警告</strong> — AI 正威胁中产阶级"有尊严的工作"，呼吁政策制定者果断行动</li>
+          <li><strong>OpenAI 发布 GPT-Rosalind</strong> — 专注生命科学和药物发现的限量 AI 模型，首次将前沿能力集中于垂直医药领域</li>
+          <li><strong>智元拆分四足业务</strong> — 成立全资子公司"智元酷拓"，创始人亲自挂帅，加速 B 端规模化落地</li>
+        </ul>
+      </div>
+      <div class="card-source">多源 · 04-16~17</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    AI 情报速递 · 自动生成于 2026-04-17 · 侧重 AI+游戏 / AI+工作提效
+  </div>
+
+</div>
+</body>
+</html>
