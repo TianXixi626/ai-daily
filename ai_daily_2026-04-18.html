@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 情报速递 | 2026-04-18</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --border: #1e1e2e;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --signal: #fd79a8;
+    --product: #00cec9;
+    --watch: #fdcb6e;
+    --tag-bg: rgba(108,92,231,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 24px 20px 60px; }
+  
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 48px 0 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent-light), var(--signal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .date {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .header .subtitle {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .signal .section-title .dot { background: var(--signal); }
+  .product .section-title .dot { background: var(--product); }
+  .watch .section-title .dot { background: var(--watch); }
+  .signal .section-title { color: var(--signal); }
+  .product .section-title { color: var(--product); }
+  .watch .section-title { color: var(--watch); }
+  
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.75;
+  }
+  .card .insight {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--tag-bg);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--accent-light);
+    line-height: 1.6;
+  }
+  .card .source {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--text-dim);
+    opacity: 0.6;
+  }
+
+  /* Quick list */
+  .quick-list { padding-left: 0; list-style: none; }
+  .quick-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .quick-list li:last-child { border-bottom: none; }
+  .quick-list li strong { color: var(--text); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px 40px; }
+    .header { padding: 32px 0 24px; }
+    .header h1 { font-size: 22px; }
+    .card { padding: 16px 18px; }
+    .card h3 { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🤖 AI 情报速递</h1>
+  <div class="date">2026 年 4 月 18 日 · 星期六</div>
+  <div class="subtitle">AI × 游戏 · AI × 工作提效</div>
+</div>
+
+<!-- Top Signals -->
+<div class="section signal">
+  <div class="section-title"><span class="dot"></span>TOP SIGNALS</div>
+
+  <div class="card">
+    <div class="card-num">#1</div>
+    <h3>OpenAI 震荡：Sora 关停 + 两位核心高管同日离职，战略急转企业 AI</h3>
+    <p>OpenAI 首席产品官 Kevin Weil 与 Sora 项目负责人 Bill Peebles 同日宣布离职。此前 OpenAI 已于 3 月关停 Sora 视频生成独立应用，同时解散了专属科学研究团队。Weil 自 2024 年 6 月加入后主导了 o1、Canvas、Codex 等多款产品上线；Peebles 则是 Sora 从论文到产品的核心推手。TechCrunch 称此为 OpenAI "削减副线、聚焦主线"的组织变革——公司正从消费级"登月项目"全面转向企业 AI 解决方案，为 IPO 铺路。</p>
+    <div class="insight">🎮 对游戏行业的影响：Sora 关停意味着 AI 视频生成工具的竞争格局将重新洗牌，游戏宣传片/CG 的 AI 制作方案需要寻找新的供应商。</div>
+    <div class="source">TechCrunch / 36氪 / 品玩 · 04-17~18</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">#2</div>
+    <h3>Cursor 500 亿美元估值融资 20 亿+：AI 编码工具史上最大一轮</h3>
+    <p>AI 代码编辑器 Cursor（原名 Anysphere）正在洽谈至少 20 亿美元新融资，投前估值约 500 亿美元，较半年前翻倍。a16z 和 Thrive Capital 联合领投。公司预计 2026 年底营收跑率突破 60 亿美元，已接近盈利。Cursor 周活跃用户已超千万，企业客户增速最为迅猛。</p>
+    <div class="insight">💼 工作提效：500 亿估值印证了"AI 编码助手"赛道的天花板远超想象，这个工具正从"辅助"变为开发者的"默认工作方式"。</div>
+    <div class="source">TechCrunch / AI Market Watch / Tech in Asia · 04-17~18</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">#3</div>
+    <h3>DeepSeek 首轮融资 3 亿美元，估值 100 亿美元：低调之王终于接受外部资本</h3>
+    <p>此前一直拒绝投资的中国 AI 公司 DeepSeek 据 The Information 报道正在洽谈 3 亿美元融资，估值约 100 亿美元。DeepSeek 凭借极低训练成本（R1 模型仅 600 万美元）和开源策略建立了独特竞争壁垒。此次策略转向标志着其从"纯研发"进入"商业化扩张"阶段。100 亿估值仍被多方认为偏保守。</p>
+    <div class="insight">📊 行业信号：DeepSeek 的融资策略转变表明，即便是最克制的 AI 公司也需要资本助力才能在商业化竞争中保持领先。</div>
+    <div class="source">Reuters / The Information / TechStartups · 04-17</div>
+  </div>
+</div>
+
+<!-- Product & Tech -->
+<div class="section product">
+  <div class="section-title"><span class="dot"></span>PRODUCT & TECH</div>
+
+  <div class="card">
+    <div class="card-num">#4</div>
+    <h3>"Tokenmaxxing"效应：AI 生成代码越多，开发者实际生产力可能越低</h3>
+    <p>TechCrunch 报道了一个正在引发行业反思的现象——"Tokenmaxxing"：开发者大量使用 AI 生成代码后，虽然代码产出量增加 3~5 倍，但运营成本增加 2~4 倍、大量代码需要重写、技术债务快速累积，实际生产力收益被严重抵消。与此同时，一位 AI 工程师在纽约进行了三个月"不用 LLM 纯手写代码"实验，认为手动编程在理解代码库和表达意图方面仍有不可替代的价值。</p>
+    <div class="insight">💼 工作提效：这是对 AI 编码工具的首次系统性"冷水泼面"——不是不用，而是要学会"精准使用"而非"无脑生成"。</div>
+    <div class="source">TechCrunch / Hacker News · 04-17~18</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">#5</div>
+    <h3>GenericAgent：从 3.3K 行种子代码长出"技能树"，Token 消耗降 6 倍</h3>
+    <p>GitHub 热榜项目 GenericAgent 提出了一种 AI Agent 的新范式：不预设全部能力，而是从极简种子代码出发，通过"自进化"在使用过程中自主生长技能树，实现全面系统控制。核心亮点是 Token 消耗仅为传统 Agent 的六分之一。同期上榜的还有 Cognee（6 行代码为 Agent 添加知识记忆）和 Vercel Open Agents（云端 Agent 开源模板）。</p>
+    <div class="insight">🎮 对游戏行业的意义：自进化 Agent 范式对游戏 NPC AI 有直接启发——NPC 可以从简单行为开始，在玩家交互中"学会"更复杂的行为。</div>
+    <div class="source">GitHub Trending · 04-18</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">#6</div>
+    <h3>NVIDIA Nemotron-OCR v2：基于合成数据的高速多语言 OCR 模型</h3>
+    <p>NVIDIA 在 Hugging Face 发布 Nemotron-OCR v2，支持英/中（简繁）/日/韩/俄 6 种语言，字符集达 14,244 个。核心创新在于使用合成数据策略解决多语言 OCR 的训练数据稀缺问题。提供英文优化版和多语言版两个变体。</p>
+    <div class="insight">💼 工作提效：游戏本地化团队处理多语言文档（合同/QA 截图/用户反馈）时，开箱即用的高精度 OCR 可大幅减少人工录入。</div>
+    <div class="source">Hugging Face Blog / CSDN · 04-17~18</div>
+  </div>
+</div>
+
+<!-- Watchlist -->
+<div class="section watch">
+  <div class="section-title"><span class="dot"></span>WATCHLIST</div>
+
+  <div class="card">
+    <div class="card-num">#7</div>
+    <h3>Netflix 将推出竖屏视频功能，AI 全面渗入内容制作</h3>
+    <p>Netflix 联合 CEO Ted Sarandos 宣布本月将在移动端推出类似 TikTok 的竖屏视频流。此前 Netflix 已收购 AI 创作公司 Interpositive，计划将生成式 AI 更广泛地融入电影和内容制作流程。Netflix 表示"电视和移动端娱乐的界限正在消失"。</p>
+    <div class="insight">🎮 对游戏行业的启示：短视频+AI 生成的内容分发模式正在成为所有内容平台的标配，游戏直播和 UGC 内容也在加速向这个方向靠拢。</div>
+    <div class="source">TechCrunch / The Verge / MobileSyrup · 04-17</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">#8</div>
+    <h3>快讯速览</h3>
+    <ul class="quick-list">
+      <li><strong>GPT-6 仍未发布</strong> — 此前传闻 4 月 14 日发布的 GPT-6（代号 Spud/土豆）已过期 4 天仍无动静，Polymarket 押注 4 月底前发布概率降至 72%，Altman 保持沉默。</li>
+      <li><strong>UNLV×KPMG 发布首份《AI in Gaming 2026》报告</strong> — 调查 83 家博彩公司和 113 个监管机构，发现 AI 采用速度远超治理能力，行业面临"先用后管"风险。</li>
+      <li><strong>World（前 Worldcoin）× Tinder 合作</strong> — 用虹膜扫描 Orb 设备验证真人身份，对抗约会平台机器人泛滥。</li>
+      <li><strong>Voicebox</strong> — 开源语音合成工作室登上 GitHub 热榜，推进语音合成技术民主化。</li>
+      <li><strong>Google Magika</strong> — AI 驱动的文件类型识别工具开源，基于深度学习按文件内容（非扩展名）分类。</li>
+    </ul>
+    <div class="source">多源 · 04-17~18</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>AI 情报速递 · 每日 20:00 更新 · AI × 游戏 · AI × 工作提效</p>
+  <p style="margin-top:4px;">Powered by Claw 🦀</p>
+</div>
+
+</div>
+</body>
+</html>
