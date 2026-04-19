@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 情报速递 | 2026-04-19</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --border: #1e1e2e;
+    --text: #e0e0e8;
+    --muted: #8888a0;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --signal: #fd79a8;
+    --product: #6c5ce7;
+    --watch: #00cec9;
+    --tag-bg: rgba(108,92,231,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
+  
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 48px 0 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #6c5ce7, #00cec9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .date {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .section-title.signal { background: rgba(253,121,168,0.12); color: var(--signal); }
+  .section-title.product { background: rgba(108,92,231,0.12); color: var(--product); }
+  .section-title.watch { background: rgba(0,206,201,0.12); color: var(--watch); }
+  
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #2a2a3e; }
+  .card-num {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .card-num.signal { background: rgba(253,121,168,0.15); color: var(--signal); }
+  .card-num.product { background: rgba(108,92,231,0.15); color: var(--product); }
+  .card-num.watch { background: rgba(0,206,201,0.15); color: var(--watch); }
+  
+  .card h3 {
+    font-size: 17px;
+    font-weight: 650;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #f0f0f5;
+  }
+  .card p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .card .insight {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(108,92,231,0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+    color: #b0b0c8;
+  }
+  .card .source {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #555570;
+  }
+  
+  /* Flash news */
+  .flash-list { padding-left: 0; list-style: none; }
+  .flash-list li {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    font-size: 14px;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(30,30,46,0.5);
+    line-height: 1.7;
+  }
+  .flash-list li:last-child { border-bottom: none; }
+  .flash-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+  }
+  .flash-list li strong { color: var(--text); }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+  .footer p { font-size: 13px; color: var(--muted); }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px 40px; }
+    .header { padding: 32px 0 24px; }
+    .header h1 { font-size: 22px; }
+    .card { padding: 18px; }
+    .card h3 { font-size: 15.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>⚡ AI 情报速递</h1>
+  <div class="date">2026 年 4 月 19 日 · 周日</div>
+</div>
+
+<!-- TOP SIGNALS -->
+<div class="section">
+  <div class="section-title signal">🔺 Top Signals</div>
+  
+  <div class="card">
+    <div class="card-num signal">1</div>
+    <h3>Cerebras 提交 IPO 申请：$510M 营收 + OpenAI $10B+ 合作，目标估值 $23-35B</h3>
+    <p>AI 芯片公司 Cerebras Systems 于 4/17 正式向 SEC 提交 S-1 注册文件（股票代码 CBRS），锁定 Nasdaq 上市。招股书披露 2025 年营收 $5.1 亿（同比+76%），已与 OpenAI 签署超 100 亿美元芯片供应协议（OpenAI 还提供了 $10 亿贷款并获得认股权证），同时与 AWS 达成芯片部署合作。Cerebras 的晶圆级引擎（WSE-3）是全球最大的单芯片，与 NVIDIA 形成差异化竞争。</p>
+    <div class="insight">💡 AI 芯片赛道正从 NVIDIA 一家独大走向多极竞争。OpenAI 的巨额绑定表明头部模型公司正在积极分散算力供应链风险。</div>
+    <div class="source">CNBC / Reuters / TechCrunch · 04-17~18</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num signal">2</div>
+    <h3>Claude Design 发布：设计"真理来源"从 Figma 回归代码，Figma 股价单日跌 7.28%</h3>
+    <p>Anthropic 于 4/17 发布 Claude Design，由 Instagram 联合创始人、Anthropic CPO Mike Krieger 主导（他此前刚辞去 Figma 董事席位）。该产品基于 Opus 4.7 驱动，能读取现有代码库和设计文件直接生成可用的原型、页面和组件，实现 Design→Code 闭环。社区热议指出：由于 LLM 基于代码而非 Figma 原语训练，设计的"真理来源"正从 Figma 回归代码，预示设计工具链可能迎来重大变革。发布当天 Figma 股价跌 7.28%，Adobe 跌 2.4%。</p>
+    <div class="insight">💡 工作提效：这可能是近年来对产品开发流程影响最大的一次工具变革——设计师和工程师之间的"交接"环节可能被大幅压缩甚至消除。Pro 用户实测 30 分钟即耗尽一周额度，需求热度可见一斑。</div>
+    <div class="source">Hacker News / AI Insight / Wired · 04-17~19</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num signal">3</div>
+    <h3>Anthropic ARR 突破 $300 亿，反超 OpenAI：4 个月 3.3 倍增长</h3>
+    <p>据 SaaStr 和 The AI Corner 报道，Anthropic 的年化营收跑率（ARR）在 4 月达到 $300 亿，正式超越 OpenAI 的 $250 亿，为 ChatGPT 发布以来首次。增长轨迹极其陡峭：2024.1 $8700 万 → 2024.12 $10 亿 → 2025 年底 $90 亿 → 2026.2 $140 亿 → 2026.3 $190 亿 → 2026.4 $300 亿。关键驱动力是 Claude Code 的企业采用爆发，模型训练成本仅为 OpenAI 的 1/4。</p>
+    <div class="insight">💡 AI 领域的"收入王座"首次易主，编码工具（而非聊天机器人）成为最大增长引擎。Anthropic 用更低的训练成本实现了更高的商业回报，"安全优先=商业劣势"的叙事被彻底打破。</div>
+    <div class="source">SaaStr / Analytics Insight / The AI Corner · 04-07~10</div>
+  </div>
+</div>
+
+<!-- PRODUCT & TECH -->
+<div class="section">
+  <div class="section-title product">🔧 Product & Tech</div>
+  
+  <div class="card">
+    <div class="card-num product">4</div>
+    <h3>Factory AI 融资 $1.5 亿估值 $15 亿：企业级 AI 编码 Agent 赛道再添独角兽</h3>
+    <p>成立仅三年的 Factory 完成 Series C 融资，Khosla Ventures 领投。其核心产品 Droids 平台能自动化从编码到部署的完整软件开发流程，关键差异化在于支持多模型切换（Anthropic Claude / DeepSeek 等），不绑定单一模型提供商。公司 CEO 称目标是"让每个工程团队都有 AI 同事"。</p>
+    <div class="insight">💡 继 Cursor（$500 亿）后，Factory（$15 亿）再次验证了企业级 AI 编码工具的巨大市场空间。编码 AI 正从个人辅助走向团队级自动化。</div>
+    <div class="source">TechCrunch / AI Market Watch / TechFundingNews · 04-16~17</div>
+  </div>
+  
+  <div class="card">
+    <div class="card-num product">5</div>
+    <h3>Claude Code Game Studios 登上 GitHub 热榜：49 个 AI 智能体组成完整游戏开发工作室</h3>
+    <p>开发者 Donchitos 的开源项目将单个 Claude Code 会话转化为一个结构化的游戏开发工作室，包含 49 个分层 AI 智能体（总监→部门主管→执行者）、72 项工作流技能和自动化质量门控。架构模仿真实游戏工作室的组织层级，覆盖创意、美术、音效、关卡设计、QA 等全部环节。</p>
+    <div class="insight">💡 游戏行业：这是"AI 替代游戏团队"最具象化的一次尝试——虽然目前更多是概念验证，但它展示了 AI Agent 编排在游戏开发流水线中的巨大潜力。49 个 Agent 的分层协作模式对游戏工作室的组织架构有直接启发。</div>
+    <div class="source">GitHub Trending / AIToolly · 04-18~19</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num product">6</div>
+    <h3>xAI 发布独立 Grok 语音 API：STT $0.10/小时 + TTS $4.20/M 字符，低于竞品 60%</h3>
+    <p>Elon Musk 的 xAI 正式发布 Grok Speech-to-Text 和 Text-to-Speech 两款独立 API。STT 支持 25 种语言的实时多人转写（含说话人分离和词级时间戳），定价为批处理 $0.10/小时、实时流 $0.20/小时；TTS 定价 $4.20/百万字符。整体价格较竞品低约 60%。</p>
+    <div class="insight">💡 低价高质的语音 API 将加速"语音优先"的 AI 应用落地——会议纪要、客服对话分析、游戏语音交互等场景的成本门槛进一步降低。</div>
+    <div class="source">MarkTechPost / AI Daily Post · 04-17~18</div>
+  </div>
+</div>
+
+<!-- WATCHLIST -->
+<div class="section">
+  <div class="section-title watch">👁 Watchlist</div>
+
+  <div class="card">
+    <div class="card-num watch">7</div>
+    <h3>英国启动 $6.75 亿主权 AI 基金：投资本土创业公司，减少对外依赖</h3>
+    <p>英国科技大臣 Liz Kendall 于 4/16 在自动驾驶公司 Wayve 总部正式发布"Sovereign AI"基金，规模约 $6.75 亿（£5 亿），投资方向覆盖模型开发、Agent AI、药物发现等领域。受投公司将获得英国政府的算力资源和监管支持。此举被视为英国对"AI 主权焦虑"的政策性回应——减少对美国 AI 巨头的依赖。</p>
+    <div class="insight">💡 继欧盟 AI Act 之后，英国选择了"投钱扶持本土"而非"立法限制外国"的路径。国家级 AI 基金正在成为各国的标配，对中国 AI 出海的竞争环境有长期影响。</div>
+    <div class="source">WIRED / GOV.UK · 04-16~17</div>
+  </div>
+
+  <div class="card">
+    <div class="card-num watch">8</div>
+    <h3>快讯速览</h3>
+    <ul class="flash-list">
+      <li><strong>OpenAI GPT-Rosalind 生命科学专用模型发布</strong> — 以 DNA 双螺旋发现者罗莎琳德·富兰克林命名，针对 50 种生物学工作流深度调优，可整合 50+ 科学工具，标志 OpenAI 从通用模型走向垂直领域</li>
+      <li><strong>全球 DRAM 短缺或持续至 2030 年</strong> — SK 集团董事长警告制造商到 2027 年底仅能满足全球 60% 的需求，HBM 已占 DRAM 晶圆产能 23%，AI 算力需求正在挤压消费电子内存供应</li>
+      <li><strong>美国两党推进 AI 透明度立法（H.R.8094）</strong> — 要求大型基础模型开发者公开训练数据、局限性和评估方法</li>
+      <li><strong>特斯拉 Robotaxi 扩至达拉斯和休斯顿</strong> — 无人驾驶商业化地理版图加速扩张</li>
+      <li><strong>GitHub 热榜新项目</strong> — Evolver（基因演化协议驱动 AI Agent 自我演化引擎）、Omi（屏幕+对话捕捉的 AI"第二大脑"）、Craft Agents（新型 Agent 开发框架）</li>
+    </ul>
+    <div class="source">多源 · 04-17~19</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>AI 情报速递 · 每日 20:00 自动生成 · Claw for Tian</p>
+</div>
+
+</div>
+</body>
+</html>
